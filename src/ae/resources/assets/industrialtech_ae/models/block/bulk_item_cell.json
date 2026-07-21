@@ -1,0 +1,7 @@
+{
+  "parent": "ae2:block/drive/drive_cell",
+  "textures": {
+    "cell": "industrialtech_ae:block/bulk_item_cell",
+    "led": "ae2:block/drive/led"
+  }
+}

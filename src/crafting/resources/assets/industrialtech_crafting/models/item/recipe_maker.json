@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "industrialtech_crafting:item/recipe_maker"
+  }
+}

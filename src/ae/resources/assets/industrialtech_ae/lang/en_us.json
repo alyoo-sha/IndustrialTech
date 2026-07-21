@@ -1,0 +1,19 @@
+{
+  "item.industrialtech_ae.infinite_empty_pattern": "Infinite Empty Pattern",
+  "itemGroup.industrialtech_ae": "Infinity Pattern Addon",
+  "infinitypattern.guide_name": "Infinity Pattern Guide",
+  "item.industrialtech_ae.bulk_component": "Bulk Storage Component",
+  "item.industrialtech_ae.bulk_fluid_cell": "ME Bulk Fluid Cell",
+  "item.industrialtech_ae.bulk_item_cell": "ME Bulk Item Cell",
+  "block.industrialtech_ae.bulk_item_chest": "ME Item Storage",
+  "block.industrialtech_ae.bulk_fluid_tank": "ME Fluid Tank",
+  "gui.industrialtech_ae.unpartitioned": "Unpartitioned",
+  "gui.industrialtech_ae.empty": "Empty",
+  "gui.industrialtech_ae.contains": "Contains",
+  "gui.industrialtech_ae.amount": "Amount",
+  "gui.industrialtech_ae.no_filter": "Unfiltered",
+  "gui.industrialtech_ae.online": "Online",
+  "gui.industrialtech_ae.offline": "Offline",
+  "gui.industrialtech_ae.filter": "Filter",
+  "gui.industrialtech_ae.status": "Status"
+}

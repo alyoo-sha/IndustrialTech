@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=up": { "model": "industrialtech_crafting:block/ender_alternator" },
+    "facing=down": { "model": "industrialtech_crafting:block/ender_alternator", "x": 180 },
+    "facing=north": { "model": "industrialtech_crafting:block/ender_alternator", "x": 90 },
+    "facing=south": { "model": "industrialtech_crafting:block/ender_alternator", "x": 270 },
+    "facing=west":  { "model": "industrialtech_crafting:block/ender_alternator", "x": 90, "y": 270 },
+    "facing=east":  { "model": "industrialtech_crafting:block/ender_alternator", "x": 270, "y": 270 }
+  }
+}

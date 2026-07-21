@@ -1,0 +1,667 @@
+// ========== Импорты ==========
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+// ========== Buildscript для Mixin ==========
+buildscript {
+  repositories {
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+  }
+}
+
+// ========== Плагины ==========
+plugins {
+  id 'idea'
+  id 'eclipse'
+  id 'maven-publish'
+  id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+  id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+// ========== Wrapper ==========
+tasks.named('wrapper', Wrapper).configure {
+  gradleVersion = '8.14.5'
+  distributionType = Wrapper.DistributionType.ALL
+}
+
+// ========== Основные свойства ==========
+group = mod_group_id
+version = mod_version
+base { archivesName = mod_id }
+
+jarJar.enable()
+
+// ========== Java ==========
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+// ========== SourceSets ==========
+sourceSets {
+  main {
+    resources {
+      srcDirs += 'src/datagen/generated/main'
+      exclude '.cache'
+    }
+  }
+  ae {
+    java.srcDirs = ['src/ae/java']
+    resources.srcDirs = ['src/ae/resources', 'src/datagen/generated/ae']
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+  }
+  crafting {
+    java.srcDirs = ['src/crafting/java']
+    resources.srcDirs = ['src/crafting/resources', 'src/datagen/generated/crafting']
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+  }
+  ore {
+    java.srcDirs = ['src/ore/java']
+    resources.srcDirs = ['src/ore/resources', 'src/datagen/generated/ore']
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+  }
+  // Датагены
+  datagenMain {
+    java.srcDirs = ['src/datagen/main/java']
+    resources.srcDirs = ['src/datagen/main/resources']
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+  }
+  datagenAe {
+    java.srcDirs = ['src/datagen/ae/java']
+    resources.srcDirs = ['src/datagen/ae/resources']
+    compileClasspath += sourceSets.main.output
+    compileClasspath += sourceSets.ae.output
+    runtimeClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.ae.output
+  }
+  datagenCrafting {
+    java.srcDirs = ['src/datagen/crafting/java']
+    resources.srcDirs = ['src/datagen/crafting/resources']
+    compileClasspath += sourceSets.main.output
+    compileClasspath += sourceSets.crafting.output
+    runtimeClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.crafting.output
+  }
+  datagenOre {
+    java.srcDirs = ['src/datagen/ore/java']
+    resources.srcDirs = ['src/datagen/ore/resources']
+    compileClasspath += sourceSets.main.output
+    compileClasspath += sourceSets.ore.output
+    runtimeClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.ore.output
+  }
+}
+
+// ========== Конфигурации ==========
+configurations {
+  datagenNonMod
+  aeImplementation.extendsFrom(implementation)
+  craftingImplementation.extendsFrom(implementation)
+  oreImplementation.extendsFrom(implementation)
+  datagenMainImplementation.extendsFrom(implementation)
+  datagenAeImplementation.extendsFrom(implementation)
+  datagenCraftingImplementation.extendsFrom(implementation)
+  datagenOreImplementation.extendsFrom(implementation)
+  datagenMainImplementation.extendsFrom(datagenNonMod)
+  datagenAeImplementation.extendsFrom(datagenNonMod)
+  datagenCraftingImplementation.extendsFrom(datagenNonMod)
+  datagenOreImplementation.extendsFrom(datagenNonMod)
+}
+
+// ========== Mixin ==========
+mixin {
+  add sourceSets.main, "${mod_id}.refmap.json"
+  config "${mod_id}.mixins.json"
+
+  // Если у модулей есть свои миксины, добавьте:
+  // add sourceSets.ae, "industrialtech_ae.refmap.json"
+  // config "industrialtech_ae.mixins.json"
+  // add sourceSets.crafting, "industrialtech_crafting.refmap.json"
+  // config "industrialtech_crafting.mixins.json"
+  // add sourceSets.ore, "industrialtech_ore.refmap.json"
+  // config "industrialtech_ore.mixins.json"
+}
+
+// ========== IDEA ==========
+idea {
+  module {
+    for (String excludeDirName in ["run", "runGameTests", "out", "logs", "gradle"]) {
+      excludeDirs.add(new File(projectDir, excludeDirName))
+    }
+  }
+}
+
+// ========== Minecraft ==========
+minecraft {
+  mappings channel: mapping_channel, version: mapping_version
+
+  if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+  }
+
+  copyIdeResources = true
+
+  runs {
+    configureEach {
+      workingDirectory project.file('run')
+      property 'forge.logging.markers', 'REGISTRIES'
+      property 'forge.logging.console.level', 'debug'
+      property 'mixin.env.remapRefMap', 'true'
+      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+      ideaModule "${rootProject.name}.${project.name}.main"
+
+      mods {
+        "${mod_id}" {
+          source sourceSets.main
+        }
+        "industrialtech_ae" {
+          source sourceSets.ae
+        }
+        "industrialtech_crafting" {
+          source sourceSets.crafting
+        }
+        "industrialtech_ore" {
+          source sourceSets.ore
+        }
+      }
+    }
+
+    client {
+      taskName 'Client'
+      property 'forge.enabledGameTestNamespaces', "${mod_id},industrialtech_ae,industrialtech_crafting,industrialtech_ore"
+    }
+
+    server {
+      taskName 'Server'
+      property 'forge.enabledGameTestNamespaces', "${mod_id},industrialtech_ae,industrialtech_crafting,industrialtech_ore"
+      args '--nogui'
+    }
+
+    gameTestServer {
+      taskName 'GameTest'
+      property 'forge.enabledGameTestNamespaces', "${mod_id},industrialtech_ae,industrialtech_crafting,industrialtech_ore"
+    }
+
+    data {
+      taskName 'DataGen'
+      workingDirectory project.file('run-data')
+
+      // Генерация для основного модуля
+      args '--mod', mod_id,
+          '--all',
+          '--output', file('src/datagen/generated/main'),
+          '--existing', file('src/main/resources/'),
+          '--existing', file('src/datagen/generated/main/')
+      mods.named(mod_id).configure { source(sourceSets.datagenMain) }
+
+      // Генерация для AE
+      args '--mod', 'industrialtech_ae',
+          '--output', file('src/datagen/generated/ae'),
+          '--existing', file('src/ae/resources/'),
+          '--existing', file('src/datagen/generated/ae/')
+      mods.named("industrialtech_ae").configure { source(sourceSets.datagenAe) }
+
+      // Генерация для Craft
+      args '--mod', 'industrialtech_crafting',
+          '--output', file('src/datagen/generated/crafting'),
+          '--existing', file('src/crafting/resources/'),
+          '--existing', file('src/datagen/generated/craft/')
+      mods.named("industrialtech_crafting").configure { source(sourceSets.datagenCrafting) }
+
+      // Генерация для Ore
+      args '--mod', 'industrialtech_ore',
+          '--output', file('src/datagen/generated/ore'),
+          '--existing', file('src/ore/resources/'),
+          '--existing', file('src/datagen/generated/ore/')
+      mods.named("industrialtech_ore").configure { source(sourceSets.datagenOre) }
+    }
+  }
+}
+
+// ========== Репозитории ==========
+repositories {
+//  flatDir { dir 'libs' }
+//  mavenCentral()
+
+  maven {
+    url 'https://maven.blakesmods.com'
+  }
+
+  maven {
+    url "https://cursemaven.com"
+    content {
+      includeGroup "curse.maven"
+    }
+  }
+
+  maven {
+    name "Modmaven"
+    url "https://modmaven.dev/"
+    content {
+      includeGroup 'appeng'
+    }
+  }
+
+  maven {
+    url "https://api.modrinth.com/maven"
+  }
+  exclusiveContent {
+    forRepository {
+      maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+      }
+    }
+    forRepositories(fg.repository) // Uncomment when using ForgeGradle
+    filter {
+      includeGroup "maven.modrinth"
+    }
+  }
+
+}
+
+// ========== Зависимости ==========
+dependencies {
+  minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+  annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+  //applied-energistics-2-wireless-terminals
+  runtimeOnly fg.deobf("curse.maven:applied-energistics-2-wireless-terminals-459929:7251206") //MIT
+
+  // ae2-crafting-tree
+  runtimeOnly fg.deobf("curse.maven:ae2-crafting-tree-1086241:7182165") //MIT
+
+  // ae2-things-forge
+  runtimeOnly fg.deobf("curse.maven:ae2-things-forge-609977:4616683") //MIT
+
+  // forge-ae2-additional-opportunity
+  runtimeOnly fg.deobf("curse.maven:forge-ae2-additional-opportunity-475335:4760066") //MIT
+
+  // ae-wireless-transceiver
+  runtimeOnly fg.deobf("curse.maven:ae-wireless-transceiver-1337607:8356380") //MIT
+
+  // ae2-toogleable-view-cell
+  runtimeOnly fg.deobf("curse.maven:ae2-toogleable-view-cell-1141472:8054118") //MIT
+
+  // ae2-ftbquest-detector
+  runtimeOnly fg.deobf("curse.maven:ae2-ftbquest-detector-1377642:7180759") //MIT
+
+  // infinite-storage-cell
+  runtimeOnly fg.deobf("curse.maven:infinite-storage-cell-1173691:6155997") //MIT
+
+  // me-placement-tool
+  runtimeOnly fg.deobf("curse.maven:me-placement-tool-1408718:8097758") //MIT
+
+  // aehelpers-more
+  runtimeOnly fg.deobf("curse.maven:aehelpers-more-1468017:7657575") //MIT
+
+  // aea-aee
+  runtimeOnly fg.deobf("curse.maven:aea-aee-1466886:8014740") //MIT
+
+  // patternprovidersave
+  runtimeOnly fg.deobf("curse.maven:patternprovidersave-1409613:7723016") //MIT
+
+  // infinity-pattern-provider
+  runtimeOnly fg.deobf("curse.maven:infinity-pattern-provider-1447974:8189749") //MIT
+
+  // bigger-ae2
+//  implementation fg.deobf("maven.modrinth:bigger-ae2:1.20.1-1.3.7") ////MIT
+
+  // ae2-pattern-encoding-access-terminal
+  implementation fg.deobf("maven.modrinth:ae2-pattern-encoding-access-terminal:1.0.4") //MIT
+
+  // makeae2better
+  implementation fg.deobf("maven.modrinth:makeae2better:0.2.0") //MIT
+
+  // ae2-personal-me-system
+  implementation fg.deobf("maven.modrinth:ae2-personal-me-system:0.2.4") //MIT
+
+  // ae2-organizer
+//  implementation fg.deobf("maven.modrinth:ae2-organizer:1.3.0+1.20.1") //MIT // crash
+
+  // ae2-favorites
+  implementation fg.deobf("maven.modrinth:ae2-favorites:1.0") //MIT
+
+  // applied-sorting
+  implementation fg.deobf("maven.modrinth:applied-sorting:1.20.1-forge-v2.0.0") //MIT
+
+  // ae2-wcwt(Wireless Comprehensive Work Terminal)
+  implementation fg.deobf("maven.modrinth:ae2-wcwt:1.20.1.7-hotfix") //MIT
+
+  // ae2-molecular-assembler-plus
+  implementation fg.deobf("maven.modrinth:ae2-molecular-assembler-plus:1.1.0") //MIT
+  implementation fg.deobf("maven.modrinth:extended-crafting:6.0.10") //MIT
+  implementation fg.deobf("maven.modrinth:cucumber:7.0.16") //MIT
+  implementation fg.deobf("maven.modrinth:re-avaritia:1.4.0") //MIT
+  implementation fg.deobf("maven.modrinth:appliedvoltex:1.0.2") //All Rights Reserved
+
+  implementation fg.deobf("maven.modrinth:draconic-evolution:3.1.2.621") //All Rights Reserved
+  implementation fg.deobf("maven.modrinth:brandons-core:3.2.1.302") //LGPL
+  implementation fg.deobf("maven.modrinth:codechicken-lib:4.4.0.516") //LGPL
+
+
+  runtimeOnly fg.deobf("curse.maven:sodium-embeddium-options-mod-compat-1146393:6929972")
+  compileOnly fg.deobf("curse.maven:almostunified-633823:7430993")
+  runtimeOnly fg.deobf("curse.maven:sodium-options-api-1103431:6100812")
+  runtimeOnly fg.deobf("curse.maven:magnesium-extras-558905:6041697")
+  runtimeOnly fg.deobf("curse.maven:dynamiclights-reforged-551736:6044481")
+  runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:5338457")
+  runtimeOnly fg.deobf("curse.maven:ferritecore-429235:4810975")
+  runtimeOnly fg.deobf("curse.maven:faster-block-placement-1025486:5374271")
+  runtimeOnly fg.deobf("curse.maven:chunk-animator-embeddium-compat-1527419:8007459")
+  runtimeOnly fg.deobf("curse.maven:chunk-animator-236484:4588407")
+  runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
+  runtimeOnly fg.deobf("curse.maven:embeddium-908741:5681725")//скачал
+  runtimeOnly fg.deobf("curse.maven:modern-ui-352491:6956345")
+
+  runtimeOnly fg.deobf("curse.maven:merequester-688367:8298547") //LGPL
+  runtimeOnly fg.deobf("curse.maven:ae2-mega-things-1150075:6203824") //LGPL
+  runtimeOnly fg.deobf("curse.maven:ae2-extras-421104:7698810")
+  runtimeOnly fg.deobf("curse.maven:extendedae-plus-1337639:8141730") //LGPL
+  runtimeOnly fg.deobf("curse.maven:ex-pattern-provider-892005:8291632") //LGPL ExtendedAE
+  runtimeOnly fg.deobf("curse.maven:ae2labelviewcell-1411927:7370022") //All Rights Reserved
+  runtimeOnly fg.deobf("curse.maven:ae2-all-encompassing-1398858:7692178") //АGPL
+  runtimeOnly fg.deobf("curse.maven:emi-patternizer-1480670:7790860") //LGPL
+
+  runtimeOnly fg.deobf("curse.maven:architectury-api-419699:5137938")//скачал
+  implementation fg.deobf("curse.maven:curios-309927:6418456")//скачал
+  runtimeOnly fg.deobf("curse.maven:mega-cells-622112:6175008")//скачал
+  runtimeOnly fg.deobf("curse.maven:glodium-957920:5226922")//скачал
+  runtimeOnly fg.deobf("curse.maven:geckolib-388172:8285794")//скачал
+  runtimeOnly fg.deobf("curse.maven:ae2addonlib-1366135:7668681")//скачал
+  runtimeOnly fg.deobf("curse.maven:jei-238222:8367520")//скачал
+  runtimeOnly fg.deobf("curse.maven:kotlin-for-forge-351264:7291067")//скачал
+  implementation fg.deobf("curse.maven:cloth-config-348521:5729105")//скачал
+  implementation fg.deobf("com.blakebr0.cucumber:Cucumber:1.20.1-7.0.16")
+
+  implementation fg.deobf("maven.modrinth:emi:1.1.24+1.20.1+forge")
+
+  // omni-cells
+  implementation fg.deobf("maven.modrinth:ae2-omni-cells:1.1.6-1.20.1-forge") //LGPL
+
+  // crystal-science
+  implementation fg.deobf("maven.modrinth:ae2-crystal-science:1.20.1-1.2.0") //Custom License (LGPL)
+
+  // ae2-tangible-bookmarks
+  implementation fg.deobf("maven.modrinth:ae2-tangible-bookmarks:1.20.1-15.0.2") //LGPL
+
+  // ae2-overclocked
+  implementation fg.deobf("maven.modrinth:ae2-overclocked:1.2.3-fix3") //LGPL
+
+  // ae2-auto-pattern-upload
+  implementation fg.deobf("maven.modrinth:ae2-auto-pattern-upload:1.20.1-1.0.0-fix") //LGPL
+
+  // ae2-all-encompassing
+  implementation fg.deobf("maven.modrinth:ae2-all-encompassing:1.20.1-0.0.3") //АGPL
+
+  // ae2-fluid-crafting-terminal
+  implementation fg.deobf("maven.modrinth:ae2-fluid-crafting-terminal:1.20.1-15.0.2") //LGPL
+
+  implementation fg.deobf("maven.modrinth:applied-extended-crafting:1.1.2") //LGPL
+
+  // ae2-sort-selector
+  implementation fg.deobf("maven.modrinth:ae2-sort-selector:1.0.0") //BSD 2-Clause
+
+  // advancedae
+  implementation fg.deobf("maven.modrinth:advancedae:1.3.5-1.20.1") //LGPL
+
+  // AEInfinityBooster
+  implementation fg.deobf("maven.modrinth:AEInfinityBooster:1.20.1-1.0.0+20") //LGPL
+
+  // me-beam-former
+  implementation fg.deobf("maven.modrinth:me-beam-former:1.3.0") //LGPL
+
+  // BetterP2P
+  implementation fg.deobf("maven.modrinth:BetterP2P:1.5.0") //GPL fatal
+
+  // fullblock-energistics
+  implementation fg.deobf("maven.modrinth:fullblock-energistics:forge-1.7.3-1.20.1") //LGPL
+
+  // expanded-ae
+  implementation fg.deobf("maven.modrinth:expanded-ae:1.2.2") //LGPL
+
+  // myotus-lib
+  implementation fg.deobf("maven.modrinth:myotus-lib:1.20.1-15.0.7") //LGPL
+  // patternbetter
+  implementation fg.deobf("maven.modrinth:patternbetter:1.3.3") //LGPL
+
+  // applied-enough-items
+  implementation fg.deobf("maven.modrinth:applied-enough-items:1.1.1") //LGPL
+
+  // network-tool-plus
+//  implementation fg.deobf("maven.modrinth:network-tool-plus:0.0.3") //AGPL // crash
+
+  // extended-ae
+  implementation fg.deobf("maven.modrinth:extended-ae:1.20-1.4.12-forge") //LGPL
+
+  // ae-additions
+  implementation fg.deobf("maven.modrinth:ae-additions:unspecified") //GPL fatal
+
+
+  // ae2
+  implementation fg.deobf("maven.modrinth:ae2:15.4.10") //LGPL
+  implementation fg.deobf("maven.modrinth:guideme:20.1.15") //LGPL
+
+  // ae rechiseled
+  runtimeOnly fg.deobf("maven.modrinth:rechiseled-applied-energistics-2:1.0.1-forge-mc1.20.1") //Custom License
+  runtimeOnly fg.deobf("maven.modrinth:rechiseled:1.2.5-forge-mc1.20.1") //rechiseled
+  runtimeOnly fg.deobf("maven.modrinth:fusion-connected-textures:1.3.5-forge-mc1.20.1") //fusion-connected-textures
+  implementation fg.deobf("maven.modrinth:supermartijn642s-config-lib:1.1.8-forge-mc1.20") //supermartijn642s-config-lib
+  implementation fg.deobf("maven.modrinth:supermartijn642s-core-lib:1.1.21-forge-mc1.20.1") //
+
+  // UI
+  implementation fg.deobf("maven.modrinth:ui-lib:GizE27iH") //
+
+//  implementation fg.deobf(fileTree(dir: 'libs', include: '*.jar'))
+
+  // Дополнительные зависимости между модулями, если нужны:
+  // aeImplementation sourceSets.craft.output
+  // craftImplementation sourceSets.ae.output
+  // и т.д.
+
+  // Зависимости для датагена:
+  // datagenNonMod 'com.thiakil:yaml-ops:1.0'
+}
+
+// ========== Настройка processResources для всех задач ==========
+tasks.withType(ProcessResources).configureEach {
+  def props = [
+      minecraft_version         : minecraft_version,
+      minecraft_version_range   : minecraft_version_range,
+      forge_version             : forge_version,
+      forge_version_range       : forge_version_range,
+      loader_version_range      : loader_version_range,
+      mod_id                    : mod_id,
+      mod_name                  : mod_name,
+      mod_license               : mod_license,
+      mod_version               : mod_version,
+      mod_authors               : mod_authors,
+      mod_description           : mod_description,
+      // 👇 Добавляем переменные для модулей
+      mod_id_ae                 : mod_id_ae,
+      mod_name_ae               : mod_name_ae,
+      mod_id_crafting           : mod_id_crafting,
+      mod_name_crafting         : mod_name_crafting,
+      mod_id_ore                : mod_id_ore,
+      mod_name_ore              : mod_name_ore
+  ]
+  inputs.properties(props)
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+  filesMatching(['META-INF/mods.toml', 'pack.mcmeta', '*.mixins.json']) {
+    expand(props)
+  }
+
+  doLast {
+    fileTree(dir: outputs.files.asPath, includes: ['**/*.json', '**/*.mcmeta']).each { File file ->
+      try {
+        def json = new JsonSlurper().parse(file)
+        file.text = JsonOutput.toJson(json)
+      } catch (Exception ignored) {}
+    }
+  }
+}
+
+// ========== JAR-задачи ==========
+def createModuleJar(SourceSet ss, String title) {
+  return tasks.register(ss.getJarTaskName(), Jar) {
+    archiveClassifier.set(ss.name)
+    from ss.output
+    manifest {
+      attributes([
+          'Specification-Title'   : title,
+          'Specification-Vendor'  : mod_authors,
+          'Specification-Version' : project.version,
+          'Implementation-Title'  : title,
+          'Implementation-Version': project.version,
+          'Implementation-Vendor' : mod_authors
+      ])
+    }
+  }
+}
+
+def aeJar = createModuleJar(sourceSets.ae, 'IndustrialTech AE')
+def craftingJar = createModuleJar(sourceSets.crafting, 'IndustrialTech Crafting')
+def oreJar = createModuleJar(sourceSets.ore, 'IndustrialTech Ore')
+
+tasks.named('jar', Jar).configure {
+  from sourceSets.main.output
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+  manifest {
+    attributes([
+        'Specification-Title'   : mod_name,
+        'Specification-Vendor'  : mod_authors,
+        'Specification-Version' : project.version,
+        'Implementation-Title'  : project.name,
+        'Implementation-Version': project.version,
+        'Implementation-Vendor' : mod_authors,
+        'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+    ])
+  }
+  finalizedBy 'reobfJar'
+}
+
+tasks.register('allJar', Jar) {
+  dependsOn classes, aeClasses, craftingClasses, oreClasses
+  archiveClassifier.set('all')
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  from sourceSets.main.output
+  from sourceSets.ae.output
+  from sourceSets.crafting.output
+  from sourceSets.ore.output
+  from file('src/datagen/generated')
+
+  manifest {
+    attributes([
+        'Specification-Title'   : 'IndustrialTech All',
+        'Specification-Vendor'  : mod_authors,
+        'Specification-Version' : project.version,
+        'Implementation-Title'  : 'IndustrialTech All',
+        'Implementation-Version': project.version,
+        'Implementation-Vendor' : mod_authors
+    ])
+  }
+}
+
+tasks.register('sourcesJar', Jar) {
+  dependsOn classes
+  archiveClassifier.set('sources')
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  from sourceSets.main.allJava
+  from sourceSets.ae.allJava
+  from sourceSets.crafting.allJava
+  from sourceSets.ore.allJava
+  from sourceSets.datagenMain.allJava
+  from sourceSets.datagenAe.allJava
+  from sourceSets.datagenCrafting.allJava
+  from sourceSets.datagenOre.allJava
+
+  manifest {
+    attributes([
+        'Specification-Title'   : 'IndustrialTech Sources',
+        'Specification-Vendor'  : mod_authors,
+        'Specification-Version' : project.version,
+        'Implementation-Title'  : 'IndustrialTech Sources',
+        'Implementation-Version': project.version,
+        'Implementation-Vendor' : mod_authors
+    ])
+  }
+}
+
+// ========== Артефакты ==========
+artifacts {
+  archives jar
+  archives aeJar
+  archives craftingJar
+  archives oreJar
+  archives allJar
+  archives sourcesJar
+}
+
+// ========== Публикация ==========
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      artifactId base.archivesName.get()
+      from components.java
+      artifact aeJar
+      artifact craftingJar
+      artifact oreJar
+      artifact allJar
+      artifact sourcesJar
+    }
+  }
+  repositories {
+    if (System.getenv("local_maven") != null) {
+      maven {
+        url "file://" + System.getenv("local_maven")
+      }
+    }
+  }
+}
+
+// ========== Оптимизация PNG ==========
+tasks.register('optimizePng') {
+  doLast {
+    def pngFiles = fileTree(dir: projectDir, includes: ['**/*.png'], excludes: ['**/build/**', '**/run/**'])
+    pngFiles.each { File file ->
+      long size = file.length()
+      exec {
+        executable 'optipng'
+        args '-q', '-o7', '-zm1-9', '-strip', 'all', file
+        ignoreExitValue = true
+      }
+      long newSize = file.length()
+      if (newSize < size) {
+        println "Сжат $file: ${size} -> ${newSize} байт"
+      }
+    }
+  }
+}
+
+// ========== Чейнджлог ==========
+tasks.register('outputChangelog') {
+  doLast {
+    file('build/changelog.txt').text = "Список изменений:\n"
+  }
+}
+
+// ========== Общие настройки компиляции ==========
+tasks.withType(JavaCompile).configureEach {
+  options.encoding = 'UTF-8'
+  options.release = 17
+}
+
+clean {
+  delete 'src/datagen/generated'
+  delete 'run'
+  delete 'run-data'
+}

@@ -1,0 +1,19 @@
+{
+  "item.industrialtech_ae.infinite_empty_pattern": "Бесконечный Пустой узор",
+  "itemGroup.industrialtech_ae": "Дополнение к шаблону бесконечности",
+  "infinitypattern.guide_name": "Руководство по узору бесконечности",
+  "item.industrialtech_ae.bulk_component": "Компонент массового хранения",
+  "item.industrialtech_ae.bulk_fluid_cell": "МЭ Жидкостная массовая ячейка",
+  "item.industrialtech_ae.bulk_item_cell": "МЭ Предметная массовая ячейка",
+  "block.industrialtech_ae.bulk_item_chest": "МЭ Предметное хранилище",
+  "block.industrialtech_ae.bulk_fluid_tank": "МЭ Жидкостный резервуар",
+  "gui.industrialtech_ae.unpartitioned": "Нет разделов",
+  "gui.industrialtech_ae.empty": "Пусто",
+  "gui.industrialtech_ae.contains": "Содержит",
+  "gui.industrialtech_ae.amount": "Кол-во",
+  "gui.industrialtech_ae.no_filter": "Нет фильтра",
+  "gui.industrialtech_ae.online": "Онлайн",
+  "gui.industrialtech_ae.offline": "Оффлайн",
+  "gui.industrialtech_ae.filter": "Фильтр",
+  "gui.industrialtech_ae.status": "Статус"
+}

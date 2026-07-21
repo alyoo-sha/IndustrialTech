@@ -1,0 +1,147 @@
+{
+  "parent": "minecraft:block/cube",
+  "gui_light": "front",
+  "display": {
+    "ground": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 3, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "head": {
+      "rotation": [0, 180, 0],
+      "translation": [0, 13, 7],
+      "scale": [1, 1, 1]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "gui": {
+      "rotation": [25, 215, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.625, 0.625, 0.625]
+    }
+  },
+  "textures": {
+    "side": "industrialtech_ae:block/bulk_item_chest_side",
+    "inside": "industrialtech_ae:block/bulk_item_chest_inside",
+    "glass": "industrialtech_ae:block/block_glass",
+    "particle": "industrialtech_ae:block/bulk_item_chest_side",
+    "active_frame": "industrialtech_ae:block/frame_active"
+  },
+  "elements": [
+    {
+      "name": "box",
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "down":  { "texture": "#side", "cullface": "down" },
+        "up":    { "texture": "#side", "cullface": "up" },
+        "east":  { "texture": "#side", "cullface": "east" },
+        "west":  { "texture": "#side", "cullface": "west" },
+        "south": { "texture": "#side", "cullface": "south" }
+      }
+    },
+    {
+      "name": "inside_down",
+      "from": [1, 0.99, 1],
+      "to": [15, 1, 15],
+      "faces": {
+        "up": { "texture": "#inside" }
+      }
+    },
+    {
+      "name": "inside_up",
+      "from": [1, 15, 1],
+      "to": [15, 15.01, 15],
+      "faces": {
+        "down": { "texture": "#inside" }
+      }
+    },
+    {
+      "name": "inside_south",
+      "from": [1, 1, 15],
+      "to": [15, 15, 15.01],
+      "faces": {
+        "north": { "texture": "#inside" }
+      }
+    },
+    {
+      "name": "inside_west",
+      "from": [0.99, 1, 1],
+      "to": [1, 15, 15],
+      "faces": {
+        "east": { "texture": "#inside" }
+      }
+    },
+    {
+      "name": "inside_east",
+      "from": [15, 1, 1],
+      "to": [15.01, 15, 15],
+      "faces": {
+        "west": { "texture": "#inside" }
+      }
+    },
+    {
+      "name": "frame_down",
+      "from": [0, 0, 0],
+      "to": [16, 1, 1],
+      "faces": {
+        "up": { "texture": "#side", "uv": [0, 0, 16, 1] },
+        "north": { "texture": "#side","uv": [0, 0, 16, 1] },
+        "south": { "texture": "#side","uv": [0, 0, 16, 1] }
+      }
+    },
+    {
+      "name": "frame_up",
+      "from": [0, 15, 0],
+      "to": [16, 16, 1],
+      "faces": {
+        "down": { "texture": "#side", "uv": [0, 0, 16, 1] },
+        "north": { "texture": "#side","uv": [0, 0, 16, 1] },
+        "south": { "texture": "#side","uv": [0, 0, 16, 1] }
+      }
+    },
+    {
+      "name": "frame_west",
+      "from": [0, 0, 0],
+      "to": [1, 16, 1],
+      "faces": {
+        "east": { "texture": "#side", "uv": [0, 0, 1, 16] },
+        "north": { "texture": "#side","uv": [0, 0, 1, 16] },
+        "south": { "texture": "#side","uv": [0, 0, 1, 16] }
+      }
+    },
+    {
+      "name": "frame_east",
+      "from": [15, 0, 0],
+      "to": [16, 16, 1],
+      "faces": {
+        "west": { "texture": "#side", "uv": [0, 0, 1, 16] },
+        "north": { "texture": "#side","uv": [0, 0, 1, 16] },
+        "south": { "texture": "#side","uv": [0, 0, 1, 16] }
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "industrialtech_ae:block/bulk_item_chest" },
+    "facing=south": { "model": "industrialtech_ae:block/bulk_item_chest", "y": 180 },
+    "facing=west":  { "model": "industrialtech_ae:block/bulk_item_chest", "y": 270 },
+    "facing=east":  { "model": "industrialtech_ae:block/bulk_item_chest", "y": 90 }
+  }
+}

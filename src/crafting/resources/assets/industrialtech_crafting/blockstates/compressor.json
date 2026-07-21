@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "industrialtech_crafting:block/compressor", "y": 180 },
+    "facing=south": { "model": "industrialtech_crafting:block/compressor" },
+    "facing=west":  { "model": "industrialtech_crafting:block/compressor", "y": 90 },
+    "facing=east":  { "model": "industrialtech_crafting:block/compressor", "y": 270 }
+  }
+}

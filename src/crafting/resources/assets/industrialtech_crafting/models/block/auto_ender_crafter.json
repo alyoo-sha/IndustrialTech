@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "industrialtech_crafting:block/ender_ingot_block",
+    "down": "industrialtech_crafting:block/ender_ingot_block",
+    "up": "industrialtech_crafting:block/ender_crafter_top",
+    "north": "industrialtech_crafting:block/auto_ender_crafter_side",
+    "east": "industrialtech_crafting:block/auto_ender_crafter_side",
+    "south": "industrialtech_crafting:block/auto_ender_crafter_side",
+    "west": "industrialtech_crafting:block/auto_ender_crafter_side"
+  }
+}
