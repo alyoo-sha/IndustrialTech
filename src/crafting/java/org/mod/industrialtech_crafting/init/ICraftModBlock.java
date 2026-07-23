@@ -20,25 +20,27 @@ public class ICraftModBlock {
             DeferredRegister.create(ForgeRegistries.BLOCKS, Industrialtech_crafting.MOD_ID);
 
     public static RegistryObject<Block> LUMINESSENCE_BLOCK = register(BLOCK, "luminessence_block",
-            () -> new BaseBlockUtil(SoundType.STONE, 5.0F, 10.0F, true), ICraftModRarity.LEGENDARY.rarity);
+            () -> new BaseBlockUtil(SoundType.STONE, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_LEGENDARY.rarity);
     public static RegistryObject<Block> BLACK_IRON_BLOCK = register(BLOCK, "black_iron_block",
-            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.UNCOMMON.rarity);
+            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_UNCOMMON.rarity);
     public static RegistryObject<Block> REDSTONE_INGOT_BLOCK = register(BLOCK, "redstone_ingot_block",
             () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true));
     public static RegistryObject<Block> ENHANCED_REDSTONE_INGOT_BLOCK = register(BLOCK, "enhanced_redstone_ingot_block",
-            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.UNCOMMON.rarity);
+            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_UNCOMMON.rarity);
     public static RegistryObject<Block> ENDER_INGOT_BLOCK = register(BLOCK, "ender_ingot_block",
             () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true));
     public static RegistryObject<Block> ENHANCED_ENDER_INGOT_BLOCK = register(BLOCK, "enhanced_ender_ingot_block",
-            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.UNCOMMON.rarity);
+            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_UNCOMMON.rarity);
     public static RegistryObject<Block> CRYSTALTINE_BLOCK = register(BLOCK, "crystaltine_block",
-            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.UNCOMMON.rarity);
+            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_UNCOMMON.rarity);
     public static RegistryObject<Block> NETHER_STAR_BLOCK = register(BLOCK, "nether_star_block",
-            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.UNCOMMON.rarity);
+            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_UNCOMMON.rarity);
     public static RegistryObject<Block> FLUX_STAR_BLOCK = register(BLOCK, "flux_star_block",
-            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.UNCOMMON.rarity);
+            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_UNCOMMON.rarity);
     public static RegistryObject<Block> ENDER_STAR_BLOCK = register(BLOCK, "ender_star_block",
-            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.UNCOMMON.rarity);
+            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_UNCOMMON.rarity);
+    public static RegistryObject<Block> THE_ULTIMATE_BLOCK = register(BLOCK, "the_ultimate_block",
+            () -> new BaseBlockUtil(SoundType.METAL, 5.0F, 10.0F, true), ICraftModRarity.CUSTOM_UNCOMMON.rarity);
 
 
     //    public static final RegistryObject<Block> THE_ULTIMATE_BLOCK = register("the_ultimate_block", TheUltimateBlock::new, Rarity.EPIC);

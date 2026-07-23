@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -27,7 +26,7 @@ public class BulkFluidTankBlockEntity extends BaseBlockEntity<AEFluidKey> {
     private final LazyOptional<IFluidHandler> fluidHandlerCap = LazyOptional.of(this::createFluidHandler);
 
     public BulkFluidTankBlockEntity(BlockPos pos, BlockState state) {
-        super((BlockEntityType) AEModBlockEntity.BULK_FLUID_TANK_BE.get(), pos, state, AeKeyType.FLUID);
+        super(AEModBlockEntity.BULK_FLUID_TANK_BE.get(), pos, state, AeKeyType.FLUID);
     }
 
     protected void syncToOpenPlayers() {
@@ -61,7 +60,7 @@ public class BulkFluidTankBlockEntity extends BaseBlockEntity<AEFluidKey> {
             }
 
             public @NotNull FluidStack getFluidInTank(int tank) {
-                AEFluidKey key = (AEFluidKey) org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity.this.storage.getStoredKey();
+                AEFluidKey key = BulkFluidTankBlockEntity.this.storage.getStoredKey();
                 return key == null ? FluidStack.EMPTY : new FluidStack(key.getFluid(), (int)Math.min(2147483647L, org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity.this.storage.getAmount()));
             }
 
@@ -70,26 +69,26 @@ public class BulkFluidTankBlockEntity extends BaseBlockEntity<AEFluidKey> {
             }
 
             public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
-                AEFluidKey filter = (AEFluidKey) org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity.this.storage.getFilterKey();
+                AEFluidKey filter = BulkFluidTankBlockEntity.this.storage.getFilterKey();
                 return filter == null || filter.getFluid() == stack.getFluid();
             }
 
             public int fill(FluidStack resource, IFluidHandler.FluidAction action) {
                 if (!resource.isEmpty() && this.isFluidValid(0, resource)) {
                     Actionable mode = action.simulate() ? Actionable.SIMULATE : Actionable.MODULATE;
-                    return (int) org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity.this.storage.insert(AEFluidKey.of(resource.getFluid()), (long)resource.getAmount(), mode);
+                    return (int) BulkFluidTankBlockEntity.this.storage.insert(AEFluidKey.of(resource.getFluid()), resource.getAmount(), mode);
                 } else {
                     return 0;
                 }
             }
 
             public @NotNull FluidStack drain(int maxDrain, IFluidHandler.FluidAction action) {
-                AEFluidKey key = (AEFluidKey) org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity.this.storage.getStoredKey();
+                AEFluidKey key = BulkFluidTankBlockEntity.this.storage.getStoredKey();
                 if (key == null) {
                     return FluidStack.EMPTY;
                 } else {
                     Actionable mode = action.simulate() ? Actionable.SIMULATE : Actionable.MODULATE;
-                    long extracted = org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity.this.storage.extract(key, (long)maxDrain, mode);
+                    long extracted = BulkFluidTankBlockEntity.this.storage.extract(key, maxDrain, mode);
                     return extracted <= 0L ? FluidStack.EMPTY : new FluidStack(key.getFluid(), (int)extracted);
                 }
             }

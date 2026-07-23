@@ -5,6 +5,6 @@ public enum TextAlignment {
     CENTER,
     RIGHT;
 
-    private TextAlignment() {
+    TextAlignment() {
     }
 }

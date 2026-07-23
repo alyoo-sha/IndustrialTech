@@ -7,12 +7,12 @@ import appeng.menu.slot.RestrictedInputSlot;
 import appeng.parts.encoding.PatternEncodingLogic;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.mod.industrialtech_ae.init.AEModItem;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -23,9 +23,11 @@ public abstract class MixinPatternEncodingTermMenu extends MEStorageMenu {
     @Final
     @Shadow
     private RestrictedInputSlot encodedPatternSlot;
+    @Final
     @Shadow
     private RestrictedInputSlot blankPatternSlot;
-    private boolean wasInfinitePattern = false;
+    @Unique
+    private boolean industrialtech$wasInfinitePattern = false;
 
     @Inject(
             method = {"encode"},
@@ -33,7 +35,7 @@ public abstract class MixinPatternEncodingTermMenu extends MEStorageMenu {
     )
     private void onEncodePatternHead(CallbackInfo ci) {
         ItemStack blank = this.blankPatternSlot.getItem();
-        this.wasInfinitePattern = blank.is((Item) AEModItem.ITEM_INFINITE_EMPTY_PATTERN.get());
+        this.industrialtech$wasInfinitePattern = blank.is(AEModItem.INFINITE_PATTERN.get());
     }
 
     @Inject(
@@ -41,8 +43,8 @@ public abstract class MixinPatternEncodingTermMenu extends MEStorageMenu {
             at = {@At("HEAD")},
             cancellable = true
     )
-    private void onIsPattern(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (stack.is((Item)AEModItem.ITEM_INFINITE_EMPTY_PATTERN.get())) {
+    private void onIsPattern(ItemStack output, CallbackInfoReturnable<Boolean> cir) {
+        if (output.is(AEModItem.INFINITE_PATTERN.get())) {
             cir.setReturnValue(true);
         }
 
@@ -53,15 +55,15 @@ public abstract class MixinPatternEncodingTermMenu extends MEStorageMenu {
             at = {@At("RETURN")}
     )
     private void onEncodePatternReturn(CallbackInfo ci) {
-        if (this.wasInfinitePattern) {
+        if (this.industrialtech$wasInfinitePattern) {
             ItemStack blank = this.blankPatternSlot.getItem();
             if (blank.isEmpty()) {
-                this.blankPatternSlot.set(((Item)AEModItem.ITEM_INFINITE_EMPTY_PATTERN.get()).getDefaultInstance());
-            } else if (blank.is((Item)AEModItem.ITEM_INFINITE_EMPTY_PATTERN.get())) {
+                this.blankPatternSlot.set((AEModItem.INFINITE_PATTERN.get()).getDefaultInstance());
+            } else if (blank.is(AEModItem.INFINITE_PATTERN.get())) {
                 blank.setCount(1);
             }
 
-            this.wasInfinitePattern = false;
+            this.industrialtech$wasInfinitePattern = false;
         }
 
     }

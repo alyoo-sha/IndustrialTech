@@ -32,8 +32,8 @@ public class ItemInteractPacket {
     }
 
     public static void handle(org.mod.industrialtech_ae.network.ItemInteractPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        ((NetworkEvent.Context)ctx.get()).enqueueWork(() -> {
-            ServerPlayer player = ((NetworkEvent.Context)ctx.get()).getSender();
+        (ctx.get()).enqueueWork(() -> {
+            ServerPlayer player = (ctx.get()).getSender();
             if (player != null) {
                 if (!(player.distanceToSqr((double)msg.pos.getX() + (double)0.5F, (double)msg.pos.getY() + (double)0.5F, (double)msg.pos.getZ() + (double)0.5F) > (double)64.0F)) {
                     BlockEntity patt1577$temp = player.level().getBlockEntity(msg.pos);
@@ -49,7 +49,7 @@ public class ItemInteractPacket {
                 }
             }
         });
-        ((NetworkEvent.Context)ctx.get()).setPacketHandled(true);
+        (ctx.get()).setPacketHandled(true);
     }
 
     private static void processInsert(ServerPlayer player, BulkItemChestBlockEntity be, ItemStack sourceStack, boolean rightClick) {
@@ -77,13 +77,13 @@ public class ItemInteractPacket {
 
     private static void processExtract(ServerPlayer player, BulkItemChestBlockEntity be, boolean rightClick) {
         GenericAeKeyStorage<AEItemKey> storage = be.getStorage();
-        AEItemKey key = (AEItemKey)storage.getStoredKey();
+        AEItemKey key = storage.getStoredKey();
         long amount = storage.getAmount();
         if (key != null && amount > 0L) {
             ItemStack template = key.toStack();
             if (!template.isEmpty()) {
                 int toExtract = rightClick ? 1 : template.getMaxStackSize();
-                long extracted = storage.extract(key, Math.min((long)toExtract, amount), Actionable.MODULATE);
+                long extracted = storage.extract(key, Math.min(toExtract, amount), Actionable.MODULATE);
                 if (extracted > 0L) {
                     ItemStack result = key.toStack();
                     result.setCount((int)extracted);

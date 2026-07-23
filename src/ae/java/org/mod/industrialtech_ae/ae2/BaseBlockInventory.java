@@ -7,12 +7,7 @@ import appeng.api.stacks.KeyCounter;
 import appeng.api.storage.MEStorage;
 import net.minecraft.network.chat.Component;
 
-public class BaseBlockInventory<T extends AEKey> implements MEStorage {
-    protected final GenericAeKeyStorage<T> storage;
-
-    public BaseBlockInventory(GenericAeKeyStorage<T> storage) {
-        this.storage = storage;
-    }
+public record BaseBlockInventory<T extends AEKey>(GenericAeKeyStorage<T> storage) implements MEStorage {
 
     public long insert(AEKey what, long amount, Actionable mode, IActionSource source) {
         return this.storage.insert(what, amount, mode);
@@ -28,23 +23,15 @@ public class BaseBlockInventory<T extends AEKey> implements MEStorage {
 
     public Component getDescription() {
         T key = this.storage.getStoredKey();
-        return (Component)(key != null ? key.getDisplayName() : Component.empty());
-    }
-
-    public GenericAeKeyStorage<T> getStorage() {
-        return this.storage;
+        return key != null ? key.getDisplayName() : Component.empty();
     }
 
     public T getStoredKey() {
-        return (T)this.storage.getStoredKey();
+        return this.storage.getStoredKey();
     }
 
     public T getFilterKey() {
-        return (T)this.storage.getFilterKey();
-    }
-
-    public long getStoredAmount() {
-        return this.storage.getAmount();
+        return this.storage.getFilterKey();
     }
 
     public boolean isPreferredStorageFor(AEKey what, IActionSource source) {

@@ -1,6 +1,7 @@
 package org.mod.industrialtech_ae.menu;
 
 import appeng.api.stacks.AEFluidKey;
+import org.jetbrains.annotations.NotNull;
 import org.mod.industrialtech_ae.ae2.GenericAeKeyStorage;
 import org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity;
 import org.mod.industrialtech_ae.init.AEModBlock;
@@ -14,11 +15,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class BulkFluidTankMenu extends AbstractContainerMenu {
@@ -35,7 +34,7 @@ public class BulkFluidTankMenu extends AbstractContainerMenu {
     }
 
     public BulkFluidTankMenu(int containerId, Inventory inv, BulkFluidTankBlockEntity blockEntity) {
-        super((MenuType) AEModMenu.BULK_FLUID_TANK_MENU.get(), containerId);
+        super(AEModMenu.BULK_FLUID_TANK_MENU.get(), containerId);
         this.blockEntity = blockEntity;
         this.level = inv.player.level();
         this.pos = blockEntity.getBlockPos();
@@ -46,9 +45,9 @@ public class BulkFluidTankMenu extends AbstractContainerMenu {
             this.syncToClient(serverPlayer);
         } else {
             GenericAeKeyStorage<AEFluidKey> storage = blockEntity.getStorage();
-            this.clientFluid = (AEFluidKey)storage.getStoredKey();
+            this.clientFluid = storage.getStoredKey();
             this.clientAmount = storage.getAmount();
-            this.clientFilter = (AEFluidKey)storage.getFilterKey();
+            this.clientFilter = storage.getFilterKey();
             this.clientOnline = blockEntity.isOnline();
         }
 
@@ -61,18 +60,17 @@ public class BulkFluidTankMenu extends AbstractContainerMenu {
             BlockPos pos = extraData.readBlockPos();
             BlockEntity be = inv.player.level().getBlockEntity(pos);
             if (be instanceof BulkFluidTankBlockEntity) {
-                BulkFluidTankBlockEntity tank = (BulkFluidTankBlockEntity)be;
-                return tank;
+                return (BulkFluidTankBlockEntity)be;
             } else {
                 String var10002 = String.valueOf(pos);
-                throw new IllegalStateException("Block entity at " + var10002 + " is not BulkFluidTankBlockEntity: " + String.valueOf(be));
+                throw new IllegalStateException("Block entity at " + var10002 + " is not BulkFluidTankBlockEntity: " + (be));
             }
         }
     }
 
     public void syncToClient(ServerPlayer serverPlayer) {
         GenericAeKeyStorage<AEFluidKey> storage = this.blockEntity.getStorage();
-        AEModNetworking.sendToPlayer(new FluidSyncPacket(this.pos, (AEFluidKey)storage.getStoredKey(), storage.getAmount(), (AEFluidKey)storage.getFilterKey(), this.blockEntity.isOnline()), serverPlayer);
+        AEModNetworking.sendToPlayer(new FluidSyncPacket(this.pos, storage.getStoredKey(), storage.getAmount(), storage.getFilterKey(), this.blockEntity.isOnline()), serverPlayer);
     }
 
     public void updateClientData(BlockPos pos, AEFluidKey fluid, long amount, AEFluidKey filter, boolean online) {
@@ -104,9 +102,9 @@ public class BulkFluidTankMenu extends AbstractContainerMenu {
         return this.clientOnline;
     }
 
-    public ItemStack quickMoveStack(Player player, int index) {
-        ItemStack result = ItemStack.EMPTY;
-        Slot slot = (Slot)this.slots.get(index);
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
+        ItemStack result;
+        Slot slot = this.slots.get(index);
         if (!slot.hasItem()) {
             return ItemStack.EMPTY;
         } else {
@@ -141,8 +139,8 @@ public class BulkFluidTankMenu extends AbstractContainerMenu {
         }
     }
 
-    public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(this.level, this.pos), player, (Block) AEModBlock.BULK_FLUID_TANK.get());
+    public boolean stillValid(@NotNull Player player) {
+        return stillValid(ContainerLevelAccess.create(this.level, this.pos), player, AEModBlock.BULK_FLUID_TANK.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

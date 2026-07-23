@@ -47,7 +47,7 @@ public class FluidSyncPacket {
     }
 
     public static void handle(org.mod.industrialtech_ae.network.FluidSyncPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        ((NetworkEvent.Context)ctx.get()).enqueueWork(() -> {
+        (ctx.get()).enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player != null) {
                 AbstractContainerMenu patt2123$temp = mc.player.containerMenu;
@@ -60,6 +60,6 @@ public class FluidSyncPacket {
 
             }
         });
-        ((NetworkEvent.Context)ctx.get()).setPacketHandled(true);
+        (ctx.get()).setPacketHandled(true);
     }
 }

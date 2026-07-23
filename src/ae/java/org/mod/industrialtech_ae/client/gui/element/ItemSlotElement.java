@@ -27,7 +27,7 @@ public class ItemSlotElement implements GuiElement {
     }
 
     private ItemStack getStack() {
-        AEItemKey key = (AEItemKey)this.keySupplier.get();
+        AEItemKey key = this.keySupplier.get();
         if (key == null) {
             return ItemStack.EMPTY;
         } else {
@@ -47,9 +47,9 @@ public class ItemSlotElement implements GuiElement {
     }
 
     public void renderTooltip(GuiGraphics guiGraphics, Font font, int leftPos, int topPos, int mouseX, int mouseY) {
-        if (this.rect.contains((double)mouseX, (double)mouseY, leftPos, topPos)) {
+        if (this.rect.contains(mouseX, mouseY, leftPos, topPos)) {
             if (this.tooltipSupplier != null) {
-                List<Component> tooltip = (List)this.tooltipSupplier.get();
+                List<Component> tooltip = this.tooltipSupplier.get();
                 if (tooltip != null && !tooltip.isEmpty()) {
                     guiGraphics.renderTooltip(font, tooltip, Optional.empty(), mouseX, mouseY);
                     return;

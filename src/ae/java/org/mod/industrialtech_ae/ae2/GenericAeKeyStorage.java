@@ -12,12 +12,12 @@ public class GenericAeKeyStorage<T extends AEKey> {
     protected T storedKey;
     protected long amount;
     protected Runnable onDirty;
-    protected final org.mod.industrialtech_ae.ae2.AeKeyType<T> keyType;
+    protected final AeKeyType<T> keyType;
     protected KeyCounter cachedStacks;
     protected boolean cacheDirty = true;
 
-    public GenericAeKeyStorage(org.mod.industrialtech_ae.ae2.AeKeyType<T> keyType, T filterKey, Runnable onDirty) {
-        this.keyType = (org.mod.industrialtech_ae.ae2.AeKeyType) Objects.requireNonNull(keyType, "keyType");
+    public GenericAeKeyStorage(AeKeyType<T> keyType, T filterKey, Runnable onDirty) {
+        this.keyType = Objects.requireNonNull(keyType, "keyType");
         this.filterKey = filterKey;
         this.onDirty = onDirty;
     }

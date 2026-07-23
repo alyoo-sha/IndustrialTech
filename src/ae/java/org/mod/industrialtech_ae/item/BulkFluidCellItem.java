@@ -2,7 +2,6 @@ package org.mod.industrialtech_ae.item;
 
 import appeng.api.config.FuzzyMode;
 import appeng.api.stacks.AEFluidKey;
-import appeng.api.stacks.AEKey;
 import appeng.api.stacks.GenericStack;
 import appeng.api.storage.cells.ICellHandler;
 import appeng.api.storage.cells.ICellWorkbenchItem;
@@ -47,14 +46,14 @@ public class BulkFluidCellItem extends AEBaseItem implements ICellWorkbenchItem 
     public void setFuzzyMode(ItemStack itemStack, FuzzyMode fuzzyMode) {
     }
 
-    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
-        BaseCellInventory<AEFluidKey> inv = HANDLER.getCellInventory(stack, (ISaveProvider)null);
+    public @NotNull Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
+        BaseCellInventory<AEFluidKey> inv = HANDLER.getCellInventory(stack, null);
         if (inv == null) {
             return Optional.empty();
         } else {
-            List<GenericStack> content = new ArrayList();
-            AEFluidKey storedKey = (AEFluidKey)inv.getStoredKey();
-            AEFluidKey filterKey = (AEFluidKey)inv.getFilterKey();
+            List<GenericStack> content = new ArrayList<>();
+            AEFluidKey storedKey = inv.getStoredKey();
+            AEFluidKey filterKey = inv.getFilterKey();
             long amount = inv.getStoredAmount();
             if (storedKey != null && amount > 0L) {
                 content.add(new GenericStack(storedKey, amount));
@@ -66,11 +65,11 @@ public class BulkFluidCellItem extends AEBaseItem implements ICellWorkbenchItem 
         }
     }
 
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        BaseCellInventory<AEFluidKey> inv = HANDLER.getCellInventory(stack, (ISaveProvider)null);
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+        BaseCellInventory<AEFluidKey> inv = HANDLER.getCellInventory(stack, null);
         if (inv != null) {
-            AEFluidKey filter = (AEFluidKey)inv.getFilterKey();
-            AEFluidKey stored = (AEFluidKey)inv.getStoredKey();
+            AEFluidKey filter = inv.getFilterKey();
+            AEFluidKey stored = inv.getStoredKey();
             long amount = inv.getStoredAmount();
             if (filter == null) {
                 tooltip.add(Component.translatable("gui.industrialtech_ae.unpartitioned").withStyle(ChatFormatting.RED));
@@ -99,8 +98,8 @@ public class BulkFluidCellItem extends AEBaseItem implements ICellWorkbenchItem 
             if (!this.isCell(stack)) {
                 return null;
             } else {
-                GenericAeKeyStorage<AEFluidKey> storage = new GenericAeKeyStorage(AeKeyType.FLUID, (AEKey)null, (Runnable)null);
-                return new BaseCellInventory(stack, host, storage);
+                GenericAeKeyStorage<AEFluidKey> storage = new GenericAeKeyStorage<>(AeKeyType.FLUID, null, null);
+                return new BaseCellInventory<>(stack, host, storage);
             }
         }
     }

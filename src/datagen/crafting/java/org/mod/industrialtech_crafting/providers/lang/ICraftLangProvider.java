@@ -2,7 +2,9 @@ package org.mod.industrialtech_crafting.providers.lang;
 
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -23,6 +25,13 @@ public abstract class ICraftLangProvider extends LanguageProvider {
     // Метод для добавления блоков
     protected void addBlock(String name, String translate) {
         add("block." + modId + "." + name, translate);
+    }
+
+    // Метод для добавления блоков
+    protected void addBlock(Block name, String translate) {
+        // Если у предмета есть GUI или другие особенности – можно добавить логику
+        // Но обычно предметы не имеют контейнерных ключей, поэтому просто вызываем add с descriptionId
+        add(name.getDescriptionId(), translate);
     }
 
     // Метод для добавления подсказок к предметам

@@ -23,13 +23,13 @@ public class AEModItem {
 
     // ====== Регистрируемые предметы ======
     public static final RegistryObject<Item> BULK_FLUID_CELL =
-            item("bulk_fluid_cell", BulkFluidCellItem::new, AERarity.COMMON.rarity, p -> p.stacksTo(1));
+            item("bulk_fluid_cell", BulkFluidCellItem::new, AERarity.CUSTOM_COMMON.rarity, p -> p.stacksTo(1));
     public static final RegistryObject<Item> BULK_ITEM_CELL =
-            item("bulk_item_cell", BulkItemCellItem::new, AERarity.COMMON.rarity, p -> p.stacksTo(1));
+            item("bulk_item_cell", BulkItemCellItem::new, AERarity.CUSTOM_COMMON.rarity, p -> p.stacksTo(1));
     public static final RegistryObject<Item> BULK_COMPONENT =
-            item("bulk_component", AERarity.EPIC.rarity);
-    public static final RegistryObject<Item> ITEM_INFINITE_EMPTY_PATTERN =
-            item("infinite_empty_pattern", AERarity.MYTHIC.rarity, p -> p.stacksTo(1));
+            item("bulk_component", AERarity.CUSTOM_EPIC.rarity);
+    public static final RegistryObject<Item> INFINITE_PATTERN =
+            item("infinite_pattern", AERarity.CUSTOM_MYTHIC.rarity, p -> p.stacksTo(1));
 
 
     // ====== Вспомогательные методы (перегрузки) ======

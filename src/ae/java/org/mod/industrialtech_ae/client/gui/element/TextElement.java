@@ -30,28 +30,28 @@ public class TextElement implements GuiElement {
     }
 
     public void render(GuiGraphics guiGraphics, Font font, int leftPos, int topPos, int mouseX, int mouseY, float partialTick) {
-        Component text = trimFormattedTextToFit(font, (Component)this.textSupplier.get(), this.rect.width);
+        Component text = trimFormattedTextToFit(font, this.textSupplier.get(), this.rect.width());
         int sx = this.rect.screenX(leftPos);
         int sy = this.rect.screenY(topPos);
         int textWidth = font.width(text);
         int var10000;
         switch (this.alignment) {
             case LEFT -> var10000 = sx;
-            case CENTER -> var10000 = sx + (this.rect.width - textWidth) / 2;
-            case RIGHT -> var10000 = sx + this.rect.width - textWidth;
+            case CENTER -> var10000 = sx + (this.rect.width() - textWidth) / 2;
+            case RIGHT -> var10000 = sx + this.rect.width() - textWidth;
             default -> throw new IncompatibleClassChangeError();
         }
 
         int textX = var10000;
-        int var10001 = this.rect.height;
+        int var10001 = this.rect.height();
         Objects.requireNonNull(font);
         int textY = sy + (var10001 - 9) / 2 + 1;
         guiGraphics.drawString(font, text, textX, textY, this.color, this.shadow);
     }
 
     public void renderTooltip(GuiGraphics guiGraphics, Font font, int leftPos, int topPos, int mouseX, int mouseY) {
-        if (this.tooltipSupplier != null && this.rect.contains((double)mouseX, (double)mouseY, leftPos, topPos)) {
-            List<Component> tooltip = (List)this.tooltipSupplier.get();
+        if (this.tooltipSupplier != null && this.rect.contains(mouseX, mouseY, leftPos, topPos)) {
+            List<Component> tooltip = this.tooltipSupplier.get();
             if (tooltip != null && !tooltip.isEmpty()) {
                 guiGraphics.renderTooltip(font, tooltip, Optional.empty(), mouseX, mouseY);
             }

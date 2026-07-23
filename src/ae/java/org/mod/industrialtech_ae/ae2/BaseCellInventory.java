@@ -36,7 +36,7 @@ public class BaseCellInventory<T extends AEKey> implements StorageCell {
                 if (actualFilter != null) {
                     config.setStack(0, new GenericStack(actualFilter, 0L));
                 } else {
-                    config.setStack(0, (GenericStack)null);
+                    config.setStack(0, null);
                 }
             }
         }
@@ -94,11 +94,11 @@ public class BaseCellInventory<T extends AEKey> implements StorageCell {
     }
 
     public T getStoredKey() {
-        return (T)this.storage.getStoredKey();
+        return this.storage.getStoredKey();
     }
 
     public T getFilterKey() {
-        return (T)this.storage.getFilterKey();
+        return this.storage.getFilterKey();
     }
 
     public long getStoredAmount() {

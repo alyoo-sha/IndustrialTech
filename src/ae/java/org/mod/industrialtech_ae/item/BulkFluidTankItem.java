@@ -56,7 +56,7 @@ public class BulkFluidTankItem extends BlockItem {
         return null;
     }
 
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         AEFluidKey filter = this.getFilter(stack);
         long amount = this.getAmount(stack);
         AEFluidKey stored = this.getFluid(stack);

@@ -15,17 +15,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Industrialtech.MOD_ID)
 public class Industrialtech {
-
     public static final String MOD_ID = "industrialtech";
     public static final String MOD_NAME = "IndustrialTech";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
+    public static IEventBus modEventBus;
 
-    public Industrialtech() {
+    public Industrialtech(FMLJavaModLoadingContext context) {
 
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus = context.getModEventBus();
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -38,10 +37,8 @@ public class Industrialtech {
     public void onServerStarting(ServerStartingEvent event) {
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
-
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
         }

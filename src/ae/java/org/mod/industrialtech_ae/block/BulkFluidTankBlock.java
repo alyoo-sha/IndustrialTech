@@ -1,6 +1,5 @@
 package org.mod.industrialtech_ae.block;
 
-import org.mod.industrialtech_ae.block.BaseBlock;
 import org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;

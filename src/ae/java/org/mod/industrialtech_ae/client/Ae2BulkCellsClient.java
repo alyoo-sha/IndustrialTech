@@ -4,7 +4,6 @@ import appeng.api.client.StorageCellModels;
 import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.storage.cells.CellState;
-import appeng.api.storage.cells.ISaveProvider;
 import org.mod.industrialtech_ae.ae2.BaseCellInventory;
 import org.mod.industrialtech_ae.client.gui.BulkFluidTankScreen;
 import org.mod.industrialtech_ae.client.gui.BulkItemChestScreen;
@@ -14,8 +13,6 @@ import org.mod.industrialtech_ae.init.AEModMenu;
 import org.mod.industrialtech_ae.item.BulkFluidCellItem;
 import org.mod.industrialtech_ae.item.BulkItemCellItem;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -31,8 +28,8 @@ public class Ae2BulkCellsClient {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(AEModBlockEntity.BULK_FLUID_TANK_BE.get(), ctx -> new GenericBlockRenderer(ctx));
-        event.registerBlockEntityRenderer(AEModBlockEntity.BULK_ITEM_CHEST_BE.get(), ctx -> new GenericBlockRenderer(ctx));
+        event.registerBlockEntityRenderer(AEModBlockEntity.BULK_FLUID_TANK_BE.get(), GenericBlockRenderer::new);
+        event.registerBlockEntityRenderer(AEModBlockEntity.BULK_ITEM_CHEST_BE.get(), GenericBlockRenderer::new);
     }
 
     @SubscribeEvent(
@@ -43,27 +40,27 @@ public class Ae2BulkCellsClient {
             if (tintIndex != 1) {
                 return 16777215;
             } else {
-                BaseCellInventory<AEFluidKey> inv = BulkFluidCellItem.HANDLER.getCellInventory(stack, (ISaveProvider)null);
+                BaseCellInventory<AEFluidKey> inv = BulkFluidCellItem.HANDLER.getCellInventory(stack, null);
                 return getCellColor(inv);
             }
-        }, new ItemLike[]{(ItemLike) AEModItem.BULK_FLUID_CELL.get()});
+        }, AEModItem.BULK_FLUID_CELL.get());
         event.register((stack, tintIndex) -> {
             if (tintIndex != 1) {
                 return 16777215;
             } else {
-                BaseCellInventory<AEItemKey> inv = BulkItemCellItem.HANDLER.getCellInventory(stack, (ISaveProvider)null);
+                BaseCellInventory<AEItemKey> inv = BulkItemCellItem.HANDLER.getCellInventory(stack, null);
                 return getCellColor(inv);
             }
-        }, new ItemLike[]{(ItemLike)AEModItem.BULK_ITEM_CELL.get()});
+        }, AEModItem.BULK_ITEM_CELL.get());
     }
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            StorageCellModels.registerModel((ItemLike)AEModItem.BULK_FLUID_CELL.get(), Industrialtech_ae.makeId("block/bulk_fluid_cell"));
-            StorageCellModels.registerModel((ItemLike)AEModItem.BULK_ITEM_CELL.get(), Industrialtech_ae.makeId("block/bulk_item_cell"));
-            MenuScreens.register((MenuType) AEModMenu.BULK_FLUID_TANK_MENU.get(), BulkFluidTankScreen::new);
-            MenuScreens.register((MenuType)AEModMenu.BULK_ITEM_CHEST_MENU.get(), BulkItemChestScreen::new);
+            StorageCellModels.registerModel(AEModItem.BULK_FLUID_CELL.get(), Industrialtech_ae.makeId("block/bulk_fluid_cell"));
+            StorageCellModels.registerModel(AEModItem.BULK_ITEM_CELL.get(), Industrialtech_ae.makeId("block/bulk_item_cell"));
+            MenuScreens.register(AEModMenu.BULK_FLUID_TANK_MENU.get(), BulkFluidTankScreen::new);
+            MenuScreens.register(AEModMenu.BULK_ITEM_CHEST_MENU.get(), BulkItemChestScreen::new);
         });
     }
 

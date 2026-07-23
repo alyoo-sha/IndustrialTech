@@ -13,7 +13,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class AeKeyType<T extends AEKey> {
-    private static final Map<String, org.mod.industrialtech_ae.ae2.AeKeyType<?>> TYPES = new HashMap();
+    private static final Map<String, org.mod.industrialtech_ae.ae2.AeKeyType<?>> TYPES = new HashMap<>();
     public static final org.mod.industrialtech_ae.ae2.AeKeyType<AEItemKey> ITEM = register("item", (key) -> key instanceof AEItemKey, (tag) -> tag != null && !tag.isEmpty() ? AEItemKey.fromTag(tag) : null);
     public static final org.mod.industrialtech_ae.ae2.AeKeyType<AEFluidKey> FLUID = register("fluid", (key) -> key instanceof AEFluidKey, (tag) -> tag != null && !tag.isEmpty() ? AEFluidKey.fromTag(tag) : null);
     private final String storageTag;
@@ -21,13 +21,13 @@ public class AeKeyType<T extends AEKey> {
     private final Function<CompoundTag, T> reader;
 
     public static <T extends AEKey> org.mod.industrialtech_ae.ae2.AeKeyType<T> register(String id, Predicate<AEKey> validator, Function<CompoundTag, T> reader) {
-        org.mod.industrialtech_ae.ae2.AeKeyType<T> type = new org.mod.industrialtech_ae.ae2.AeKeyType<T>(id, validator, reader);
+        org.mod.industrialtech_ae.ae2.AeKeyType<T> type = new org.mod.industrialtech_ae.ae2.AeKeyType<>(id, validator, reader);
         TYPES.put(id, type);
         return type;
     }
 
-    public static <T extends AEKey> org.mod.industrialtech_ae.ae2.AeKeyType<T> get(String id) {
-        return (org.mod.industrialtech_ae.ae2.AeKeyType)TYPES.get(id);
+    public static <T extends AEKey> AeKeyType<T> get(String id) {
+        return (AeKeyType)TYPES.get(id);
     }
 
     public static Collection<org.mod.industrialtech_ae.ae2.AeKeyType<?>> values() {
@@ -35,9 +35,9 @@ public class AeKeyType<T extends AEKey> {
     }
 
     public AeKeyType(String storageTag, Predicate<AEKey> validator, Function<CompoundTag, T> reader) {
-        this.storageTag = (String) Objects.requireNonNull(storageTag, "storageTag");
-        this.validator = (Predicate)Objects.requireNonNull(validator, "validator");
-        this.reader = (Function)Objects.requireNonNull(reader, "reader");
+        this.storageTag = Objects.requireNonNull(storageTag, "storageTag");
+        this.validator = Objects.requireNonNull(validator, "validator");
+        this.reader = Objects.requireNonNull(reader, "reader");
     }
 
     public String getStorageTag() {
@@ -53,7 +53,7 @@ public class AeKeyType<T extends AEKey> {
     }
 
     public T read(CompoundTag tag) {
-        return (T)(this.reader.apply(tag));
+        return this.reader.apply(tag);
     }
 
     public CompoundTag write(T key) {

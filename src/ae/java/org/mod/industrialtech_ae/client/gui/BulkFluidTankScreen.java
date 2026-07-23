@@ -20,12 +20,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 public class BulkFluidTankScreen extends AbstractContainerScreen<BulkFluidTankMenu> {
     private static final ResourceLocation BACKGROUND = Industrialtech_ae.makeId("textures/gui/fluid_tank.png");
     private static final Size BACKGROUND_SIZE = new Size(176, 186);
-    private static final int GRAY = 11184810;
     private static final Rect TITLE_RECT = new Rect(14, 9, 152, 11);
     private static final Rect STATUS_RECT = new Rect(14, 25, 152, 11);
     private static final Rect FILTER_RECT = new Rect(14, 39, 152, 11);
@@ -33,7 +31,7 @@ public class BulkFluidTankScreen extends AbstractContainerScreen<BulkFluidTankMe
     private static final Rect FILTER_LABEL_RECT = new Rect(14, 72, 54, 11);
     private static final Rect FILTER_SLOT_RECT = new Rect(70, 72, 16, 16);
     private static final Rect FLUID_SLOT_RECT = new Rect(145, 72, 16, 16);
-    private final List<GuiElement> elements = new ArrayList();
+    private final List<GuiElement> elements = new ArrayList<>();
 
     public BulkFluidTankScreen(BulkFluidTankMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -46,30 +44,30 @@ public class BulkFluidTankScreen extends AbstractContainerScreen<BulkFluidTankMe
     protected void init() {
         super.init();
         this.elements.clear();
-        this.elements.add(new TextElement(TITLE_RECT, () -> this.title, 16777215, false, TextAlignment.CENTER, (Supplier)null));
+        this.elements.add(new TextElement(TITLE_RECT, () -> this.title, 16777215, false, TextAlignment.CENTER, null));
         this.elements.add(new TextElement(STATUS_RECT, () -> {
             MutableComponent res = Component.translatable("gui.industrialtech_ae.status").append(": ");
-            if (((BulkFluidTankMenu)this.menu).isOnline()) {
+            if ((this.menu).isOnline()) {
                 res.append(Component.translatable("gui.industrialtech_ae.online").withStyle(ChatFormatting.GREEN));
             } else {
                 res.append(Component.translatable("gui.industrialtech_ae.offline").withStyle(ChatFormatting.RED));
             }
 
             return res;
-        }, 11184810, false, TextAlignment.LEFT, (Supplier)null));
-        this.elements.add(new TextElement(FILTER_RECT, () -> ((BulkFluidTankMenu)this.menu).getFilter() == null ? Component.translatable("gui.industrialtech_ae.no_filter").withStyle(ChatFormatting.RED) : Component.translatable("gui.industrialtech_ae.contains").withStyle(ChatFormatting.GRAY).append(Component.literal(": ").withStyle(ChatFormatting.GRAY)).append(((BulkFluidTankMenu)this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GOLD)), 11184810, false, TextAlignment.LEFT, () -> ((BulkFluidTankMenu)this.menu).getFilter() != null ? Collections.singletonList(((BulkFluidTankMenu)this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GOLD)) : null));
-        this.elements.add(new TextElement(AMOUNT_RECT, () -> ((BulkFluidTankMenu)this.menu).getFluid() != null && ((BulkFluidTankMenu)this.menu).getAmount() != 0L ? Component.translatable("gui.industrialtech_ae.amount").withStyle(ChatFormatting.GRAY).append(Component.literal(": ").withStyle(ChatFormatting.GRAY)).append(AmountFormatter.formatFluid(((BulkFluidTankMenu)this.menu).getAmount(), true, ChatFormatting.LIGHT_PURPLE)) : Component.translatable("gui.industrialtech_ae.empty").withStyle(ChatFormatting.DARK_RED), 11184810, false, TextAlignment.LEFT, () -> ((BulkFluidTankMenu)this.menu).getFluid() != null && ((BulkFluidTankMenu)this.menu).getAmount() >= 0L ? Collections.singletonList(AmountFormatter.formatWithSpaces(((BulkFluidTankMenu)this.menu).getAmount(), ChatFormatting.LIGHT_PURPLE).append(" mb")) : null));
-        this.elements.add(new TextElement(FILTER_LABEL_RECT, () -> Component.translatable("gui.industrialtech_ae.filter").append(":"), 11184810, false, TextAlignment.LEFT, (Supplier)null));
-        List var10000 = this.elements;
+        }, 11184810, false, TextAlignment.LEFT, null));
+        this.elements.add(new TextElement(FILTER_RECT, () -> (this.menu).getFilter() == null ? Component.translatable("gui.industrialtech_ae.no_filter").withStyle(ChatFormatting.RED) : Component.translatable("gui.industrialtech_ae.contains").withStyle(ChatFormatting.GRAY).append(Component.literal(": ").withStyle(ChatFormatting.GRAY)).append((this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GOLD)), 11184810, false, TextAlignment.LEFT, () -> (this.menu).getFilter() != null ? Collections.singletonList((this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GOLD)) : null));
+        this.elements.add(new TextElement(AMOUNT_RECT, () -> (this.menu).getFluid() != null && (this.menu).getAmount() != 0L ? Component.translatable("gui.industrialtech_ae.amount").withStyle(ChatFormatting.GRAY).append(Component.literal(": ").withStyle(ChatFormatting.GRAY)).append(AmountFormatter.formatFluid((this.menu).getAmount(), true, ChatFormatting.LIGHT_PURPLE)) : Component.translatable("gui.industrialtech_ae.empty").withStyle(ChatFormatting.DARK_RED), 11184810, false, TextAlignment.LEFT, () -> (this.menu).getFluid() != null && (this.menu).getAmount() >= 0L ? Collections.singletonList(AmountFormatter.formatWithSpaces((this.menu).getAmount(), ChatFormatting.LIGHT_PURPLE).append(" mb")) : null));
+        this.elements.add(new TextElement(FILTER_LABEL_RECT, () -> Component.translatable("gui.industrialtech_ae.filter").append(":"), 11184810, false, TextAlignment.LEFT, null));
+        List<GuiElement> var10000 = this.elements;
         Rect var10003 = FILTER_SLOT_RECT;
-        BulkFluidTankMenu var10004 = (BulkFluidTankMenu)this.menu;
+        BulkFluidTankMenu var10004 = this.menu;
         Objects.requireNonNull(var10004);
-        var10000.add(new FluidSlotElement(var10003, var10004::getFilter, () -> ((BulkFluidTankMenu)this.menu).getFilter() != null ? Collections.singletonList(((BulkFluidTankMenu)this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GOLD)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.no_filter").withStyle(ChatFormatting.RED)), 0, () -> AEModNetworking.sendToServer(new FilterInteractPacket(((BulkFluidTankMenu)this.menu).getBlockPos()))));
-        this.elements.add(new FluidSlotElement(FLUID_SLOT_RECT, () -> ((BulkFluidTankMenu)this.menu).getAmount() > 0L ? ((BulkFluidTankMenu)this.menu).getFluid() : null, () -> ((BulkFluidTankMenu)this.menu).getFluid() != null && ((BulkFluidTankMenu)this.menu).getAmount() > 0L ? List.of(((BulkFluidTankMenu)this.menu).getFluid().getDisplayName().copy().withStyle(ChatFormatting.GOLD), AmountFormatter.formatFluid(((BulkFluidTankMenu)this.menu).getAmount(), true, ChatFormatting.LIGHT_PURPLE)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.empty").withStyle(ChatFormatting.DARK_RED)), 0, () -> AEModNetworking.sendToServer(new FluidInteractPacket(((BulkFluidTankMenu)this.menu).getBlockPos()))));
+        var10000.add(new FluidSlotElement(var10003, var10004::getFilter, () -> (this.menu).getFilter() != null ? Collections.singletonList((this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GOLD)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.no_filter").withStyle(ChatFormatting.RED)), 0, () -> AEModNetworking.sendToServer(new FilterInteractPacket((this.menu).getBlockPos()))));
+        this.elements.add(new FluidSlotElement(FLUID_SLOT_RECT, () -> (this.menu).getAmount() > 0L ? (this.menu).getFluid() : null, () -> (this.menu).getFluid() != null && (this.menu).getAmount() > 0L ? List.of((this.menu).getFluid().getDisplayName().copy().withStyle(ChatFormatting.GOLD), AmountFormatter.formatFluid((this.menu).getAmount(), true, ChatFormatting.LIGHT_PURPLE)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.empty").withStyle(ChatFormatting.DARK_RED)), 0, () -> AEModNetworking.sendToServer(new FluidInteractPacket((this.menu).getBlockPos()))));
     }
 
     private boolean isCustomTooltipArea(int mouseX, int mouseY) {
-        return FILTER_SLOT_RECT.contains((double)mouseX, (double)mouseY, this.leftPos, this.topPos) || FLUID_SLOT_RECT.contains((double)mouseX, (double)mouseY, this.leftPos, this.topPos);
+        return FILTER_SLOT_RECT.contains(mouseX, mouseY, this.leftPos, this.topPos) || FLUID_SLOT_RECT.contains(mouseX, mouseY, this.leftPos, this.topPos);
     }
 
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {

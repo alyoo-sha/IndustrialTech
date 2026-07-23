@@ -31,21 +31,21 @@ public class FluidSlotElement implements GuiElement {
     }
 
     public void render(GuiGraphics guiGraphics, Font font, int leftPos, int topPos, int mouseX, int mouseY, float partialTick) {
-        AEFluidKey fluid = (AEFluidKey)this.fluidSupplier.get();
+        AEFluidKey fluid = this.fluidSupplier.get();
         if (fluid != null) {
             FluidStack fluidStack = new FluidStack(fluid.getFluid(), 1);
-            TextureAtlasSprite sprite = (TextureAtlasSprite)Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(IClientFluidTypeExtensions.of(fluidStack.getFluid()).getStillTexture(fluidStack));
+            TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(IClientFluidTypeExtensions.of(fluidStack.getFluid()).getStillTexture(fluidStack));
             int tint = IClientFluidTypeExtensions.of(fluidStack.getFluid()).getTintColor(fluidStack);
             RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
             guiGraphics.setColor((float)(tint >> 16 & 255) / 255.0F, (float)(tint >> 8 & 255) / 255.0F, (float)(tint & 255) / 255.0F, (float)(tint >> 24 & 255) / 255.0F);
-            guiGraphics.blit(this.rect.screenX(leftPos), this.rect.screenY(topPos), 0, this.rect.width, this.rect.height, sprite);
+            guiGraphics.blit(this.rect.screenX(leftPos), this.rect.screenY(topPos), 0, this.rect.width(), this.rect.height(), sprite);
             guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         }
     }
 
     public void renderTooltip(GuiGraphics guiGraphics, Font font, int leftPos, int topPos, int mouseX, int mouseY) {
-        if (this.tooltipSupplier != null && this.rect.contains((double)mouseX, (double)mouseY, leftPos, topPos)) {
-            List<Component> tooltip = (List)this.tooltipSupplier.get();
+        if (this.tooltipSupplier != null && this.rect.contains(mouseX, mouseY, leftPos, topPos)) {
+            List<Component> tooltip = this.tooltipSupplier.get();
             if (tooltip != null && !tooltip.isEmpty()) {
                 guiGraphics.renderTooltip(font, tooltip, Optional.empty(), mouseX, mouseY);
             }

@@ -44,25 +44,25 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 sourceSets {
   main {
     resources {
-      srcDirs += 'src/datagen/generated/main'
+      srcDirs += 'src/datagen/generated/industrialtech'
       exclude '.cache'
     }
   }
   ae {
     java.srcDirs = ['src/ae/java']
-    resources.srcDirs = ['src/ae/resources', 'src/datagen/generated/ae']
+    resources.srcDirs = ['src/ae/resources', 'src/datagen/generated/industrialtech_ae']
     compileClasspath += sourceSets.main.output
     runtimeClasspath += sourceSets.main.output
   }
   crafting {
     java.srcDirs = ['src/crafting/java']
-    resources.srcDirs = ['src/crafting/resources', 'src/datagen/generated/crafting']
+    resources.srcDirs = ['src/crafting/resources', 'src/datagen/generated/industrialtech_crafting']
     compileClasspath += sourceSets.main.output
     runtimeClasspath += sourceSets.main.output
   }
   ore {
     java.srcDirs = ['src/ore/java']
-    resources.srcDirs = ['src/ore/resources', 'src/datagen/generated/ore']
+    resources.srcDirs = ['src/ore/resources', 'src/datagen/generated/industrialtech_ore']
     compileClasspath += sourceSets.main.output
     runtimeClasspath += sourceSets.main.output
   }
@@ -121,12 +121,14 @@ mixin {
   config "${mod_id}.mixins.json"
 
   // Если у модулей есть свои миксины, добавьте:
-  // add sourceSets.ae, "industrialtech_ae.refmap.json"
-  // config "industrialtech_ae.mixins.json"
-  // add sourceSets.crafting, "industrialtech_crafting.refmap.json"
-  // config "industrialtech_crafting.mixins.json"
-  // add sourceSets.ore, "industrialtech_ore.refmap.json"
-  // config "industrialtech_ore.mixins.json"
+  add sourceSets.ae, "${mod_id_ae}.refmap.json"
+  config "${mod_id_ae}.mixins.json"
+
+  add sourceSets.ae, "${mod_id_crafting}.refmap.json"
+  config "${mod_id_crafting}.mixins.json"
+
+  add sourceSets.ae, "${mod_id_ore}.refmap.json"
+  config "${mod_id_ore}.mixins.json"
 }
 
 // ========== IDEA ==========
@@ -193,33 +195,22 @@ minecraft {
       taskName 'DataGen'
       workingDirectory project.file('run-data')
 
-      // Генерация для основного модуля
-      args '--mod', mod_id,
-          '--all',
-          '--output', file('src/datagen/generated/main'),
+      // ✅ Исправлено: один общий --output для всех модов
+      args '--all',
+          '--mod', mod_id,
+          '--mod', 'industrialtech_ae',
+          '--mod', 'industrialtech_crafting',
+          '--mod', 'industrialtech_ore',
+          '--output', file('src/datagen/generated'),
           '--existing', file('src/main/resources/'),
-          '--existing', file('src/datagen/generated/main/')
-      mods.named(mod_id).configure { source(sourceSets.datagenMain) }
-
-      // Генерация для AE
-      args '--mod', 'industrialtech_ae',
-          '--output', file('src/datagen/generated/ae'),
           '--existing', file('src/ae/resources/'),
-          '--existing', file('src/datagen/generated/ae/')
-      mods.named("industrialtech_ae").configure { source(sourceSets.datagenAe) }
-
-      // Генерация для Craft
-      args '--mod', 'industrialtech_crafting',
-          '--output', file('src/datagen/generated/crafting'),
           '--existing', file('src/crafting/resources/'),
-          '--existing', file('src/datagen/generated/craft/')
-      mods.named("industrialtech_crafting").configure { source(sourceSets.datagenCrafting) }
+          '--existing', file('src/ore/resources/')
 
-      // Генерация для Ore
-      args '--mod', 'industrialtech_ore',
-          '--output', file('src/datagen/generated/ore'),
-          '--existing', file('src/ore/resources/'),
-          '--existing', file('src/datagen/generated/ore/')
+      // Добавляем соответствующие datagen-источники для каждого мода
+      mods.named(mod_id).configure { source(sourceSets.datagenMain) }
+      mods.named("industrialtech_ae").configure { source(sourceSets.datagenAe) }
+      mods.named("industrialtech_crafting").configure { source(sourceSets.datagenCrafting) }
       mods.named("industrialtech_ore").configure { source(sourceSets.datagenOre) }
     }
   }
@@ -227,20 +218,15 @@ minecraft {
 
 // ========== Репозитории ==========
 repositories {
-//  flatDir { dir 'libs' }
-//  mavenCentral()
-
   maven {
     url 'https://maven.blakesmods.com'
   }
-
   maven {
     url "https://cursemaven.com"
     content {
       includeGroup "curse.maven"
     }
   }
-
   maven {
     name "Modmaven"
     url "https://modmaven.dev/"
@@ -248,7 +234,6 @@ repositories {
       includeGroup 'appeng'
     }
   }
-
   maven {
     url "https://api.modrinth.com/maven"
   }
@@ -259,12 +244,11 @@ repositories {
         url = "https://api.modrinth.com/maven"
       }
     }
-    forRepositories(fg.repository) // Uncomment when using ForgeGradle
+    forRepositories(fg.repository)
     filter {
       includeGroup "maven.modrinth"
     }
   }
-
 }
 
 // ========== Зависимости ==========
@@ -284,8 +268,8 @@ dependencies {
   // forge-ae2-additional-opportunity
   runtimeOnly fg.deobf("curse.maven:forge-ae2-additional-opportunity-475335:4760066") //MIT
 
-  // ae-wireless-transceiver
-  runtimeOnly fg.deobf("curse.maven:ae-wireless-transceiver-1337607:8356380") //MIT
+  // ae-wireless-transceiver patternbetter, mouse-tweaks, modern-ui, ae-wireless-transceiver
+//  runtimeOnly fg.deobf("curse.maven:ae-wireless-transceiver-1337607:8356380") //MIT
 
   // ae2-toogleable-view-cell
   runtimeOnly fg.deobf("curse.maven:ae2-toogleable-view-cell-1141472:8054118") //MIT
@@ -352,14 +336,14 @@ dependencies {
   runtimeOnly fg.deobf("curse.maven:sodium-options-api-1103431:6100812")
   runtimeOnly fg.deobf("curse.maven:magnesium-extras-558905:6041697")
   runtimeOnly fg.deobf("curse.maven:dynamiclights-reforged-551736:6044481")
-  runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:5338457")
+//  runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:5338457")
   runtimeOnly fg.deobf("curse.maven:ferritecore-429235:4810975")
   runtimeOnly fg.deobf("curse.maven:faster-block-placement-1025486:5374271")
   runtimeOnly fg.deobf("curse.maven:chunk-animator-embeddium-compat-1527419:8007459")
   runtimeOnly fg.deobf("curse.maven:chunk-animator-236484:4588407")
   runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
   runtimeOnly fg.deobf("curse.maven:embeddium-908741:5681725")//скачал
-  runtimeOnly fg.deobf("curse.maven:modern-ui-352491:6956345")
+//  runtimeOnly fg.deobf("curse.maven:modern-ui-352491:6956345")
 
   runtimeOnly fg.deobf("curse.maven:merequester-688367:8298547") //LGPL
   runtimeOnly fg.deobf("curse.maven:ae2-mega-things-1150075:6203824") //LGPL
@@ -430,7 +414,7 @@ dependencies {
   // myotus-lib
   implementation fg.deobf("maven.modrinth:myotus-lib:1.20.1-15.0.7") //LGPL
   // patternbetter
-  implementation fg.deobf("maven.modrinth:patternbetter:1.3.3") //LGPL
+//  implementation fg.deobf("maven.modrinth:patternbetter:1.3.3") //LGPL
 
   // applied-enough-items
   implementation fg.deobf("maven.modrinth:applied-enough-items:1.1.1") //LGPL
@@ -458,6 +442,7 @@ dependencies {
 
   // UI
   implementation fg.deobf("maven.modrinth:ui-lib:GizE27iH") //
+  implementation fg.deobf("maven.modrinth:mekanism:uxe1WQp4") //
 
 //  implementation fg.deobf(fileTree(dir: 'libs', include: '*.jar'))
 
@@ -484,7 +469,6 @@ tasks.withType(ProcessResources).configureEach {
       mod_version               : mod_version,
       mod_authors               : mod_authors,
       mod_description           : mod_description,
-      // 👇 Добавляем переменные для модулей
       mod_id_ae                 : mod_id_ae,
       mod_name_ae               : mod_name_ae,
       mod_id_crafting           : mod_id_crafting,

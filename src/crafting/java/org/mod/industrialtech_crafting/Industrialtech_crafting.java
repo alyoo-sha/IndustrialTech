@@ -29,12 +29,13 @@ public class Industrialtech_crafting {
     public static final String MOD_ID = "industrialtech_crafting";
     public static final String MOD_NAME = "IndustrialTech: Crafting";
     private static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
-    public static final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public static  IEventBus modEventBus;
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 
-    public Industrialtech_crafting() {
+    public Industrialtech_crafting(FMLJavaModLoadingContext context) {
+        modEventBus = context.getModEventBus();
         ICraftModItem.init();
         ICraftModBlock.init();
         ICraftModTab.init();
@@ -47,25 +48,17 @@ public class Industrialtech_crafting {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-        }
+        {}
     }
 }

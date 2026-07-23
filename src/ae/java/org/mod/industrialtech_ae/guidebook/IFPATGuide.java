@@ -16,7 +16,7 @@ public class IFPATGuide {
         if (modList == null || modList.isLoaded("guideme")) {
             try {
                 Class<?> guideClass = Class.forName("guideme.Guide");
-                Object guideBuilder = guideClass.getMethod("builder", ResourceLocation.class).invoke((Object)null, ID);
+                Object guideBuilder = guideClass.getMethod("builder", ResourceLocation.class).invoke(null, ID);
                 Class<?> guideBuilderClass = guideBuilder.getClass();
                 guideBuilderClass.getMethod("folder", String.class).invoke(guideBuilder, "ifpat_guidebook");
                 guideBuilderClass.getMethod("build").invoke(guideBuilder);
@@ -30,22 +30,19 @@ public class IFPATGuide {
 
     public static ItemStack createGuideItem() {
         ModList modList = ModList.get();
-        if (modList != null && !modList.isLoaded("guideme")) {
-            return ItemStack.EMPTY;
-        } else {
+        if (modList == null || modList.isLoaded("guideme")) {
             try {
                 Class<?> guidesClass = Class.forName("guideme.Guides");
-                Object guideItem = guidesClass.getMethod("createGuideItem", ResourceLocation.class).invoke((Object)null, ID);
-                if (guideItem instanceof ItemStack) {
-                    ItemStack stack = (ItemStack)guideItem;
+                Object guideItem = guidesClass.getMethod("createGuideItem", ResourceLocation.class).invoke(null, ID);
+                if (guideItem instanceof ItemStack stack) {
                     return stack;
                 }
             } catch (ReflectiveOperationException e) {
                 LOGGER.warn("Failed to create GuideME item for {}.", ID, e);
             }
 
-            return ItemStack.EMPTY;
         }
+        return ItemStack.EMPTY;
     }
 
     private IFPATGuide() {

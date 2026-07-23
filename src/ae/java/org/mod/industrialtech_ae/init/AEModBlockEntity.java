@@ -38,7 +38,7 @@ public class AEModBlockEntity {
             Block[] blockArray = Arrays.stream(blocks)
                     .map(Supplier::get)
                     .toArray(Block[]::new);
-            return BlockEntityType.Builder.of(factory, blockArray).build(null);
+            return BlockEntityType.Builder.of(factory, blockArray).build( null);
         });
     }
 }

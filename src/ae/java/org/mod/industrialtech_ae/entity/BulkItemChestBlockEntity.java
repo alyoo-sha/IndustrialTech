@@ -14,7 +14,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -27,7 +26,7 @@ public class BulkItemChestBlockEntity extends BaseBlockEntity<AEItemKey> {
     private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(this::createItemHandler);
 
     public BulkItemChestBlockEntity(BlockPos pos, BlockState state) {
-        super((BlockEntityType) AEModBlockEntity.BULK_ITEM_CHEST_BE.get(), pos, state, AeKeyType.ITEM);
+        super(AEModBlockEntity.BULK_ITEM_CHEST_BE.get(), pos, state, AeKeyType.ITEM);
     }
 
     protected void syncToOpenPlayers() {
@@ -61,12 +60,12 @@ public class BulkItemChestBlockEntity extends BaseBlockEntity<AEItemKey> {
             }
 
             public @NotNull ItemStack getStackInSlot(int slot) {
-                AEItemKey key = (AEItemKey) org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity.this.storage.getStoredKey();
+                AEItemKey key = BulkItemChestBlockEntity.this.storage.getStoredKey();
                 if (key == null) {
                     return ItemStack.EMPTY;
                 } else {
                     ItemStack stack = key.toStack();
-                    stack.setCount((int)Math.min(org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity.this.storage.getAmount(), 2147483647L));
+                    stack.setCount((int)Math.min(BulkItemChestBlockEntity.this.storage.getAmount(), 2147483647L));
                     return stack;
                 }
             }
@@ -74,7 +73,7 @@ public class BulkItemChestBlockEntity extends BaseBlockEntity<AEItemKey> {
             public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
                 if (!stack.isEmpty() && this.isItemValid(slot, stack)) {
                     Actionable mode = simulate ? Actionable.SIMULATE : Actionable.MODULATE;
-                    long inserted = org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity.this.storage.insert(AEItemKey.of(stack), (long)stack.getCount(), mode);
+                    long inserted = BulkItemChestBlockEntity.this.storage.insert(AEItemKey.of(stack), stack.getCount(), mode);
                     if (inserted >= (long)stack.getCount()) {
                         return ItemStack.EMPTY;
                     } else {
@@ -88,12 +87,12 @@ public class BulkItemChestBlockEntity extends BaseBlockEntity<AEItemKey> {
             }
 
             public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
-                AEItemKey key = (AEItemKey) org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity.this.storage.getStoredKey();
+                AEItemKey key = BulkItemChestBlockEntity.this.storage.getStoredKey();
                 if (key == null) {
                     return ItemStack.EMPTY;
                 } else {
                     Actionable mode = simulate ? Actionable.SIMULATE : Actionable.MODULATE;
-                    long extracted = org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity.this.storage.extract(key, (long)amount, mode);
+                    long extracted = BulkItemChestBlockEntity.this.storage.extract(key, amount, mode);
                     if (extracted <= 0L) {
                         return ItemStack.EMPTY;
                     } else {
@@ -109,7 +108,7 @@ public class BulkItemChestBlockEntity extends BaseBlockEntity<AEItemKey> {
             }
 
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                AEItemKey filter = (AEItemKey) org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity.this.storage.getFilterKey();
+                AEItemKey filter = BulkItemChestBlockEntity.this.storage.getFilterKey();
                 return filter == null || filter.matches(stack);
             }
         };

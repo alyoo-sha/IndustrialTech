@@ -2,9 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "org.mod.industrialtech_ae.mixin",
+  "plugin": "org.mod.industrialtech_ae.mixin.AEMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "industrialtech_ae.refmap.json",
   "mixins": [
+    "MixinItemDefinition",
+    "MixinPatternEncodingTermMenu",
+    "MixinRestrictedInputSlot"
   ],
   "client": [
   ],

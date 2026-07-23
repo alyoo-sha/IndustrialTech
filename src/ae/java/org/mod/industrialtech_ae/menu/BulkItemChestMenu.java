@@ -17,11 +17,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +38,7 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
     }
 
     public BulkItemChestMenu(int containerId, Inventory inv, BulkItemChestBlockEntity blockEntity) {
-        super((MenuType) AEModMenu.BULK_ITEM_CHEST_MENU.get(), containerId);
+        super(AEModMenu.BULK_ITEM_CHEST_MENU.get(), containerId);
         this.tankContainer = new SimpleContainer(1);
         this.blockEntity = blockEntity;
         this.level = inv.player.level();
@@ -52,9 +50,9 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
             this.syncToClient(serverPlayer);
         } else {
             GenericAeKeyStorage<AEItemKey> storage = blockEntity.getStorage();
-            this.clientItem = (AEItemKey)storage.getStoredKey();
+            this.clientItem = storage.getStoredKey();
             this.clientAmount = storage.getAmount();
-            this.clientFilter = (AEItemKey)storage.getFilterKey();
+            this.clientFilter = storage.getFilterKey();
             this.clientOnline = blockEntity.isOnline();
         }
 
@@ -67,18 +65,17 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
             BlockPos pos = extraData.readBlockPos();
             BlockEntity be = inv.player.level().getBlockEntity(pos);
             if (be instanceof BulkItemChestBlockEntity) {
-                BulkItemChestBlockEntity tank = (BulkItemChestBlockEntity)be;
-                return tank;
+                return (BulkItemChestBlockEntity)be;
             } else {
                 String var10002 = String.valueOf(pos);
-                throw new IllegalStateException("Block entity at " + var10002 + " is not BulkItemTankBlockEntity: " + String.valueOf(be));
+                throw new IllegalStateException("Block entity at " + var10002 + " is not BulkItemTankBlockEntity: " + (be));
             }
         }
     }
 
     public void syncToClient(ServerPlayer serverPlayer) {
         GenericAeKeyStorage<AEItemKey> storage = this.blockEntity.getStorage();
-        AEModNetworking.sendToPlayer(new ItemSyncPacket(this.pos, (AEItemKey)storage.getStoredKey(), storage.getAmount(), (AEItemKey)storage.getFilterKey(), this.blockEntity.isOnline()), serverPlayer);
+        AEModNetworking.sendToPlayer(new ItemSyncPacket(this.pos, storage.getStoredKey(), storage.getAmount(), storage.getFilterKey(), this.blockEntity.isOnline()), serverPlayer);
     }
 
     public void updateClientData(BlockPos pos, AEItemKey item, long amount, AEItemKey filter, boolean online) {
@@ -111,7 +108,7 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
     }
 
     public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
-        Slot slot = (Slot)this.slots.get(index);
+        Slot slot = this.slots.get(index);
         if (!slot.hasItem()) {
             return ItemStack.EMPTY;
         } else {
@@ -152,7 +149,7 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
         } else {
             GenericAeKeyStorage<AEItemKey> storage = this.blockEntity.getStorage();
             AEItemKey key = AEItemKey.of(stack);
-            long inserted = storage.insert(key, (long)stack.getCount(), Actionable.MODULATE);
+            long inserted = storage.insert(key, stack.getCount(), Actionable.MODULATE);
             if (inserted <= 0L) {
                 return stack;
             } else {
@@ -166,9 +163,9 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
 
     private ItemStack extractFromTankForSlot(int amount) {
         GenericAeKeyStorage<AEItemKey> storage = this.blockEntity.getStorage();
-        AEItemKey key = (AEItemKey)storage.getStoredKey();
+        AEItemKey key = storage.getStoredKey();
         if (key != null && storage.getAmount() > 0L) {
-            long extracted = Math.min((long)amount, storage.getAmount());
+            long extracted = Math.min(amount, storage.getAmount());
             long actuallyExtracted = storage.extract(key, extracted, Actionable.MODULATE);
             if (actuallyExtracted <= 0L) {
                 return ItemStack.EMPTY;
@@ -183,8 +180,8 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
         }
     }
 
-    public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(this.level, this.pos), player, (Block) AEModBlock.BULK_ITEM_CHEST.get());
+    public boolean stillValid(@NotNull Player player) {
+        return stillValid(ContainerLevelAccess.create(this.level, this.pos), player, AEModBlock.BULK_ITEM_CHEST.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
@@ -202,4 +199,5 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
         }
 
     }
+
 }

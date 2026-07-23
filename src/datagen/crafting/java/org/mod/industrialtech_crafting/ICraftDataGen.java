@@ -1,7 +1,5 @@
 package org.mod.industrialtech_crafting;
 
-import com.wintercogs.ae2omnicells.datagen.ModBlockStateProvider;
-import com.wintercogs.ae2omnicells.datagen.ModRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -9,6 +7,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.mod.industrialtech_crafting.providers.lang.ICraftEnglishLangProvider;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -43,10 +42,10 @@ public class ICraftDataGen {
 //                new ModItemModelProvider(packOutput, existingFileHelper)
 //        );
 //
-//        gen.addProvider(
-//                true,
-//                new ModEnglishLangProvider(packOutput)
-//        );
+        gen.addProvider(
+                true,
+                new ICraftEnglishLangProvider(packOutput)
+        );
 //        gen.addProvider(
 //                true,
 //                new ModRussianLangProvider(packOutput)

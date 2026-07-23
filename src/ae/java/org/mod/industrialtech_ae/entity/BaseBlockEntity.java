@@ -33,21 +33,21 @@ public abstract class BaseBlockEntity<T extends AEKey> extends BlockEntity imple
     protected final IManagedGridNode gridNode;
     protected boolean online = false;
     private final LazyOptional<IInWorldGridNodeHost> gridNodeCap = LazyOptional.of(() -> this);
-    public static final Capability<IInWorldGridNodeHost> GRID_NODE_HOST_CAP = CapabilityManager.get(new CapabilityToken<IInWorldGridNodeHost>() {
+    public static final Capability<IInWorldGridNodeHost> GRID_NODE_HOST_CAP = CapabilityManager.get(new CapabilityToken<>() {
     });
 
     public BaseBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, AeKeyType<T> keyType) {
         super(type, pos, state);
-        this.storage = new GenericAeKeyStorage(keyType, (AEKey)null, this::onStorageChanged);
-        this.adapter = new BaseBlockInventory(this.storage);
-        this.gridNode = GridHelper.createManagedNode(this, new IGridNodeListener<org.mod.industrialtech_ae.entity.BaseBlockEntity<T>>() {
+        this.storage = new GenericAeKeyStorage<>(keyType, null, this::onStorageChanged);
+        this.adapter = new BaseBlockInventory<>(this.storage);
+        this.gridNode = GridHelper.createManagedNode(this, new IGridNodeListener<>() {
             public void onSaveChanges(org.mod.industrialtech_ae.entity.BaseBlockEntity<T> tBaseBlockEntity, IGridNode iGridNode) {
             }
 
             public void onStateChanged(org.mod.industrialtech_ae.entity.BaseBlockEntity<T> be, IGridNode node, IGridNodeListener.State state) {
                 be.updateOnlineState();
             }
-        }).setVisualRepresentation(state.getBlock()).setInWorldNode(true).setTagName("proxy_node").setFlags(new GridFlags[]{GridFlags.REQUIRE_CHANNEL}).setExposedOnSides(EnumSet.allOf(Direction.class)).setIdlePowerUsage(0.1);
+        }).setVisualRepresentation(state.getBlock()).setInWorldNode(true).setTagName("proxy_node").setFlags(GridFlags.REQUIRE_CHANNEL).setExposedOnSides(EnumSet.allOf(Direction.class)).setIdlePowerUsage(0.1);
         this.gridNode.addService(IStorageProvider.class, this);
     }
 
@@ -67,7 +67,7 @@ public abstract class BaseBlockEntity<T extends AEKey> extends BlockEntity imple
     public void onStorageChanged() {
         this.setChanged();
         if (this.gridNode.isReady()) {
-            ((IGrid) Objects.requireNonNull(this.gridNode.getGrid())).getStorageService().refreshNodeStorageProvider(this.gridNode.getNode());
+            (Objects.requireNonNull(this.gridNode.getGrid())).getStorageService().refreshNodeStorageProvider(this.gridNode.getNode());
         }
 
         if (this.level != null && !this.level.isClientSide) {
@@ -129,12 +129,11 @@ public abstract class BaseBlockEntity<T extends AEKey> extends BlockEntity imple
 
     }
 
-    public ItemStack saveToItemStack(ItemStack stack) {
+    public void saveToItemStack(ItemStack stack) {
         CompoundTag tag = new CompoundTag();
         this.saveAdditional(tag);
         tag.putBoolean("online", false);
         stack.setTag(tag);
-        return stack;
     }
 
     public void mountInventories(IStorageMounts iStorageMounts) {

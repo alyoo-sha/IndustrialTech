@@ -1,7 +1,6 @@
 package org.mod.industrialtech_ae.network;
 
 import appeng.api.stacks.AEFluidKey;
-import appeng.api.stacks.AEKey;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,8 +29,8 @@ public class FilterInteractPacket {
     }
 
     public static void handle(org.mod.industrialtech_ae.network.FilterInteractPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        ((NetworkEvent.Context)ctx.get()).enqueueWork(() -> {
-            ServerPlayer player = ((NetworkEvent.Context)ctx.get()).getSender();
+        (ctx.get()).enqueueWork(() -> {
+            ServerPlayer player = (ctx.get()).getSender();
             if (player != null) {
                 if (!(player.distanceToSqr((double)msg.pos.getX() + (double)0.5F, (double)msg.pos.getY() + (double)0.5F, (double)msg.pos.getZ() + (double)0.5F) > (double)64.0F)) {
                     BlockEntity patt1482$temp = player.level().getBlockEntity(msg.pos);
@@ -40,7 +39,7 @@ public class FilterInteractPacket {
                         ItemStack carried = player.containerMenu.getCarried();
                         ItemStack held = carried.isEmpty() ? player.getItemInHand(InteractionHand.MAIN_HAND) : carried;
                         if (held.isEmpty()) {
-                            be.getStorage().setFilter((AEKey)null);
+                            be.getStorage().setFilter(null);
                             be.onStorageChanged();
                         } else {
                             FluidUtil.getFluidContained(held).ifPresent((fluidStack) -> {
@@ -55,6 +54,6 @@ public class FilterInteractPacket {
                 }
             }
         });
-        ((NetworkEvent.Context)ctx.get()).setPacketHandled(true);
+        (ctx.get()).setPacketHandled(true);
     }
 }

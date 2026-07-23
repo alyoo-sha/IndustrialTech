@@ -1,66 +1,391 @@
-[18июл.2026 15:57:28.633] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\n4471\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, industrialtech, --all, --output, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated\main, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\main\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated\main, --mod, industrialtech_ae, --output, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated\ae, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\ae\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated\ae, --mod, industrialtech_crafting, --output, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated\crafting, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\crafting\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated\craft, --mod, industrialtech_ore, --output, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated\ore, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\ore\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated\ore, --mixin.config, industrialtech.mixins.json]
-[18июл.2026 15:57:28.645] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.19 by Microsoft; OS Windows 11 arch amd64 version 10.0
-[18июл.2026 15:57:28.963] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
-[18июл.2026 15:57:29.141] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/n4471/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
-[18июл.2026 15:57:30.055] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\n4471\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.4.10\ccc533c7dd67e0983217197d7549c8b49e7ab453\javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
-[18июл.2026 15:57:30.064] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\n4471\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.4.10\e9a2879fe3612ea34b9728ec2633304a1e67d480\lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
-[18июл.2026 15:57:30.074] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\n4471\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.4.10\ec5cefbbc65c67302b8fac317010faab85fa14b9\mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
-[18июл.2026 15:57:30.083] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\n4471\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.4.10\94dae566be650566ea9115a1414ab76bfcf5a804\fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
-[18июл.2026 15:57:30.124] [main/ERROR] [net.minecraftforge.fml.loading.moddiscovery.ModInfo/FATAL]: Invalid modId found in file C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\build\resources\crafting - industrialtech_Ñrafting does not match the standard: ^[a-z][a-z0-9_]{1,63}$
-[18июл.2026 15:57:30.126] [main/ERROR] [net.minecraftforge.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Locator net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator@344b8190 found an invalid mod file net.minecraftforge.fml.loading.moddiscovery.ModFileInfo@6a078481
-net.minecraftforge.fml.loading.moddiscovery.InvalidModFileException: Invalid modId found : industrialtech_Ñrafting (crafting)
-	at net.minecraftforge.fml.loading.moddiscovery.ModInfo.<init>(ModInfo.java:62) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.ModFileInfo.lambda$new$2(ModFileInfo.java:103) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[?:?]
-	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625) ~[?:?]
-	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?]
-	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?]
-	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:575) ~[?:?]
-	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260) ~[?:?]
-	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:616) ~[?:?]
-	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:622) ~[?:?]
-	at java.util.stream.ReferencePipeline.toList(ReferencePipeline.java:627) ~[?:?]
-	at net.minecraftforge.fml.loading.moddiscovery.ModFileInfo.<init>(ModFileInfo.java:104) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.ModFileParser.modsTomlParser(ModFileParser.java:47) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.ModFileParser.readModList(ModFileParser.java:31) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.ModFile.<init>(ModFile.java:79) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.ModFile.<init>(ModFile.java:68) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.AbstractModProvider.createMod(AbstractModProvider.java:57) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.AbstractModProvider.createMod(AbstractModProvider.java:37) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator.lambda$scanMods$6(MinecraftLocator.java:43) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[?:?]
-	at java.util.AbstractList$RandomAccessSpliterator.forEachRemaining(AbstractList.java:720) ~[?:?]
-	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?]
-	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?]
-	at java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310) ~[?:?]
-	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735) ~[?:?]
-	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?]
-	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?]
-	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:575) ~[?:?]
-	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260) ~[?:?]
-	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:616) ~[?:?]
-	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:622) ~[?:?]
-	at java.util.stream.ReferencePipeline.toList(ReferencePipeline.java:627) ~[?:?]
-	at net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator.scanMods(MinecraftLocator.java:47) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.moddiscovery.ModDiscoverer.discoverMods(ModDiscoverer.java:78) ~[fmlloader-1.20.1-47.4.10.jar:?]
-	at net.minecraftforge.fml.loading.FMLLoader.beginModScan(FMLLoader.java:173) ~[fmlloader-1.20.1-47.4.10.jar:1.0]
-	at net.minecraftforge.fml.loading.FMLServiceProvider.beginScanning(FMLServiceProvider.java:86) ~[fmlloader-1.20.1-47.4.10.jar:1.0]
-	at cpw.mods.modlauncher.TransformationServiceDecorator.runScan(TransformationServiceDecorator.java:112) ~[modlauncher-10.0.9.jar:?]
-	at cpw.mods.modlauncher.TransformationServicesHandler.lambda$runScanningTransformationServices$8(TransformationServicesHandler.java:100) ~[modlauncher-10.0.9.jar:?]
-	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[?:?]
-	at java.util.HashMap$ValueSpliterator.forEachRemaining(HashMap.java:1779) ~[?:?]
-	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?]
-	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?]
-	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:575) ~[?:?]
-	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260) ~[?:?]
-	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:616) ~[?:?]
-	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:622) ~[?:?]
-	at java.util.stream.ReferencePipeline.toList(ReferencePipeline.java:627) ~[?:?]
-	at cpw.mods.modlauncher.TransformationServicesHandler.runScanningTransformationServices(TransformationServicesHandler.java:102) ~[modlauncher-10.0.9.jar:?]
-	at cpw.mods.modlauncher.TransformationServicesHandler.initializeTransformationServices(TransformationServicesHandler.java:55) ~[modlauncher-10.0.9.jar:?]
-	at cpw.mods.modlauncher.Launcher.run(Launcher.java:88) ~[modlauncher-10.0.9.jar:?]
+[22июл.2026 20:46:34.843] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\n4471\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --all, --mod, industrialtech, --mod, industrialtech_ae, --mod, industrialtech_crafting, --mod, industrialtech_ore, --output, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\main\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\ae\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\crafting\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\ore\resources, --mixin.config, industrialtech.mixins.json]
+[22июл.2026 20:46:34.851] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.19 by Microsoft; OS Windows 11 arch amd64 version 10.0
+[22июл.2026 20:46:35.057] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[22июл.2026 20:46:35.153] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/n4471/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[22июл.2026 20:46:35.635] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\n4471\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.4.10\ccc533c7dd67e0983217197d7549c8b49e7ab453\javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[22июл.2026 20:46:35.640] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\n4471\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.4.10\e9a2879fe3612ea34b9728ec2633304a1e67d480\lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[22июл.2026 20:46:35.646] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\n4471\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.4.10\ec5cefbbc65c67302b8fac317010faab85fa14b9\mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[22июл.2026 20:46:35.651] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\n4471\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.4.10\94dae566be650566ea9115a1414ab76bfcf5a804\fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[22июл.2026 20:46:37.577] [main/WARN] [net.minecraftforge.jarjar.selection.JarSelector/]: Attempted to select two dependency jars from JarJar which have the same identification: Mod File:  and Mod File: . Using Mod File: 
+[22июл.2026 20:46:37.579] [main/WARN] [net.minecraftforge.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ae2addonlib. Using Mod File: C:\Users\n4471\.gradle\caches\forge_gradle\deobf_dependencies\curse\maven\ae2addonlib-1366135\7668681_mapped_parchment_2023.09.03-1.20.1\ae2addonlib-1366135-7668681_mapped_parchment_2023.09.03-1.20.1.jar
+[22июл.2026 20:46:37.579] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 9 dependencies adding them to mods collection
+[22июл.2026 20:46:46.248] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[22июл.2026 20:46:46.380] [main/ERROR] [mixin/]: Mixin config ae2omnicells.mixins.json does not specify "minVersion" property
+[22июл.2026 20:46:46.623] [main/ERROR] [mixin/]: Mixin config ae2cs.mixins.json does not specify "minVersion" property
+[22июл.2026 20:46:46.811] [main/INFO] [mixin/]: Successfully loaded Mixin Connector [lumien.chunkanimator.MixinConnector]
+[22июл.2026 20:46:46.815] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\n4471\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --all, --mod, industrialtech, --mod, industrialtech_ae, --mod, industrialtech_crafting, --mod, industrialtech_ore, --output, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\datagen\generated, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\main\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\ae\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\crafting\resources, --existing, C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech\src\ore\resources]
+[22июл.2026 20:46:46.822] [main/WARN] [mixin/]: Reference map 'industrialtech.refmap.json' for industrialtech.mixins.json could not be read. If this is a development environment you can ignore this message
+[22июл.2026 20:46:47.109] [main/INFO] [mixin/]: Remapping refMap emi_patternizer.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.112] [main/INFO] [mixin/]: Remapping refMap cucumber.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.115] [main/INFO] [mixin/]: Remapping refMap sodiumextras-forge-1.20.1-forge-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.118] [main/INFO] [mixin/]: Remapping refMap rechiseled.mixins.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.120] [main/INFO] [mixin/]: Remapping refMap geckolib.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.125] [main/INFO] [mixin/]: Remapping refMap ae2_ftbquest_detector.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.129] [main/WARN] [mixin/]: Reference map '${mod_id}.refmap.json' for infinitypatternprovider.mixins.json could not be read. If this is a development environment you can ignore this message
+[22июл.2026 20:46:47.136] [main/INFO] [mixin/]: Remapping refMap fusion.mixins.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.139] [main/INFO] [mixin/]: Remapping refMap sodiumoptionsapi-forge-1.20.1-forge-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.142] [main/INFO] [mixin/]: Remapping refMap myotus.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.145] [main/INFO] [mixin/]: Remapping refMap makeae2better.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.147] [main/INFO] [mixin/]: Remapping refMap ae2_label_view_cell.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.159] [main/INFO] [Embeddium/]: Loaded configuration file for Embeddium: 128 options available, 0 override(s) found
+[22июл.2026 20:46:47.162] [main/INFO] [Embeddium-GraphicsAdapterProbe/]: Searching for graphics cards...
+[22июл.2026 20:46:47.672] [main/INFO] [Embeddium-GraphicsAdapterProbe/]: Found graphics card: GraphicsAdapterInfo[vendor=AMD, name=AMD Radeon (TM) Graphics, version=DriverVersion=31.0.21924.61]
+[22июл.2026 20:46:47.700] [main/INFO] [mixin/]: Remapping refMap embeddium-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.703] [main/INFO] [mixin/]: Remapping refMap sodiumdynamiclights-forge-1.20.1-forge-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.712] [main/INFO] [mixin/]: Remapping refMap emi-xplat-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.719] [main/INFO] [mixin/]: Remapping refMap fasterblockplacement.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.722] [main/INFO] [mixin/]: Remapping refMap jeirender.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.746] [main/INFO] [mixin/]: Remapping refMap ae2_toggleable_view_cell.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.749] [main/WARN] [mixin/]: Reference map 'configuration.refmap.json' for configuration.mixins.json could not be read. If this is a development environment you can ignore this message
+[22июл.2026 20:46:47.755] [main/INFO] [mixin/]: Remapping refMap jade.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.759] [main/INFO] [mixin/]: Remapping refMap ae2.mixins.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.765] [main/INFO] [mixin/]: Remapping refMap ae2fct.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.773] [main/INFO] [mixin/]: Remapping refMap extendedae_plus-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.776] [main/INFO] [mixin/]: Remapping refMap ae2ao.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.782] [main/INFO] [mixin/]: Remapping refMap aea.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.787] [main/INFO] [mixin/]: Remapping refMap AEInfinityBooster.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.791] [main/INFO] [mixin/]: Remapping refMap ae2_auto_pattern_upload.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.793] [main/INFO] [mixin/]: Remapping refMap mixins.ae2things.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.797] [main/INFO] [mixin/]: Remapping refMap appliedenoughitems.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.801] [main/INFO] [mixin/]: Remapping refMap supermartijn642corelib.mixins.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.807] [main/INFO] [mixin/]: Remapping refMap merequester.mixins.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.813] [main/INFO] [mixin/]: Remapping refMap chunkanimatorembeddiumcompat.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.816] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.834] [main/INFO] [mixin/]: Remapping refMap mixins.expandedae.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.842] [main/WARN] [mixin/]: Reference map 'personalmesystem.refmap.json' for personalmesystem.mixins.json could not be read. If this is a development environment you can ignore this message
+[22июл.2026 20:46:47.845] [main/INFO] [mixin/]: Remapping refMap ae2additions.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.848] [main/INFO] [mixin/]: Remapping refMap aehelpers_more.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.852] [main/INFO] [mixin/]: Remapping refMap sodiumoptionsmodcompat-forge-1.20.1-forge-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.855] [main/INFO] [mixin/]: Remapping refMap fulleng.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.858] [main/INFO] [mixin/]: Remapping refMap patternprovidersave.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.861] [main/WARN] [mixin/]: Reference map 'ME-Beam-Former.refmap.json' for me_beam_former.mixins.json could not be read. If this is a development environment you can ignore this message
+[22июл.2026 20:46:47.866] [main/INFO] [mixin/]: Remapping refMap architectury-forge-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.871] [main/INFO] [mixin/]: Remapping refMap architectury-common-refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.875] [main/INFO] [mixin/]: Remapping refMap ae2wtlib.mixins.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.881] [main/INFO] [mixin/]: Remapping refMap mixins.aae.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.888] [main/INFO] [mixin/]: Remapping refMap wcwt.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.897] [main/WARN] [mixin/]: Reference map 'uilib-common-refmap.json' for uilib-common.mixins.json could not be read. If this is a development environment you can ignore this message
+[22июл.2026 20:46:47.904] [main/INFO] [mixin/]: Remapping refMap megacells.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.908] [main/INFO] [mixin/]: Remapping refMap megacells.forge.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.912] [main/INFO] [mixin/]: Remapping refMap ae2_mega_things.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.936] [main/INFO] [mixin/]: Remapping refMap ferritecore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.941] [main/INFO] [mixin/]: Remapping refMap ferritecore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.945] [main/INFO] [mixin/]: Remapping refMap ferritecore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.960] [main/INFO] [mixin/]: Remapping refMap ferritecore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.964] [main/INFO] [mixin/]: Remapping refMap ferritecore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.969] [main/INFO] [mixin/]: Remapping refMap ferritecore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.973] [main/INFO] [mixin/]: Remapping refMap ferritecore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.977] [main/INFO] [mixin/]: Remapping refMap ferritecore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.981] [main/INFO] [mixin/]: Remapping refMap mixins.codechickenlib.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.984] [main/INFO] [mixin/]: Remapping refMap mixins.brandonscore.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.991] [main/INFO] [mixin/]: Remapping refMap mixins.draconicevolution.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:47.996] [main/WARN] [mixin/]: Reference map 'ccapplied.refmap.json' for ccapplied.mixins.json could not be read. If this is a development environment you can ignore this message
+[22июл.2026 20:46:48.002] [main/INFO] [mixin/]: Remapping refMap ae2tb.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:48.005] [main/INFO] [mixin/]: Remapping refMap ae2ct.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:48.121] [main/INFO] [mixin/]: Remapping refMap chunkanimator.refmap.json using C:\Users\n4471\OneDrive\Документы\My_mods\IndustrialTech/build/createSrgToMcp/output.srg
+[22июл.2026 20:46:48.668] [main/WARN] [mixin/]: Error loading class: dev/ftb/mods/ftbquests/quest/task/FluidTask (java.lang.ClassNotFoundException: dev.ftb.mods.ftbquests.quest.task.FluidTask)
+[22июл.2026 20:46:48.668] [main/WARN] [mixin/]: @Mixin target dev.ftb.mods.ftbquests.quest.task.FluidTask was not found ae2_ftbquest_detector.mixins.json:FluidTaskMixin
+[22июл.2026 20:46:48.675] [main/WARN] [mixin/]: Error loading class: dev/ftb/mods/ftbquests/quest/task/ItemTask (java.lang.ClassNotFoundException: dev.ftb.mods.ftbquests.quest.task.ItemTask)
+[22июл.2026 20:46:48.675] [main/WARN] [mixin/]: @Mixin target dev.ftb.mods.ftbquests.quest.task.ItemTask was not found ae2_ftbquest_detector.mixins.json:ItemTaskMixin
+[22июл.2026 20:46:48.682] [main/WARN] [mixin/]: Error loading class: dev/ftb/mods/ftbquests/quest/task/Task (java.lang.ClassNotFoundException: dev.ftb.mods.ftbquests.quest.task.Task)
+[22июл.2026 20:46:48.683] [main/WARN] [mixin/]: @Mixin target dev.ftb.mods.ftbquests.quest.task.Task was not found ae2_ftbquest_detector.mixins.json:TaskMixin
+[22июл.2026 20:46:48.689] [main/WARN] [mixin/]: Error loading class: dev/ftb/mods/ftbquests/quest/TeamData (java.lang.ClassNotFoundException: dev.ftb.mods.ftbquests.quest.TeamData)
+[22июл.2026 20:46:48.690] [main/WARN] [mixin/]: @Mixin target dev.ftb.mods.ftbquests.quest.TeamData was not found ae2_ftbquest_detector.mixins.json:TeamDataMixin
+[22июл.2026 20:46:49.025] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/data/ArrayLightDataCache (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.data.ArrayLightDataCache)
+[22июл.2026 20:46:49.033] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/flat/FlatLightPipeline (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.flat.FlatLightPipeline)
+[22июл.2026 20:46:49.041] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/data/LightDataAccess (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.data.LightDataAccess)
+[22июл.2026 20:46:49.077] [main/WARN] [mixin/]: Error loading class: net/fabricmc/fabric/impl/client/indigo/renderer/aocalc/AoCalculator (java.lang.ClassNotFoundException: net.fabricmc.fabric.impl.client.indigo.renderer.aocalc.AoCalculator)
+[22июл.2026 20:46:52.610] [main/WARN] [mixin/]: Error loading class: me/myogoo/extendedterminal/network/serverbound/FillRecipeBasePacket (java.lang.ClassNotFoundException: me.myogoo.extendedterminal.network.serverbound.FillRecipeBasePacket)
+[22июл.2026 20:46:52.615] [main/WARN] [mixin/]: Error loading class: me/myogoo/extendedterminal/network/serverbound/ETFillCraftingGridFromRecipePacket (java.lang.ClassNotFoundException: me.myogoo.extendedterminal.network.serverbound.ETFillCraftingGridFromRecipePacket)
+[22июл.2026 20:46:52.621] [main/WARN] [mixin/]: Error loading class: me/myogoo/extendedterminal/network/serverbound/ETFillSmithingGridFromRecipePacket (java.lang.ClassNotFoundException: me.myogoo.extendedterminal.network.serverbound.ETFillSmithingGridFromRecipePacket)
+[22июл.2026 20:46:52.626] [main/WARN] [mixin/]: Error loading class: me/myogoo/extendedterminal/network/serverbound/ETFillStonecutterGridFromRecipePacket (java.lang.ClassNotFoundException: me.myogoo.extendedterminal.network.serverbound.ETFillStonecutterGridFromRecipePacket)
+[22июл.2026 20:46:52.631] [main/WARN] [mixin/]: Error loading class: me/myogoo/extendedterminal/menu/ETTerminalBaseMenu (java.lang.ClassNotFoundException: me.myogoo.extendedterminal.menu.ETTerminalBaseMenu)
+[22июл.2026 20:46:52.648] [main/WARN] [mixin/]: Error loading class: blusunrize/immersiveengineering/api/wires/GlobalWireNetwork (java.lang.ClassNotFoundException: blusunrize.immersiveengineering.api.wires.GlobalWireNetwork)
+[22июл.2026 20:46:52.648] [main/WARN] [mixin/]: @Mixin target blusunrize.immersiveengineering.api.wires.GlobalWireNetwork was not found mixins.epp.json:MixinGlobalWireNetwork
+[22июл.2026 20:46:52.923] [main/WARN] [mixin/]: Error loading class: com/direwolf20/buildinggadgets2/common/network/packets/PacketUpdateTemplateManager (java.lang.ClassNotFoundException: com.direwolf20.buildinggadgets2.common.network.packets.PacketUpdateTemplateManager)
+[22июл.2026 20:46:52.923] [main/WARN] [mixin/]: @Mixin target com.direwolf20.buildinggadgets2.common.network.packets.PacketUpdateTemplateManager was not found aea.mixins.json:buildinggadgets2.PacketUpdateTemplateManagerAccessor
+[22июл.2026 20:46:52.929] [main/WARN] [mixin/]: Error loading class: com/direwolf20/buildinggadgets2/common/network/packets/PacketUpdateTemplateManager (java.lang.ClassNotFoundException: com.direwolf20.buildinggadgets2.common.network.packets.PacketUpdateTemplateManager)
+[22июл.2026 20:46:52.929] [main/WARN] [mixin/]: @Mixin target com.direwolf20.buildinggadgets2.common.network.packets.PacketUpdateTemplateManager was not found aea.mixins.json:buildinggadgets2.PacketUpdateTemplateManagerMixin
+[22июл.2026 20:46:52.937] [main/WARN] [mixin/]: Error loading class: com/direwolf20/buildinggadgets2/common/containers/customhandler/TemplateManagerHandler (java.lang.ClassNotFoundException: com.direwolf20.buildinggadgets2.common.containers.customhandler.TemplateManagerHandler)
+[22июл.2026 20:46:52.938] [main/WARN] [mixin/]: @Mixin target com.direwolf20.buildinggadgets2.common.containers.customhandler.TemplateManagerHandler was not found aea.mixins.json:buildinggadgets2.TemplateManagerHandlerMixin
+[22июл.2026 20:46:52.943] [main/WARN] [mixin/]: Error loading class: dev/ftb/mods/ftbultimine/FTBUltimine (java.lang.ClassNotFoundException: dev.ftb.mods.ftbultimine.FTBUltimine)
+[22июл.2026 20:46:52.943] [main/WARN] [mixin/]: @Mixin target dev.ftb.mods.ftbultimine.FTBUltimine was not found aea.mixins.json:ftbultimine.FTBUltimineMixin
+[22июл.2026 20:46:52.948] [main/WARN] [mixin/]: Error loading class: dev/ftb/mods/ftbultimine/utils/forge/PlatformMethodsImpl (java.lang.ClassNotFoundException: dev.ftb.mods.ftbultimine.utils.forge.PlatformMethodsImpl)
+[22июл.2026 20:46:52.948] [main/WARN] [mixin/]: @Mixin target dev.ftb.mods.ftbultimine.utils.forge.PlatformMethodsImpl was not found aea.mixins.json:ftbultimine.PlatformMethodsImplMixin
+[22июл.2026 20:46:53.131] [main/WARN] [mixin/]: Error loading class: dynamic_fps/impl/DynamicFPSMod (java.lang.ClassNotFoundException: dynamic_fps.impl.DynamicFPSMod)
+[22июл.2026 20:46:53.131] [main/WARN] [mixin/]: @Mixin target dynamic_fps.impl.DynamicFPSMod was not found mixins.sodiumoptionsmodcompat.json:DynamicFPSConfigAccessor
+[22июл.2026 20:46:53.222] [main/INFO] [wcwt/]: WCWT compat mixin check: mixin=com.lhy.wcwt.mixin.compat.eaep.WcwtEaepCuriosItemLocatorMixin, target=com.extendedae_plus.menu.locator.CuriosItemLocator, modId=extendedae_plus, modLoaded=true, classPresent=false, apply=true
+[22июл.2026 20:46:53.233] [main/INFO] [wcwt/]: WCWT compat mixin check: mixin=com.lhy.wcwt.mixin.compat.eaep.WcwtEaepOpenCraftFromJeiC2SPacketMixin, target=com.extendedae_plus.network.crafting.OpenCraftFromJeiC2SPacket, modId=extendedae_plus, modLoaded=true, classPresent=false, apply=true
+[22июл.2026 20:46:53.244] [main/INFO] [wcwt/]: WCWT compat mixin check: mixin=com.lhy.wcwt.mixin.compat.eaep.WcwtEaepPullFromJeiOrCraftC2SPacketMixin, target=com.extendedae_plus.network.PullFromJeiOrCraftC2SPacket, modId=extendedae_plus, modLoaded=true, classPresent=false, apply=true
+[22июл.2026 20:46:53.295] [main/INFO] [wcwt/]: WCWT compat mixin check: mixin=com.lhy.wcwt.mixin.compat.eaep.WcwtEaepInputEventsMixin, target=com.extendedae_plus.client.InputEvents, modId=extendedae_plus, modLoaded=true, classPresent=false, apply=true
+[22июл.2026 20:46:53.297] [main/INFO] [wcwt/]: WCWT compat mixin check: mixin=com.lhy.wcwt.mixin.compat.jei.WcwtJeiBookmarkInputHandlerMixin, target=mezz.jei.gui.input.handlers.BookmarkInputHandler, modId=jei, modLoaded=true, classPresent=false, apply=true
+[22июл.2026 20:46:53.843] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/data/ArrayLightDataCache (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.data.ArrayLightDataCache)
+[22июл.2026 20:46:53.850] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/data/ArrayLightDataCache (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.data.ArrayLightDataCache)
+[22июл.2026 20:46:53.856] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/flat/FlatLightPipeline (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.flat.FlatLightPipeline)
+[22июл.2026 20:46:53.863] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/flat/FlatLightPipeline (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.flat.FlatLightPipeline)
+[22июл.2026 20:46:53.869] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/data/LightDataAccess (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.data.LightDataAccess)
+[22июл.2026 20:46:53.875] [main/WARN] [mixin/]: Error loading class: net/caffeinemc/mods/sodium/client/model/light/data/LightDataAccess (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.client.model.light.data.LightDataAccess)
+[22июл.2026 20:46:54.480] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.4).
+[22июл.2026 20:46:55.044] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [industrialtech_ore, industrialtech, industrialtech_crafting, industrialtech_ae]
+[22июл.2026 20:47:03.523] [main/WARN] [AE2:C/]: Unable to find class com.simibubi.create.foundation.ponder.PonderWorld. Integration with PonderJS disabled.
+[22июл.2026 20:47:05.360] [main/WARN] [mixin/]: Mixin apply failed extendedae_plus.mixins.json:ae2.autopattern.PatternProviderLogicContainsRedirectMixin -> appeng.helpers.patternprovider.PatternProviderLogic: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException @At("INVOKE") on appeng/helpers/patternprovider/PatternProviderLogic::eap$patternsContains with priority 1000 cannot inject into appeng/helpers/patternprovider/PatternProviderLogic::pushPattern(Lappeng/api/crafting/IPatternDetails;[Lappeng/api/stacks/KeyCounter;)Z merged by lu.kolja.expandedae.mixin.patternprovider.MixinPatternProviderLogic with priority 1001 [ -> redirect$znm001$eap$patternsContains(Ljava/util/List;Ljava/lang/Object;)Z -> Prepare]
+org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @At("INVOKE") on appeng/helpers/patternprovider/PatternProviderLogic::eap$patternsContains with priority 1000 cannot inject into appeng/helpers/patternprovider/PatternProviderLogic::pushPattern(Lappeng/api/crafting/IPatternDetails;[Lappeng/api/stacks/KeyCounter;)Z merged by lu.kolja.expandedae.mixin.patternprovider.MixinPatternProviderLogic with priority 1001 [ -> redirect$znm001$eap$patternsContains(Ljava/util/List;Ljava/lang/Object;)Z -> Prepare]
+	at org.spongepowered.asm.mixin.injection.code.Injector.findTargetNodes(Injector.java:305) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.injection.code.Injector.find(Injector.java:240) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.prepare(InjectionInfo.java:421) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1319) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:1042) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:393) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:325) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:383) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:365) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:250) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.service.modlauncher.MixinTransformationHandler.processClass(MixinTransformationHandler.java:131) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.launch.MixinLaunchPluginLegacy.processClass(MixinLaunchPluginLegacy.java:131) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at cpw.mods.modlauncher.serviceapi.ILaunchPluginService.processClassWithFlags(ILaunchPluginService.java:156) ~[modlauncher-10.0.9.jar:10.0.9+10.0.9+main.dcd20f30]
+	at cpw.mods.modlauncher.LaunchPluginHandler.offerClassNodeToPlugins(LaunchPluginHandler.java:88) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.ClassTransformer.transform(ClassTransformer.java:120) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.TransformingClassLoader.maybeTransformClassBytes(TransformingClassLoader.java:50) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.readerToClass(ModuleClassLoader.java:113) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.lambda$findClass$15(ModuleClassLoader.java:219) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadFromModule(ModuleClassLoader.java:229) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.findClass(ModuleClassLoader.java:219) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:135) ~[securejarhandler-2.1.10.jar:?]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	at java.lang.Class.getDeclaredFields0(Native Method) ~[?:?]
+	at java.lang.Class.privateGetDeclaredFields(Class.java:3299) ~[?:?]
+	at java.lang.Class.getDeclaredFields(Class.java:2373) ~[?:?]
+	at appeng.items.parts.PartModelsHelper.createModels(PartModelsHelper.java:43) ~[ae2-15.4.10_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at appeng.core.definitions.AEParts.createPart(AEParts.java:125) ~[ae2-15.4.10_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at appeng.core.definitions.AEParts.<clinit>(AEParts.java:107) ~[ae2-15.4.10_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at appeng.core.AppEngBootstrap.runEarlyStartup(AppEngBootstrap.java:74) ~[ae2-15.4.10_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at net.minecraft.server.Bootstrap.handler$zkp000$initRegistries(Bootstrap.java:541) ~[forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar:?]
+	at net.minecraft.server.Bootstrap.bootStrap(Bootstrap.java:61) ~[forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar:?]
+	at net.minecraftforge.data.loading.DatagenModLoader.begin(DatagenModLoader.java:42) ~[forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar:?]
+	at net.minecraft.data.Main.main(Main.java:90) ~[forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:111) ~[fmlloader-1.20.1-47.4.10.jar:?]
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.dataService(CommonLaunchHandler.java:107) ~[fmlloader-1.20.1-47.4.10.jar:?]
+	at net.minecraftforge.fml.loading.targets.ForgeDataUserdevLaunchHandler.devService(ForgeDataUserdevLaunchHandler.java:22) ~[fmlloader-1.20.1-47.4.10.jar:?]
+	at net.minecraftforge.fml.loading.targets.CommonDevLaunchHandler.lambda$makeService$7(CommonDevLaunchHandler.java:135) ~[fmlloader-1.20.1-47.4.10.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:108) ~[modlauncher-10.0.9.jar:?]
 	at cpw.mods.modlauncher.Launcher.main(Launcher.java:78) ~[modlauncher-10.0.9.jar:?]
 	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) ~[modlauncher-10.0.9.jar:?]
 	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) ~[modlauncher-10.0.9.jar:?]
 	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141) ~[bootstraplauncher-1.1.2.jar:?]
-[18июл.2026 15:57:30.312] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[22июл.2026 20:47:05.415] [main/WARN] [mixin/]: Mixin apply failed extendedae_plus.mixins.json:ae2.helpers.patternprovider.PatternProviderLogicAdvancedMixin -> appeng.helpers.patternprovider.PatternProviderLogic: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException @At("INVOKE") on appeng/helpers/patternprovider/PatternProviderLogic::eap$redirectBlockingContains with priority 1000 cannot inject into appeng/helpers/patternprovider/PatternProviderLogic::pushPattern(Lappeng/api/crafting/IPatternDetails;[Lappeng/api/stacks/KeyCounter;)Z merged by lu.kolja.expandedae.mixin.patternprovider.MixinPatternProviderLogic with priority 1001 [ -> redirect$zoc001$eap$redirectBlockingContains(Lappeng/helpers/patternprovider/PatternProviderTarget;Ljava/util/Set;Lappeng/api/crafting/IPatternDetails;[Lappeng/api/stacks/KeyCounter;)Z -> Prepare]
+org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @At("INVOKE") on appeng/helpers/patternprovider/PatternProviderLogic::eap$redirectBlockingContains with priority 1000 cannot inject into appeng/helpers/patternprovider/PatternProviderLogic::pushPattern(Lappeng/api/crafting/IPatternDetails;[Lappeng/api/stacks/KeyCounter;)Z merged by lu.kolja.expandedae.mixin.patternprovider.MixinPatternProviderLogic with priority 1001 [ -> redirect$zoc001$eap$redirectBlockingContains(Lappeng/helpers/patternprovider/PatternProviderTarget;Ljava/util/Set;Lappeng/api/crafting/IPatternDetails;[Lappeng/api/stacks/KeyCounter;)Z -> Prepare]
+	at org.spongepowered.asm.mixin.injection.code.Injector.findTargetNodes(Injector.java:305) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.injection.code.Injector.find(Injector.java:240) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.prepare(InjectionInfo.java:421) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1319) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:1042) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:393) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:325) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:383) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:365) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:250) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.service.modlauncher.MixinTransformationHandler.processClass(MixinTransformationHandler.java:131) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at org.spongepowered.asm.launch.MixinLaunchPluginLegacy.processClass(MixinLaunchPluginLegacy.java:131) ~[mixin-0.8.5.jar:0.8.5+Jenkins-b310.git-155314e6e91465dad727e621a569906a410cd6f4]
+	at cpw.mods.modlauncher.serviceapi.ILaunchPluginService.processClassWithFlags(ILaunchPluginService.java:156) ~[modlauncher-10.0.9.jar:10.0.9+10.0.9+main.dcd20f30]
+	at cpw.mods.modlauncher.LaunchPluginHandler.offerClassNodeToPlugins(LaunchPluginHandler.java:88) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.ClassTransformer.transform(ClassTransformer.java:120) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.TransformingClassLoader.maybeTransformClassBytes(TransformingClassLoader.java:50) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.readerToClass(ModuleClassLoader.java:113) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.lambda$findClass$15(ModuleClassLoader.java:219) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadFromModule(ModuleClassLoader.java:229) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.findClass(ModuleClassLoader.java:219) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:135) ~[securejarhandler-2.1.10.jar:?]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	at java.lang.Class.getDeclaredFields0(Native Method) ~[?:?]
+	at java.lang.Class.privateGetDeclaredFields(Class.java:3299) ~[?:?]
+	at java.lang.Class.getDeclaredFields(Class.java:2373) ~[?:?]
+	at appeng.items.parts.PartModelsHelper.createModels(PartModelsHelper.java:43) ~[ae2-15.4.10_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at appeng.core.definitions.AEParts.createPart(AEParts.java:125) ~[ae2-15.4.10_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at appeng.core.definitions.AEParts.<clinit>(AEParts.java:107) ~[ae2-15.4.10_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at appeng.core.AppEngBootstrap.runEarlyStartup(AppEngBootstrap.java:74) ~[ae2-15.4.10_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at net.minecraft.server.Bootstrap.handler$zkp000$initRegistries(Bootstrap.java:541) ~[forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar:?]
+	at net.minecraft.server.Bootstrap.bootStrap(Bootstrap.java:61) ~[forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar:?]
+	at net.minecraftforge.data.loading.DatagenModLoader.begin(DatagenModLoader.java:42) ~[forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar:?]
+	at net.minecraft.data.Main.main(Main.java:90) ~[forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:111) ~[fmlloader-1.20.1-47.4.10.jar:?]
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.dataService(CommonLaunchHandler.java:107) ~[fmlloader-1.20.1-47.4.10.jar:?]
+	at net.minecraftforge.fml.loading.targets.ForgeDataUserdevLaunchHandler.devService(ForgeDataUserdevLaunchHandler.java:22) ~[fmlloader-1.20.1-47.4.10.jar:?]
+	at net.minecraftforge.fml.loading.targets.CommonDevLaunchHandler.lambda$makeService$7(CommonDevLaunchHandler.java:135) ~[fmlloader-1.20.1-47.4.10.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:108) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:78) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141) ~[bootstraplauncher-1.1.2.jar:?]
+[22июл.2026 20:47:05.536] [main/INFO] [com.almostreliable.merequester.MERequester/]: Registering content
+[22июл.2026 20:47:07.390] [modloading-worker-0/INFO] [me.myogoo.myotus.util.mod.ModIntegrationManager/]: Integration enabled for: Just Enough Items (version: 15.20.0.133)
+[22июл.2026 20:47:07.391] [modloading-worker-0/INFO] [me.myogoo.myotus.util.mod.ModIntegrationManager/]: Integration enabled for: EMI (version: 1.1.24+1.20.1+forge)
+[22июл.2026 20:47:07.467] [modloading-worker-0/INFO] [me.myogoo.myotus.util.mod.ModIntegrationManager/]: Integration enabled for: AE2WTLib (version: 15.3.3-forge)
+[22июл.2026 20:47:07.468] [modloading-worker-0/INFO] [me.myogoo.myotus.util.mod.ModIntegrationManager/]: Integration enabled for: AE2 Fluid Crafting Terminal (version: 15.0.2)
+[22июл.2026 20:47:07.470] [modloading-worker-0/INFO] [me.myogoo.myotus.util.mod.ModIntegrationManager/]: Integration enabled for: AE2 Tangible Bookmarks (version: 15.0.2)
+[22июл.2026 20:47:07.480] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[22июл.2026 20:47:07.484] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[22июл.2026 20:47:07.493] [modloading-worker-0/WARN] [software.bernie.geckolib.GeckoLib/]: Minecraft.getInstance() was null, could not register reload listeners
+[22июл.2026 20:47:07.492] [modloading-worker-0/ERROR] [Embeddium/]: Failed to update fingerprint
+java.lang.NullPointerException: Cannot invoke "net.minecraft.client.Minecraft.getUser()" because the return value of "net.minecraft.client.Minecraft.getInstance()" is null
+	at me.jellysquid.mods.sodium.client.data.fingerprint.FingerprintMeasure.create(FingerprintMeasure.java:19) ~[embeddium-908741-5681725_mapped_parchment_2023.09.03-1.20.1.jar%23259!/:?]
+	at me.jellysquid.mods.sodium.client.SodiumClientMod.updateFingerprint(SodiumClientMod.java:108) ~[embeddium-908741-5681725_mapped_parchment_2023.09.03-1.20.1.jar%23259!/:?]
+	at me.jellysquid.mods.sodium.client.SodiumClientMod.<init>(SodiumClientMod.java:48) ~[embeddium-908741-5681725_mapped_parchment_2023.09.03-1.20.1.jar%23259!/:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500) ~[?:?]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:481) ~[?:?]
+	at net.minecraftforge.fml.javafmlmod.FMLModContainer.constructMod(FMLModContainer.java:77) ~[javafmllanguage-1.20.1-47.4.10.jar%23192!/:?]
+	at net.minecraftforge.fml.ModContainer.lambda$buildTransitionHandler$5(ModContainer.java:126) ~[fmlcore-1.20.1-47.4.10.jar%23195!/:?]
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[?:?]
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796) ~[?:?]
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+[22июл.2026 20:47:07.856] [modloading-worker-0/ERROR] [Embeddium-MixinTaintDetector/]: Mod mixin into Embeddium internals detected. This instance is now tainted. The Embeddium team does not provide any guarantee of support for issues encountered while such mods are installed.
+[22июл.2026 20:47:07.857] [modloading-worker-0/WARN] [Embeddium-MixinTaintDetector/]: Mod(s) [sodiumoptionsapi] are modifying Embeddium class me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI, which may cause instability.
+[22июл.2026 20:47:08.215] [modloading-worker-0/INFO] [Configuration/FileWatching]: Registered makeae2better config for auto-sync function
+[22июл.2026 20:47:08.281] [modloading-worker-0/INFO] [Configuration/FileWatching]: Registered configuration config for auto-sync function
+[22июл.2026 20:47:08.283] [modloading-worker-0/INFO] [org.mod.industrialtech_ae.guidebook.IFPATGuide/]: Registered GuideME guide industrialtech_ae:book
+[22июл.2026 20:47:08.485] [modloading-worker-0/INFO] [com.jykito.appliedvoltex.AppliedVoltex/]: Applied Voltex initializing — AE2 addon loaded.
+[22июл.2026 20:47:08.718] [modloading-worker-0/INFO] [Configuration/FileWatching]: Registered extendedae_plus config for auto-sync function
+[22июл.2026 20:47:08.909] [modloading-worker-0/INFO] [lu.kolja.expandedae.Expandedae/]: Initialised blocks.
+[22июл.2026 20:47:08.982] [modloading-worker-0/INFO] [lu.kolja.expandedae.Expandedae/]: Initialised items.
+[22июл.2026 20:47:09.662] [modloading-worker-0/INFO] [moakiee.Ae2Overclocked/]: AE2 Overclocked initialized.
+[22июл.2026 20:47:09.708] [modloading-worker-0/INFO] [BrandonsCore/]: Knock Knock...
+[22июл.2026 20:47:09.709] [modloading-worker-0/WARN] [draconicevolution/]: Reactor detonation initiated.
+[22июл.2026 20:47:09.709] [modloading-worker-0/INFO] [BrandonsCore/]: Wait... NO! What?
+[22июл.2026 20:47:09.709] [modloading-worker-0/INFO] [BrandonsCore/]: Stop That! That's not how this works!
+[22июл.2026 20:47:09.709] [modloading-worker-0/WARN] [draconicevolution/]: Calculating explosion ETA
+[22июл.2026 20:47:09.709] [modloading-worker-0/INFO] [BrandonsCore/]: Ahh... NO... NONONO! DONT DO THAT!!! STOP THIS NOW!
+[22июл.2026 20:47:09.710] [modloading-worker-0/WARN] [draconicevolution/]: **Explosion Imminent!!!**
+[22июл.2026 20:47:09.710] [modloading-worker-0/INFO] [BrandonsCore/]: Well...... fork...
+[22июл.2026 20:47:09.717] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[22июл.2026 20:47:09.777] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 53.23 ms
+[22июл.2026 20:47:09.831] [modloading-worker-0/INFO] [MEGA Cells/]: Initialised items.
+[22июл.2026 20:47:09.989] [modloading-worker-0/INFO] [MEGA Cells/]: Initialised blocks.
+[22июл.2026 20:47:10.027] [modloading-worker-0/INFO] [MEGA Cells/]: Initialised block entities.
+[22июл.2026 20:47:10.263] [modloading-worker-0/INFO] [thedarkcolour.kotlinforforge.test.KotlinForForge/]: Kotlin For Forge Enabled!
+[22июл.2026 20:47:10.292] [modloading-worker-0/INFO] [dev.architectury.networking.forge.NetworkManagerImpl/]: Registering S2C receiver with id architectury:sync_ids
+[22июл.2026 20:47:10.298] [modloading-worker-0/INFO] [dev.architectury.networking.forge.NetworkManagerImpl/]: Registering C2S receiver with id architectury:sync_ids
+[22июл.2026 20:47:10.936] [modloading-worker-0/INFO] [com.the9grounds.aeadditions.LoggerKt/]: Integration for Mekanism has been loaded
+[22июл.2026 20:47:10.937] [modloading-worker-0/INFO] [com.the9grounds.aeadditions.LoggerKt/]: Integration for AE2 Things has been loaded
+[22июл.2026 20:47:13.974] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:13.990] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:14.984] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.307] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.309] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.310] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.393] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.537] [main/INFO] [dev.architectury.networking.forge.NetworkManagerImpl/]: Registering C2S receiver with id ae2wtlib:cycle_terminal
+[22июл.2026 20:47:15.537] [main/INFO] [dev.architectury.networking.forge.NetworkManagerImpl/]: Registering C2S receiver with id ae2wtlib:pick_block
+[22июл.2026 20:47:15.538] [main/INFO] [dev.architectury.networking.forge.NetworkManagerImpl/]: Registering C2S receiver with id ae2wtlib:terminal_settings
+[22июл.2026 20:47:15.631] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.644] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.646] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.648] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.649] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.652] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.675] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.829] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.830] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.832] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.833] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.834] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.835] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.836] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:15.855] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.176] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.205] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.254] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.259] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.261] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.261] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.262] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.263] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.264] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.264] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.266] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.269] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.271] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.272] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.274] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.275] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.276] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.278] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.279] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.281] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.282] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.293] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.294] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.296] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.297] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.299] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.301] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.303] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.305] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.307] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.308] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.309] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.309] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.310] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.311] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.312] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.313] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.313] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.314] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.316] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.319] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.321] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.323] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.333] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.351] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.353] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.358] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.361] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.453] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.458] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.461] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.463] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.465] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.474] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.476] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.478] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.480] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.487] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.489] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.492] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.493] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.499] [main/INFO] [uk.co.hexeption.aeinfinitybooster.AEInfinityBooster/]: Creating Creative Mode Tab
+[22июл.2026 20:47:16.676] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/n4471/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[22июл.2026 20:47:16.677] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/n4471/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[22июл.2026 20:47:17.037] [main/INFO] [com.wintercogs.ae2omnicells.datagen.DataGenerators/]: 数据生成启动
+[22июл.2026 20:47:17.159] [main/INFO] [io.github.lounode.ae2cs.datagen.DataGenerators/]: 数据生成启动
+[22июл.2026 20:47:17.207] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 0 ms
+[22июл.2026 20:47:17.214] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 0, old count: 0, new count: 1, removed stale: 0, written: 0
+[22июл.2026 20:47:17.230] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Languages: en_us
+[22июл.2026 20:47:17.243] [main/INFO] [net.minecraft.data.DataGenerator/]: Languages: en_us finished after 11 ms
+[22июл.2026 20:47:17.243] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 13 ms
+[22июл.2026 20:47:17.252] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 1, old count: 1, new count: 2, removed stale: 0, written: 1
+[22июл.2026 20:47:17.253] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 0 ms
+[22июл.2026 20:47:17.254] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 0, old count: 0, new count: 1, removed stale: 0, written: 0
+[22июл.2026 20:47:17.254] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 0 ms
+[22июл.2026 20:47:17.255] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 0, old count: 0, new count: 1, removed stale: 0, written: 0

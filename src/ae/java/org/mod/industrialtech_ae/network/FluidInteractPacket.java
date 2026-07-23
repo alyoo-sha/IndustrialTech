@@ -30,9 +30,9 @@ public class FluidInteractPacket {
         return new org.mod.industrialtech_ae.network.FluidInteractPacket(buf.readBlockPos());
     }
 
-    public static void handle(org.mod.industrialtech_ae.network.FluidInteractPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        ((NetworkEvent.Context)ctx.get()).enqueueWork(() -> {
-            ServerPlayer player = ((NetworkEvent.Context)ctx.get()).getSender();
+    public static void handle(FluidInteractPacket msg, Supplier<NetworkEvent.Context> ctx) {
+        (ctx.get()).enqueueWork(() -> {
+            ServerPlayer player = (ctx.get()).getSender();
             if (player != null) {
                 if (!(player.distanceToSqr((double)msg.pos.getX() + (double)0.5F, (double)msg.pos.getY() + (double)0.5F, (double)msg.pos.getZ() + (double)0.5F) > (double)64.0F)) {
                     ItemStack carriedStack = player.containerMenu.getCarried();
@@ -75,7 +75,7 @@ public class FluidInteractPacket {
                 }
             }
         });
-        ((NetworkEvent.Context)ctx.get()).setPacketHandled(true);
+        (ctx.get()).setPacketHandled(true);
     }
 
     private static void processStack(ServerPlayer player, ItemStack originalStack, ItemStack resultItem, boolean wasCarried) {

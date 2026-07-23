@@ -29,9 +29,10 @@ public class Industrialtech_ae {
     public static final String MOD_ID = "industrialtech_ae";
     public static final String MOD_NAME = "IndustrialTech: AE";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
-    public static final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public static IEventBus modEventBus;
 
-    public Industrialtech_ae() {
+    public Industrialtech_ae(FMLJavaModLoadingContext context) {
+        modEventBus = context.getModEventBus();
         AEModBlock.init();
         AEModBlockEntity.init();
         AEModItem.init();
@@ -65,7 +66,6 @@ public class Industrialtech_ae {
     public void onServerStarting(ServerStartingEvent event) {
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
 
