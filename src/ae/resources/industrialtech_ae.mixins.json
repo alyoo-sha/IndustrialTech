@@ -6,9 +6,10 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "industrialtech_ae.refmap.json",
   "mixins": [
-    "MixinItemDefinition",
     "MixinPatternEncodingTermMenu",
-    "MixinRestrictedInputSlot"
+    "MixinRestrictedInputSlot",
+    "CraftingCPUClusterMixin",
+    "CraftingServiceMixin"
   ],
   "client": [
   ],

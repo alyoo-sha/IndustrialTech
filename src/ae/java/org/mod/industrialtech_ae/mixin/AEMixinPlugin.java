@@ -15,12 +15,9 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class AEMixinPlugin implements IMixinConfigPlugin {
-    private static final Object2ObjectMap<String, String> MOD_MIXINS = new Object2ObjectOpenHashMap<>(new String[]{"org.mod.industrialtech_ae.mixin.MixinItemDefinition", "org.mod.industrialtech_ae.mixin.MixinPatternEncodingTermMenu", "org.mod.industrialtech_ae.mixin.MixinRestrictedInputSlot"}, new String[]{"infinitypattern", "infinitypattern", "infinitypattern"}, 0.75F);
+    private static final Object2ObjectMap<String, String> MOD_MIXINS = new Object2ObjectOpenHashMap();
 
-    public AEMixinPlugin() {
-    }
-
-    public void onLoad(String s) {
+    public void onLoad(String mixinPackage) {
     }
 
     public String getRefMapperConfig() {
@@ -28,29 +25,40 @@ public class AEMixinPlugin implements IMixinConfigPlugin {
     }
 
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return !MOD_MIXINS.containsKey(mixinClassName) || isModLoaded(MOD_MIXINS.get(mixinClassName));
+        return !MOD_MIXINS.containsKey(mixinClassName) || isModLoaded((String) MOD_MIXINS.get(mixinClassName));
     }
 
-    public void acceptTargets(Set<String> set, Set<String> set1) {
+    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
     }
 
     public List<String> getMixins() {
         return null;
     }
 
-    public void preApply(String s, ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
+    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
     }
 
-    public void postApply(String s, ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
+    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
     }
 
     private static boolean isModLoaded(String modId) {
+        return isModLoadedInternal("ae2") || isModLoadedInternal("appliedenergistics2");
+    }
+
+    private static boolean isModLoadedInternal(String modId) {
         if (ModList.get() == null) {
-            Stream<String> var10000 = LoadingModList.get().getMods().stream().map(IModInfo::getModId);
+            Stream var10000 = LoadingModList.get().getMods().stream().map((modInfo) -> modInfo.getModId());
             Objects.requireNonNull(modId);
             return var10000.anyMatch(modId::equals);
         } else {
             return ModList.get().isLoaded(modId);
         }
+    }
+
+    static {
+        MOD_MIXINS.put("org.mod.industrialtech_ae.mixin.MixinPatternEncodingTermMenu", "ae2");
+        MOD_MIXINS.put("org.mod.industrialtech_ae.mixin.MixinRestrictedInputSlot", "ae2");
+        MOD_MIXINS.put("org.mod.industrialtech_ae.mixin.MixinPatternEncodingTermMenu", "appliedenergistics2");
+        MOD_MIXINS.put("org.mod.industrialtech_ae.mixin.MixinRestrictedInputSlot", "appliedenergistics2");
     }
 }

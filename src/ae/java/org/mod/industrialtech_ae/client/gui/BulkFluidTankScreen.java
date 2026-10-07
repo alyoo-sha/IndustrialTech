@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.mod.industrialtech_ae.Industrialtech_ae;
 import org.mod.industrialtech_ae.client.gui.element.*;
-import org.mod.industrialtech_ae.init.AEModNetworking;
+import org.mod.industrialtech_ae.init.IAeModNetworking;
 import org.mod.industrialtech_ae.menu.BulkFluidTankMenu;
 import org.mod.industrialtech_ae.network.FilterInteractPacket;
 import org.mod.industrialtech_ae.network.FluidInteractPacket;
@@ -62,8 +62,8 @@ public class BulkFluidTankScreen extends AbstractContainerScreen<BulkFluidTankMe
         Rect var10003 = FILTER_SLOT_RECT;
         BulkFluidTankMenu var10004 = this.menu;
         Objects.requireNonNull(var10004);
-        var10000.add(new FluidSlotElement(var10003, var10004::getFilter, () -> (this.menu).getFilter() != null ? Collections.singletonList((this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GOLD)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.no_filter").withStyle(ChatFormatting.RED)), 0, () -> AEModNetworking.sendToServer(new FilterInteractPacket((this.menu).getBlockPos()))));
-        this.elements.add(new FluidSlotElement(FLUID_SLOT_RECT, () -> (this.menu).getAmount() > 0L ? (this.menu).getFluid() : null, () -> (this.menu).getFluid() != null && (this.menu).getAmount() > 0L ? List.of((this.menu).getFluid().getDisplayName().copy().withStyle(ChatFormatting.GOLD), AmountFormatter.formatFluid((this.menu).getAmount(), true, ChatFormatting.LIGHT_PURPLE)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.empty").withStyle(ChatFormatting.DARK_RED)), 0, () -> AEModNetworking.sendToServer(new FluidInteractPacket((this.menu).getBlockPos()))));
+        var10000.add(new FluidSlotElement(var10003, var10004::getFilter, () -> (this.menu).getFilter() != null ? Collections.singletonList((this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GOLD)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.no_filter").withStyle(ChatFormatting.RED)), 0, () -> IAeModNetworking.sendToServer(new FilterInteractPacket((this.menu).getBlockPos()))));
+        this.elements.add(new FluidSlotElement(FLUID_SLOT_RECT, () -> (this.menu).getAmount() > 0L ? (this.menu).getFluid() : null, () -> (this.menu).getFluid() != null && (this.menu).getAmount() > 0L ? List.of((this.menu).getFluid().getDisplayName().copy().withStyle(ChatFormatting.GOLD), AmountFormatter.formatFluid((this.menu).getAmount(), true, ChatFormatting.LIGHT_PURPLE)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.empty").withStyle(ChatFormatting.DARK_RED)), 0, () -> IAeModNetworking.sendToServer(new FluidInteractPacket((this.menu).getBlockPos()))));
     }
 
     private boolean isCustomTooltipArea(int mouseX, int mouseY) {

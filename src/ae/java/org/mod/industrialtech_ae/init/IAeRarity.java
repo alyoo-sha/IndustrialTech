@@ -2,7 +2,7 @@ package org.mod.industrialtech_ae.init;
 
 import net.minecraft.world.item.Rarity;
 
-public enum AERarity {
+public enum IAeRarity {
     CUSTOM_COMMON(0xC7CDD6),
     CUSTOM_UNCOMMON(0x38E26D),
     CUSTOM_RARE(0x4DA6FF),
@@ -13,7 +13,7 @@ public enum AERarity {
 //    E31A62
     public final Rarity rarity;
 
-    AERarity(int color) {
+    IAeRarity(int color) {
         this.rarity = Rarity.create(name(), style -> style.withColor(color));
     }
 }

@@ -1,15 +1,10 @@
 package org.mod.industrialtech_ae.mixin;
 
-import appeng.api.storage.ITerminalHost;
-import appeng.menu.me.common.MEStorageMenu;
 import appeng.menu.me.items.PatternEncodingTermMenu;
 import appeng.menu.slot.RestrictedInputSlot;
-import appeng.parts.encoding.PatternEncodingLogic;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
-import org.mod.industrialtech_ae.init.AEModItem;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.world.level.ItemLike;
+import org.mod.industrialtech_ae.init.IAeModItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,33 +13,33 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = {PatternEncodingTermMenu.class}, remap = false)
-public abstract class MixinPatternEncodingTermMenu extends MEStorageMenu {
-    @Final
-    @Shadow
-    private RestrictedInputSlot encodedPatternSlot;
-    @Final
-    @Shadow
+@Mixin(value = {PatternEncodingTermMenu.class})
+public abstract class MixinPatternEncodingTermMenu {
+    @Shadow(
+            aliases = {"blankPatternSlot"},
+            remap = false
+    )
     private RestrictedInputSlot blankPatternSlot;
     @Unique
-    private boolean industrialtech$wasInfinitePattern = false;
+    private boolean infinitypattern$wasInfinitePattern;
 
-    @Inject(
-            method = {"encode"},
-            at = {@At("HEAD")}
-    )
-    private void onEncodePatternHead(CallbackInfo ci) {
+    public MixinPatternEncodingTermMenu() {
+    }
+
+    @Unique
+    private void infinitypattern$onEncodePatternHead(CallbackInfo ci) {
         ItemStack blank = this.blankPatternSlot.getItem();
-        this.industrialtech$wasInfinitePattern = blank.is(AEModItem.INFINITE_PATTERN.get());
+        this.infinitypattern$wasInfinitePattern = !blank.isEmpty() && blank.getItem() == IAeModItem.INFINITE_PATTERN.get();
     }
 
     @Inject(
             method = {"isPattern"},
             at = {@At("HEAD")},
-            cancellable = true
+            cancellable = true,
+            remap = false
     )
-    private void onIsPattern(ItemStack output, CallbackInfoReturnable<Boolean> cir) {
-        if (output.is(AEModItem.INFINITE_PATTERN.get())) {
+    private void onIsPattern(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+        if (!stack.isEmpty() && stack.getItem() == IAeModItem.INFINITE_PATTERN.get()) {
             cir.setReturnValue(true);
         }
 
@@ -52,23 +47,28 @@ public abstract class MixinPatternEncodingTermMenu extends MEStorageMenu {
 
     @Inject(
             method = {"encode"},
-            at = {@At("RETURN")}
+            at = {@At("HEAD")},
+            remap = false
+    )
+    private void onEncodePatternHead(CallbackInfo ci) {
+        this.infinitypattern$onEncodePatternHead(ci);
+    }
+
+    @Inject(
+            method = {"encode"},
+            at = {@At("RETURN")},
+            remap = false
     )
     private void onEncodePatternReturn(CallbackInfo ci) {
-        if (this.industrialtech$wasInfinitePattern) {
+        if (this.infinitypattern$wasInfinitePattern) {
             ItemStack blank = this.blankPatternSlot.getItem();
             if (blank.isEmpty()) {
-                this.blankPatternSlot.set((AEModItem.INFINITE_PATTERN.get()).getDefaultInstance());
-            } else if (blank.is(AEModItem.INFINITE_PATTERN.get())) {
+                this.blankPatternSlot.set(new ItemStack((ItemLike)IAeModItem.INFINITE_PATTERN.get()));
+            } else if (blank.getItem() == IAeModItem.INFINITE_PATTERN.get()) {
                 blank.setCount(1);
             }
 
-            this.industrialtech$wasInfinitePattern = false;
+            this.infinitypattern$wasInfinitePattern = false;
         }
-
-    }
-
-    public MixinPatternEncodingTermMenu(MenuType<?> menuType, int id, Inventory ip, ITerminalHost host, PatternEncodingLogic encodingLogic) {
-        super(menuType, id, ip, host);
     }
 }

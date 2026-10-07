@@ -1,0 +1,72 @@
+<mxfile host="Electron">
+  <diagram name="Страница-1" id="fUsJP6W_gmgSOT4-Vajw">
+    <mxGraphModel dx="7030" dy="7411" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nYMEuklsolNGN3I4c3S3-11" edge="1" parent="1" source="nYMEuklsolNGN3I4c3S3-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startSize=6;endSize=10;" target="nYMEuklsolNGN3I4c3S3-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Сырая нефть&amp;nbsp;" vertex="1">
+          <mxGeometry height="60" width="120" x="-5570" y="-6730" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-13" edge="1" parent="1" source="nYMEuklsolNGN3I4c3S3-10" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;edgeStyle=orthogonalEdgeStyle;elbow=vertical;" target="nYMEuklsolNGN3I4c3S3-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-5260" y="-6640" />
+              <mxPoint x="-5330" y="-6640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-15" edge="1" parent="1" source="nYMEuklsolNGN3I4c3S3-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="nYMEuklsolNGN3I4c3S3-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Сепаратор" vertex="1">
+          <mxGeometry height="60" width="120" x="-5290" y="-6730" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-20" edge="1" parent="1" source="nYMEuklsolNGN3I4c3S3-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="nYMEuklsolNGN3I4c3S3-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-21" edge="1" parent="1" source="nYMEuklsolNGN3I4c3S3-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="nYMEuklsolNGN3I4c3S3-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-22" edge="1" parent="1" source="nYMEuklsolNGN3I4c3S3-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" target="nYMEuklsolNGN3I4c3S3-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-23" edge="1" parent="1" source="nYMEuklsolNGN3I4c3S3-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="nYMEuklsolNGN3I4c3S3-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="нефтяной газ" vertex="1">
+          <mxGeometry height="60" width="120" x="-5390" y="-6610" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Очищенная (обессоленная) нефть" vertex="1">
+          <mxGeometry height="60" width="120" x="-5070" y="-6730" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-16" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="метана" vertex="1">
+          <mxGeometry height="80" width="80" x="-5520" y="-6510" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-17" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="этана" vertex="1">
+          <mxGeometry height="80" width="80" x="-5420" y="-6510" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-18" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="пропана" vertex="1">
+          <mxGeometry height="80" width="80" x="-5320" y="-6510" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-19" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="бутана" vertex="1">
+          <mxGeometry height="80" width="80" x="-5220" y="-6510" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;p&gt;Холодильная камера&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="-5970" y="-6500" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-25" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="из газа в жидкость&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="60" x="-5970" y="-6540" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="испаритель" vertex="1">
+          <mxGeometry height="60" width="120" x="-5840" y="-6500" as="geometry" />
+        </mxCell>
+        <mxCell id="nYMEuklsolNGN3I4c3S3-28" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="из жидкости&amp;nbsp;&lt;div&gt;в газ&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="80" x="-5840" y="-6540" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

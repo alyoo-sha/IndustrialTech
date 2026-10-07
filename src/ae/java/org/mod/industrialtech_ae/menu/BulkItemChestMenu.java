@@ -4,9 +4,9 @@ import appeng.api.config.Actionable;
 import appeng.api.stacks.AEItemKey;
 import org.mod.industrialtech_ae.ae2.GenericAeKeyStorage;
 import org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity;
-import org.mod.industrialtech_ae.init.AEModBlock;
-import org.mod.industrialtech_ae.init.AEModMenu;
-import org.mod.industrialtech_ae.init.AEModNetworking;
+import org.mod.industrialtech_ae.init.IAeModBlock;
+import org.mod.industrialtech_ae.init.IAeModMenu;
+import org.mod.industrialtech_ae.init.IAeModNetworking;
 import org.mod.industrialtech_ae.network.ItemSyncPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -38,7 +38,7 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
     }
 
     public BulkItemChestMenu(int containerId, Inventory inv, BulkItemChestBlockEntity blockEntity) {
-        super(AEModMenu.BULK_ITEM_CHEST_MENU.get(), containerId);
+        super(IAeModMenu.BULK_ITEM_CHEST_MENU.get(), containerId);
         this.tankContainer = new SimpleContainer(1);
         this.blockEntity = blockEntity;
         this.level = inv.player.level();
@@ -75,7 +75,7 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
 
     public void syncToClient(ServerPlayer serverPlayer) {
         GenericAeKeyStorage<AEItemKey> storage = this.blockEntity.getStorage();
-        AEModNetworking.sendToPlayer(new ItemSyncPacket(this.pos, storage.getStoredKey(), storage.getAmount(), storage.getFilterKey(), this.blockEntity.isOnline()), serverPlayer);
+        IAeModNetworking.sendToPlayer(new ItemSyncPacket(this.pos, storage.getStoredKey(), storage.getAmount(), storage.getFilterKey(), this.blockEntity.isOnline()), serverPlayer);
     }
 
     public void updateClientData(BlockPos pos, AEItemKey item, long amount, AEItemKey filter, boolean online) {
@@ -181,7 +181,7 @@ public class BulkItemChestMenu extends AbstractContainerMenu {
     }
 
     public boolean stillValid(@NotNull Player player) {
-        return stillValid(ContainerLevelAccess.create(this.level, this.pos), player, AEModBlock.BULK_ITEM_CHEST.get());
+        return stillValid(ContainerLevelAccess.create(this.level, this.pos), player, IAeModBlock.BULK_ITEM_CHEST.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

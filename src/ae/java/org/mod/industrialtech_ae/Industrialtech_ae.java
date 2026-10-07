@@ -33,12 +33,12 @@ public class Industrialtech_ae {
 
     public Industrialtech_ae(FMLJavaModLoadingContext context) {
         modEventBus = context.getModEventBus();
-        AEModBlock.init();
-        AEModBlockEntity.init();
-        AEModItem.init();
-        AEModMenu.init();
-        AEModNetworking.init();
-        AEModTab.init();
+        IAeModBlock.init();
+        IAeModBlockEntity.init();
+        IAeModItem.init();
+        IAeModMenu.init();
+        IAeModNetworking.init();
+        IAeModTab.init();
         IFPATGuide.init();
 
         modEventBus.addListener(this::commonSetup);

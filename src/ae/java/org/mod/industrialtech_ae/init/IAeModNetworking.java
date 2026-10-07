@@ -13,7 +13,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.mod.industrialtech_ae.network.FilterInteractPacket;
 
-public class AEModNetworking {
+public class IAeModNetworking {
     private static SimpleChannel INSTANCE;
     private static int packetId = 0;
 

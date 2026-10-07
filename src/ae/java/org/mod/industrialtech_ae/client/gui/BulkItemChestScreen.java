@@ -2,7 +2,7 @@ package org.mod.industrialtech_ae.client.gui;
 
 import org.mod.industrialtech_ae.Industrialtech_ae;
 import org.mod.industrialtech_ae.client.gui.element.*;
-import org.mod.industrialtech_ae.init.AEModNetworking;
+import org.mod.industrialtech_ae.init.IAeModNetworking;
 import org.mod.industrialtech_ae.menu.BulkItemChestMenu;
 import org.mod.industrialtech_ae.network.ItemFilterInteractPacket;
 import org.mod.industrialtech_ae.network.ItemInteractPacket;
@@ -62,8 +62,8 @@ public class BulkItemChestScreen extends AbstractContainerScreen<BulkItemChestMe
         Rect var10003 = FILTER_SLOT_RECT;
         BulkItemChestMenu var10004 = this.menu;
         Objects.requireNonNull(var10004);
-        var10000.add(new ItemSlotElement(var10003, var10004::getFilter, () -> (this.menu).getFilter() != null ? Collections.singletonList((this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GREEN)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.no_filter").withStyle(ChatFormatting.RED)), 0, (button) -> AEModNetworking.sendToServer(new ItemFilterInteractPacket((this.menu).getBlockPos()))));
-        this.elements.add(new ItemSlotElement(ITEM_SLOT_RECT, () -> (this.menu).getAmount() > 0L ? (this.menu).getItem() : null, () -> (this.menu).getItem() != null && (this.menu).getAmount() > 0L ? List.of((this.menu).getItem().getDisplayName().copy().withStyle(ChatFormatting.GREEN), AmountFormatter.formatItem((this.menu).getAmount(), true, ChatFormatting.AQUA)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.empty").withStyle(ChatFormatting.DARK_RED)), -1, (button) -> AEModNetworking.sendToServer(new ItemInteractPacket((this.menu).getBlockPos(), button == 1))));
+        var10000.add(new ItemSlotElement(var10003, var10004::getFilter, () -> (this.menu).getFilter() != null ? Collections.singletonList((this.menu).getFilter().getDisplayName().copy().withStyle(ChatFormatting.GREEN)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.no_filter").withStyle(ChatFormatting.RED)), 0, (button) -> IAeModNetworking.sendToServer(new ItemFilterInteractPacket((this.menu).getBlockPos()))));
+        this.elements.add(new ItemSlotElement(ITEM_SLOT_RECT, () -> (this.menu).getAmount() > 0L ? (this.menu).getItem() : null, () -> (this.menu).getItem() != null && (this.menu).getAmount() > 0L ? List.of((this.menu).getItem().getDisplayName().copy().withStyle(ChatFormatting.GREEN), AmountFormatter.formatItem((this.menu).getAmount(), true, ChatFormatting.AQUA)) : Collections.singletonList(Component.translatable("gui.industrialtech_ae.empty").withStyle(ChatFormatting.DARK_RED)), -1, (button) -> IAeModNetworking.sendToServer(new ItemInteractPacket((this.menu).getBlockPos(), button == 1))));
     }
 
     private boolean isCustomTooltipArea(int mouseX, int mouseY) {

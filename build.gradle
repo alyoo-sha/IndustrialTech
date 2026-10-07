@@ -18,7 +18,7 @@ plugins {
   id 'idea'
   id 'eclipse'
   id 'maven-publish'
-  id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+  id 'net.minecraftforge.gradle' version '[6.0.18,6.2)'   // ← старый плагин для Forge
   id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
@@ -26,7 +26,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 // ========== Wrapper ==========
 tasks.named('wrapper', Wrapper).configure {
-  gradleVersion = '8.14.5'
+  gradleVersion = '8.4'  // Для Forge 1.20.1 подойдёт 8.4
   distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -34,8 +34,6 @@ tasks.named('wrapper', Wrapper).configure {
 group = mod_group_id
 version = mod_version
 base { archivesName = mod_id }
-
-jarJar.enable()
 
 // ========== Java ==========
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -120,14 +118,14 @@ mixin {
   add sourceSets.main, "${mod_id}.refmap.json"
   config "${mod_id}.mixins.json"
 
-  // Если у модулей есть свои миксины, добавьте:
+  // Исправлено: для каждого модуля свой sourceSet
   add sourceSets.ae, "${mod_id_ae}.refmap.json"
   config "${mod_id_ae}.mixins.json"
 
-  add sourceSets.ae, "${mod_id_crafting}.refmap.json"
+  add sourceSets.crafting, "${mod_id_crafting}.refmap.json"
   config "${mod_id_crafting}.mixins.json"
 
-  add sourceSets.ae, "${mod_id_ore}.refmap.json"
+  add sourceSets.ore, "${mod_id_ore}.refmap.json"
   config "${mod_id_ore}.mixins.json"
 }
 
@@ -140,7 +138,7 @@ idea {
   }
 }
 
-// ========== Minecraft ==========
+// ========== Minecraft (Forge) ==========
 minecraft {
   mappings channel: mapping_channel, version: mapping_version
 
@@ -195,7 +193,6 @@ minecraft {
       taskName 'DataGen'
       workingDirectory project.file('run-data')
 
-      // ✅ Исправлено: один общий --output для всех модов
       args '--all',
           '--mod', mod_id,
           '--mod', 'industrialtech_ae',
@@ -207,7 +204,6 @@ minecraft {
           '--existing', file('src/crafting/resources/'),
           '--existing', file('src/ore/resources/')
 
-      // Добавляем соответствующие datagen-источники для каждого мода
       mods.named(mod_id).configure { source(sourceSets.datagenMain) }
       mods.named("industrialtech_ae").configure { source(sourceSets.datagenAe) }
       mods.named("industrialtech_crafting").configure { source(sourceSets.datagenCrafting) }
@@ -237,18 +233,8 @@ repositories {
   maven {
     url "https://api.modrinth.com/maven"
   }
-  exclusiveContent {
-    forRepository {
-      maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-      }
-    }
-    forRepositories(fg.repository)
-    filter {
-      includeGroup "maven.modrinth"
-    }
-  }
+  // Для совместимости со старыми библиотеками
+  mavenCentral()
 }
 
 // ========== Зависимости ==========
@@ -336,18 +322,18 @@ dependencies {
   runtimeOnly fg.deobf("curse.maven:sodium-options-api-1103431:6100812")
   runtimeOnly fg.deobf("curse.maven:magnesium-extras-558905:6041697")
   runtimeOnly fg.deobf("curse.maven:dynamiclights-reforged-551736:6044481")
-//  runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:5338457")
+  runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:5338457")
   runtimeOnly fg.deobf("curse.maven:ferritecore-429235:4810975")
   runtimeOnly fg.deobf("curse.maven:faster-block-placement-1025486:5374271")
   runtimeOnly fg.deobf("curse.maven:chunk-animator-embeddium-compat-1527419:8007459")
   runtimeOnly fg.deobf("curse.maven:chunk-animator-236484:4588407")
   runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
   runtimeOnly fg.deobf("curse.maven:embeddium-908741:5681725")//скачал
-//  runtimeOnly fg.deobf("curse.maven:modern-ui-352491:6956345")
+  runtimeOnly fg.deobf("curse.maven:modern-ui-352491:6956345")
 
   runtimeOnly fg.deobf("curse.maven:merequester-688367:8298547") //LGPL
   runtimeOnly fg.deobf("curse.maven:ae2-mega-things-1150075:6203824") //LGPL
-  runtimeOnly fg.deobf("curse.maven:ae2-extras-421104:7698810")
+  runtimeOnly fg.deobf("curse.maven:ae2-extras-421104:7698810") // можно использовать как угодно
   runtimeOnly fg.deobf("curse.maven:extendedae-plus-1337639:8141730") //LGPL
   runtimeOnly fg.deobf("curse.maven:ex-pattern-provider-892005:8291632") //LGPL ExtendedAE
   runtimeOnly fg.deobf("curse.maven:ae2labelviewcell-1411927:7370022") //All Rights Reserved

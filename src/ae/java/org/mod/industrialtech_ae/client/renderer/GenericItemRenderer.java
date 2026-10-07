@@ -5,7 +5,7 @@ import org.mod.industrialtech_ae.block.BaseBlock;
 import org.mod.industrialtech_ae.entity.BaseBlockEntity;
 import org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity;
 import org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity;
-import org.mod.industrialtech_ae.init.AEModBlock;
+import org.mod.industrialtech_ae.init.IAeModBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -31,8 +31,8 @@ public class GenericItemRenderer extends BlockEntityWithoutLevelRenderer {
 
     public GenericItemRenderer() {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
-        this.fluidDummy = new BulkFluidTankBlockEntity(BlockPos.ZERO, ((Block)AEModBlock.BULK_FLUID_TANK.get()).defaultBlockState());
-        this.itemDummy = new BulkItemChestBlockEntity(BlockPos.ZERO, ((Block)AEModBlock.BULK_ITEM_CHEST.get()).defaultBlockState());
+        this.fluidDummy = new BulkFluidTankBlockEntity(BlockPos.ZERO, ((Block) IAeModBlock.BULK_FLUID_TANK.get()).defaultBlockState());
+        this.itemDummy = new BulkItemChestBlockEntity(BlockPos.ZERO, ((Block) IAeModBlock.BULK_ITEM_CHEST.get()).defaultBlockState());
     }
 
     @Override
@@ -50,9 +50,9 @@ public class GenericItemRenderer extends BlockEntityWithoutLevelRenderer {
             poseStack.translate((double)-0.5F, (double)-0.5F, (double)-0.5F);
             blockRenderer.renderSingleBlock(state, poseStack, buffer, packedLight, packedOverlay, ModelData.EMPTY, (RenderType)null);
             poseStack.popPose();
-            if (blockItem.getBlock() == AEModBlock.BULK_FLUID_TANK.get()) {
+            if (blockItem.getBlock() == IAeModBlock.BULK_FLUID_TANK.get()) {
                 this.renderInternal(this.fluidDummy, stack, poseStack, buffer, packedLight, packedOverlay);
-            } else if (blockItem.getBlock() == AEModBlock.BULK_ITEM_CHEST.get()) {
+            } else if (blockItem.getBlock() == IAeModBlock.BULK_ITEM_CHEST.get()) {
                 this.renderInternal(this.itemDummy, stack, poseStack, buffer, packedLight, packedOverlay);
             }
 

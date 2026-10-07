@@ -19,14 +19,14 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mod.industrialtech_ae.ae2.AeKeyType;
-import org.mod.industrialtech_ae.init.AEModBlockEntity;
+import org.mod.industrialtech_ae.init.IAeModBlockEntity;
 import org.mod.industrialtech_ae.menu.BulkFluidTankMenu;
 
 public class BulkFluidTankBlockEntity extends BaseBlockEntity<AEFluidKey> {
     private final LazyOptional<IFluidHandler> fluidHandlerCap = LazyOptional.of(this::createFluidHandler);
 
     public BulkFluidTankBlockEntity(BlockPos pos, BlockState state) {
-        super(AEModBlockEntity.BULK_FLUID_TANK_BE.get(), pos, state, AeKeyType.FLUID);
+        super(IAeModBlockEntity.BULK_FLUID_TANK_BE.get(), pos, state, AeKeyType.FLUID);
     }
 
     protected void syncToOpenPlayers() {

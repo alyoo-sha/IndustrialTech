@@ -4,9 +4,9 @@ import appeng.api.stacks.AEFluidKey;
 import org.jetbrains.annotations.NotNull;
 import org.mod.industrialtech_ae.ae2.GenericAeKeyStorage;
 import org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity;
-import org.mod.industrialtech_ae.init.AEModBlock;
-import org.mod.industrialtech_ae.init.AEModMenu;
-import org.mod.industrialtech_ae.init.AEModNetworking;
+import org.mod.industrialtech_ae.init.IAeModBlock;
+import org.mod.industrialtech_ae.init.IAeModMenu;
+import org.mod.industrialtech_ae.init.IAeModNetworking;
 import org.mod.industrialtech_ae.network.FluidSyncPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,7 +34,7 @@ public class BulkFluidTankMenu extends AbstractContainerMenu {
     }
 
     public BulkFluidTankMenu(int containerId, Inventory inv, BulkFluidTankBlockEntity blockEntity) {
-        super(AEModMenu.BULK_FLUID_TANK_MENU.get(), containerId);
+        super(IAeModMenu.BULK_FLUID_TANK_MENU.get(), containerId);
         this.blockEntity = blockEntity;
         this.level = inv.player.level();
         this.pos = blockEntity.getBlockPos();
@@ -70,7 +70,7 @@ public class BulkFluidTankMenu extends AbstractContainerMenu {
 
     public void syncToClient(ServerPlayer serverPlayer) {
         GenericAeKeyStorage<AEFluidKey> storage = this.blockEntity.getStorage();
-        AEModNetworking.sendToPlayer(new FluidSyncPacket(this.pos, storage.getStoredKey(), storage.getAmount(), storage.getFilterKey(), this.blockEntity.isOnline()), serverPlayer);
+        IAeModNetworking.sendToPlayer(new FluidSyncPacket(this.pos, storage.getStoredKey(), storage.getAmount(), storage.getFilterKey(), this.blockEntity.isOnline()), serverPlayer);
     }
 
     public void updateClientData(BlockPos pos, AEFluidKey fluid, long amount, AEFluidKey filter, boolean online) {
@@ -140,7 +140,7 @@ public class BulkFluidTankMenu extends AbstractContainerMenu {
     }
 
     public boolean stillValid(@NotNull Player player) {
-        return stillValid(ContainerLevelAccess.create(this.level, this.pos), player, AEModBlock.BULK_FLUID_TANK.get());
+        return stillValid(ContainerLevelAccess.create(this.level, this.pos), player, IAeModBlock.BULK_FLUID_TANK.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

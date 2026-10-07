@@ -3,7 +3,7 @@ package org.mod.industrialtech_ae.entity;
 import appeng.api.config.Actionable;
 import appeng.api.stacks.AEItemKey;
 import org.mod.industrialtech_ae.ae2.AeKeyType;
-import org.mod.industrialtech_ae.init.AEModBlockEntity;
+import org.mod.industrialtech_ae.init.IAeModBlockEntity;
 import org.mod.industrialtech_ae.menu.BulkItemChestMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,7 +26,7 @@ public class BulkItemChestBlockEntity extends BaseBlockEntity<AEItemKey> {
     private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(this::createItemHandler);
 
     public BulkItemChestBlockEntity(BlockPos pos, BlockState state) {
-        super(AEModBlockEntity.BULK_ITEM_CHEST_BE.get(), pos, state, AeKeyType.ITEM);
+        super(IAeModBlockEntity.BULK_ITEM_CHEST_BE.get(), pos, state, AeKeyType.ITEM);
     }
 
     protected void syncToOpenPlayers() {

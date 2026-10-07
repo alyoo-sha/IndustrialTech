@@ -1,10 +1,10 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
-	"parent": "infinite_empty_pattern",
+	"parent": "infinite_pattern",
 	"texture_size": [32, 32],
 	"textures": {
-		"all": "industrialtech_ae:item/infinite_empty_pattern"
+		"all": "industrialtech_ae:item/infinite_pattern"
 	},
 	"elements": [
 		{

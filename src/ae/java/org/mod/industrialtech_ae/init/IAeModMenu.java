@@ -9,7 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.mod.industrialtech_ae.Industrialtech_ae;
 
-public class AEModMenu {
+public class IAeModMenu {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Industrialtech_ae.MOD_ID);
     public static void init() {
         MENUS.register(Industrialtech_ae.modEventBus);
