@@ -1,9 +1,8 @@
 package org.mod.industrialtech_ae.me;
 
-import com.wintercogs.ae2omnicells.common.init.OCBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
-import org.mod.industrialtech_ae.init.IAeModBlock;
+import org.mod.industrialtech_ae.core.init.IAeModBlock;
 
 public enum IAeCraftingFamily {
     COMMON,

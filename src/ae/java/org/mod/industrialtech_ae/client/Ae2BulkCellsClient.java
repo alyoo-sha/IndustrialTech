@@ -4,14 +4,14 @@ import appeng.api.client.StorageCellModels;
 import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.storage.cells.CellState;
-import org.mod.industrialtech_ae.ae2.BaseCellInventory;
+import org.mod.industrialtech_ae.integration.ae2.BaseCellInventory;
 import org.mod.industrialtech_ae.client.gui.BulkFluidTankScreen;
 import org.mod.industrialtech_ae.client.gui.BulkItemChestScreen;
 import org.mod.industrialtech_ae.client.renderer.GenericBlockRenderer;
-import org.mod.industrialtech_ae.init.IAeModItem;
-import org.mod.industrialtech_ae.init.IAeModMenu;
-import org.mod.industrialtech_ae.item.BulkFluidCellItem;
-import org.mod.industrialtech_ae.item.BulkItemCellItem;
+import org.mod.industrialtech_ae.core.init.IAeModItem;
+import org.mod.industrialtech_ae.core.init.IAeModMenu;
+import org.mod.industrialtech_ae.common.item.BulkFluidCellItem;
+import org.mod.industrialtech_ae.common.item.BulkItemCellItem;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -21,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.mod.industrialtech_ae.Industrialtech_ae;
-import org.mod.industrialtech_ae.init.IAeModBlockEntity;
+import org.mod.industrialtech_ae.core.init.IAeModBlockEntity;
 
 @Mod.EventBusSubscriber(modid = Industrialtech_ae.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Ae2BulkCellsClient {

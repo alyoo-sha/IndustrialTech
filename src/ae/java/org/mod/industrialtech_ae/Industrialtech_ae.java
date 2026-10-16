@@ -14,11 +14,11 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.mod.industrialtech_ae.guidebook.IFPATGuide;
-import org.mod.industrialtech_ae.init.*;
-import org.mod.industrialtech_ae.item.BulkFluidCellItem;
-import org.mod.industrialtech_ae.item.BulkItemCellItem;
-import org.mod.industrialtech_ae.util.SDCommand;
+import org.mod.industrialtech_ae.core.init.*;
+import org.mod.industrialtech_ae.integration.guidebook.IFPATGuide;
+import org.mod.industrialtech_ae.common.item.BulkFluidCellItem;
+import org.mod.industrialtech_ae.common.item.BulkItemCellItem;
+import org.mod.industrialtech_ae.core.util.SDCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

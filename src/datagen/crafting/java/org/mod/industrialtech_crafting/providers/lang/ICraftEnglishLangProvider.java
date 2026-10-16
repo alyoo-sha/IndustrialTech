@@ -2,7 +2,7 @@ package org.mod.industrialtech_crafting.providers.lang;
 
 import net.minecraft.data.PackOutput;
 import org.mod.industrialtech_crafting.Industrialtech_crafting;
-import org.mod.industrialtech_crafting.init.ICraftModBlock;
+import org.mod.industrialtech_crafting.core.init.ICraftModBlock;
 
 public class ICraftEnglishLangProvider extends ICraftLangProvider {
     public ICraftEnglishLangProvider(PackOutput output) {

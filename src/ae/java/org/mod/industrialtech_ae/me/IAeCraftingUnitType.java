@@ -5,7 +5,7 @@ import appeng.block.crafting.ICraftingUnitType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.mod.industrialtech_ae.config.IAeCoProcessorConfig;
-import org.mod.industrialtech_ae.init.IAeModBlock;
+import org.mod.industrialtech_ae.core.init.IAeModBlock;
 
 import java.util.function.Supplier;
 

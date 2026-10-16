@@ -2,7 +2,7 @@ package org.mod.industrialtech_ae.mixin;
 
 import appeng.menu.slot.RestrictedInputSlot;
 import net.minecraft.world.item.ItemStack;
-import org.mod.industrialtech_ae.init.IAeModItem;
+import org.mod.industrialtech_ae.core.init.IAeModItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

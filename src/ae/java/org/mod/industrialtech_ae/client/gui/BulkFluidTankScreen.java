@@ -10,11 +10,11 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.mod.industrialtech_ae.Industrialtech_ae;
 import org.mod.industrialtech_ae.client.gui.element.*;
-import org.mod.industrialtech_ae.init.IAeModNetworking;
-import org.mod.industrialtech_ae.menu.BulkFluidTankMenu;
-import org.mod.industrialtech_ae.network.FilterInteractPacket;
-import org.mod.industrialtech_ae.network.FluidInteractPacket;
-import org.mod.industrialtech_ae.util.AmountFormatter;
+import org.mod.industrialtech_ae.core.init.IAeModNetworking;
+import org.mod.industrialtech_ae.common.menu.BulkFluidTankMenu;
+import org.mod.industrialtech_ae.common.network.FilterInteractPacket;
+import org.mod.industrialtech_ae.common.network.FluidInteractPacket;
+import org.mod.industrialtech_ae.core.util.AmountFormatter;
 
 import java.util.ArrayList;
 import java.util.Collections;

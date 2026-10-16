@@ -5,7 +5,7 @@ import appeng.api.networking.crafting.ICraftingLink;
 import appeng.crafting.CraftingLink;
 import appeng.me.cluster.implementations.CraftingCPUCluster;
 import appeng.me.service.CraftingService;
-import org.mod.industrialtech_ae.block.entities.IAeCraftingBlockEntity;
+import org.mod.industrialtech_ae.common.block.entities.IAeCraftingBlockEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

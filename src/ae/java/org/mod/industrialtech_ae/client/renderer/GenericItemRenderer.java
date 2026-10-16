@@ -1,11 +1,11 @@
 package org.mod.industrialtech_ae.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import org.mod.industrialtech_ae.block.BaseBlock;
-import org.mod.industrialtech_ae.entity.BaseBlockEntity;
-import org.mod.industrialtech_ae.entity.BulkFluidTankBlockEntity;
-import org.mod.industrialtech_ae.entity.BulkItemChestBlockEntity;
-import org.mod.industrialtech_ae.init.IAeModBlock;
+import org.mod.industrialtech_ae.common.block.BaseBlock;
+import org.mod.industrialtech_ae.common.entity.BaseBlockEntity;
+import org.mod.industrialtech_ae.common.entity.BulkFluidTankBlockEntity;
+import org.mod.industrialtech_ae.common.entity.BulkItemChestBlockEntity;
+import org.mod.industrialtech_ae.core.init.IAeModBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;

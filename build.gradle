@@ -308,7 +308,6 @@ dependencies {
   // ae2-molecular-assembler-plus
   implementation fg.deobf("maven.modrinth:ae2-molecular-assembler-plus:1.1.0") //MIT
   implementation fg.deobf("maven.modrinth:extended-crafting:6.0.10") //MIT
-  implementation fg.deobf("maven.modrinth:cucumber:7.0.16") //MIT
   implementation fg.deobf("maven.modrinth:re-avaritia:1.4.0") //MIT
   implementation fg.deobf("maven.modrinth:appliedvoltex:1.0.2") //All Rights Reserved
 
@@ -329,7 +328,7 @@ dependencies {
   runtimeOnly fg.deobf("curse.maven:chunk-animator-236484:4588407")
   runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
   runtimeOnly fg.deobf("curse.maven:embeddium-908741:5681725")//скачал
-  runtimeOnly fg.deobf("curse.maven:modern-ui-352491:6956345")
+//  runtimeOnly fg.deobf("curse.maven:modern-ui-352491:6956345")
 
   runtimeOnly fg.deobf("curse.maven:merequester-688367:8298547") //LGPL
   runtimeOnly fg.deobf("curse.maven:ae2-mega-things-1150075:6203824") //LGPL

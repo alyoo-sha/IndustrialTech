@@ -1,5 +1,6 @@
 package org.mod.industrialtech_crafting;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,9 +16,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.mod.industrialtech_crafting.init.ICraftModBlock;
-import org.mod.industrialtech_crafting.init.ICraftModItem;
-import org.mod.industrialtech_crafting.init.ICraftModTab;
+import org.mod.industrialtech_crafting.core.init.ICraftModBlock;
+import org.mod.industrialtech_crafting.core.init.ICraftModItem;
+import org.mod.industrialtech_crafting.core.init.ICraftModTab;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +46,10 @@ public class Industrialtech_crafting {
         ITEMS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    public static ResourceLocation makeId(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

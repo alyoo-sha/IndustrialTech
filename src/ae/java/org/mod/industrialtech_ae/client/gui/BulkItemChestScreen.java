@@ -2,11 +2,11 @@ package org.mod.industrialtech_ae.client.gui;
 
 import org.mod.industrialtech_ae.Industrialtech_ae;
 import org.mod.industrialtech_ae.client.gui.element.*;
-import org.mod.industrialtech_ae.init.IAeModNetworking;
-import org.mod.industrialtech_ae.menu.BulkItemChestMenu;
-import org.mod.industrialtech_ae.network.ItemFilterInteractPacket;
-import org.mod.industrialtech_ae.network.ItemInteractPacket;
-import org.mod.industrialtech_ae.util.AmountFormatter;
+import org.mod.industrialtech_ae.core.init.IAeModNetworking;
+import org.mod.industrialtech_ae.common.menu.BulkItemChestMenu;
+import org.mod.industrialtech_ae.common.network.ItemFilterInteractPacket;
+import org.mod.industrialtech_ae.common.network.ItemInteractPacket;
+import org.mod.industrialtech_ae.core.util.AmountFormatter;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
