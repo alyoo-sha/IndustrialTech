@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "industrialtech:item/infinite_scrap_template"
+  }
+}

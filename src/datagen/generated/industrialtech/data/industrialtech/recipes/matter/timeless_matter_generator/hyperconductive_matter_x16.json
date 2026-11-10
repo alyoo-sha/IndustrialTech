@@ -1,0 +1,14 @@
+{
+  "type": "industrialtech:matter_generation",
+  "consume": true,
+  "count": 16,
+  "energy": 640000000,
+  "input": {
+    "item": "industrialtech:hyperconductive_matter"
+  },
+  "machine": "timeless_matter_generator",
+  "result": {
+    "count": 16,
+    "item": "industrialtech:timeless_matter"
+  }
+}

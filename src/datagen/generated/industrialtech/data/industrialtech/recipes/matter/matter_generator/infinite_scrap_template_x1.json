@@ -1,0 +1,14 @@
+{
+  "type": "industrialtech:matter_generation",
+  "consume": false,
+  "count": 1,
+  "energy": 2560000000,
+  "input": {
+    "item": "industrialtech:infinite_scrap_template"
+  },
+  "machine": "matter_generator",
+  "result": {
+    "count": 64,
+    "item": "industrialtech:basic_matter"
+  }
+}

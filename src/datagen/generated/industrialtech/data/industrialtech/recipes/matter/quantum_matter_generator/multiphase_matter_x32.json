@@ -1,0 +1,14 @@
+{
+  "type": "industrialtech:matter_generation",
+  "consume": true,
+  "count": 32,
+  "energy": 1280000000,
+  "input": {
+    "item": "industrialtech:multiphase_matter"
+  },
+  "machine": "quantum_matter_generator",
+  "result": {
+    "count": 32,
+    "item": "industrialtech:quantum_matter"
+  }
+}

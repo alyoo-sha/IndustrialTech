@@ -1,0 +1,13 @@
+// 1.20.1	2026-11-08T19:52:53.7719621	Item Models: industrialtech
+ef9c16e989e5a80255091882b9c663b20d3b3a5b assets/industrialtech/models/item/basic_matter.json
+7cedd97bb34b7e6d431df5a7e71496c22aec9d9b assets/industrialtech/models/item/bionic_matter.json
+f47b672913187f29a7a4fa099fa3b99aa9062746 assets/industrialtech/models/item/hyperconductive_matter.json
+d73d7f5b840335df8d184e9f493583616061f6af assets/industrialtech/models/item/infinite_scrap_template.json
+be31c7cba07b7876ea4f1d6d2d0c681e289d183b assets/industrialtech/models/item/multiphase_matter.json
+c39b8b302742a7878769363f482e899800904e3d assets/industrialtech/models/item/neutrino_matter.json
+8d4a37aaace422ada092f654409336dcb122fac8 assets/industrialtech/models/item/perfect_matter.json
+c651714eb052a5cdd5db8643e891cec119e5e632 assets/industrialtech/models/item/proton_matter.json
+c22fcd69e672ac72fe9dc593655c6a37cbb79d5c assets/industrialtech/models/item/quantum_matter.json
+22b55ff72ff515452092c47a5db1230e74461caa assets/industrialtech/models/item/scrap.json
+732f7f4b26a6e368e6a1052cd4230511bae55ae6 assets/industrialtech/models/item/singular_matter.json
+9029530a5b9f3c3808f83d8baf4bf3257dbeea9a assets/industrialtech/models/item/timeless_matter.json

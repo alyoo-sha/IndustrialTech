@@ -1,0 +1,14 @@
+{
+  "type": "industrialtech:matter_generation",
+  "consume": true,
+  "count": 64,
+  "energy": 2560000000,
+  "input": {
+    "item": "industrialtech:quantum_matter"
+  },
+  "machine": "proton_matter_generator",
+  "result": {
+    "count": 64,
+    "item": "industrialtech:proton_matter"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "industrialtech:matter_generation",
+  "consume": true,
+  "count": 16,
+  "energy": 640000000,
+  "input": {
+    "item": "industrialtech:timeless_matter"
+  },
+  "machine": "multiphase_matter_generator",
+  "result": {
+    "count": 16,
+    "item": "industrialtech:multiphase_matter"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "industrialtech:matter_generation",
+  "consume": true,
+  "count": 64,
+  "energy": 2560000000,
+  "input": {
+    "item": "industrialtech:singular_matter"
+  },
+  "machine": "perfect_matter_generator",
+  "result": {
+    "count": 64,
+    "item": "industrialtech:perfect_matter"
+  }
+}

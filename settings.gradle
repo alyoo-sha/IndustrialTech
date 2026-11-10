@@ -12,6 +12,6 @@ plugins {
 
 rootProject.name = 'industrialtech'
 
-include 'Nova_Core', 'Nova_UI'
-project(':Nova_Core').projectDir = file('modules/Nova_Core')
+include 'Nova-Core', 'Nova_UI'
+project(':Nova-Core').projectDir = file('modules/Nova-Core')
 project(':Nova_UI').projectDir   = file('modules/Nova_UI')

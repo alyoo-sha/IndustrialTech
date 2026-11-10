@@ -1,0 +1,14 @@
+{
+  "type": "industrialtech:matter_generation",
+  "consume": true,
+  "count": 32,
+  "energy": 1280000000,
+  "input": {
+    "item": "industrialtech:basic_matter"
+  },
+  "machine": "neutrino_matter_generator",
+  "result": {
+    "count": 32,
+    "item": "industrialtech:neutrino_matter"
+  }
+}

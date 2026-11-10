@@ -25,7 +25,7 @@ plugins {
 apply plugin: 'org.spongepowered.mixin'
 
 // Nova-модули должны быть настроены раньше корня (нужны их sourceSets)
-evaluationDependsOn(':Nova_Core')
+evaluationDependsOn(':Nova-Core')
 evaluationDependsOn(':Nova_UI')
 
 // ========== Wrapper ==========
@@ -174,7 +174,7 @@ minecraft {
         }
         "industrialtech_ore" {source sourceSets.ore
         }
-        nova_core { source project(':Nova_Core').sourceSets.main }
+        nova_core { source project(':Nova-Core').sourceSets.main }
         nova_ui   { source project(':Nova_UI').sourceSets.main }
       }
     }
@@ -257,7 +257,7 @@ dependencies {
 
 
   // Компилируемся против папок классов (dev-имена), а не против jar после reobf (SRG-имена)
-  compileOnly project(':Nova_Core').sourceSets.main.output
+  compileOnly project(':Nova-Core').sourceSets.main.output
   compileOnly project(':Nova_UI').sourceSets.main.output
 
   //OpenUI MC
