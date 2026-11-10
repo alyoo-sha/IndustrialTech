@@ -15,6 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.mod.industrialtech.client.render.IBlurConfig;
+import org.mod.industrialtech.core.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,12 +27,19 @@ public class Industrialtech {
     public static IEventBus modEventBus;
 
     public Industrialtech(FMLJavaModLoadingContext context) {
-
         modEventBus = context.getModEventBus();
+
+        IModBlock.init();
+        IModItem.init();
+        IModBlockEntity.init();
+        IModMenu.init();
+        IModTab.init();
+        IModRecipe.init();
+        MatterRegistry.register();
+
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         //
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         ModLoadingContext.get().registerExtensionPoint(
                 IExtensionPoint.DisplayTest.class,
                 () -> new IExtensionPoint.DisplayTest(

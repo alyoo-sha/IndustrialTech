@@ -1,144 +1,220 @@
 package org.mod.industrialtech.client.screen;
 
-import com.daqem.uilib.client.gui.AbstractScreen;
-import com.daqem.uilib.client.gui.component.AbstractComponent;
-import com.daqem.uilib.client.gui.component.ButtonComponent;
-import com.daqem.uilib.client.gui.component.SolidColorComponent;
-import com.daqem.uilib.client.gui.component.TextComponent;
-import com.daqem.uilib.client.gui.text.Text;
-import com.daqem.uilib.client.gui.texture.Textures;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import org.mod.industrialtech.client.IClientForgeEvents;
 import org.mod.industrialtech.client.render.IBlurConfig;
+import org.mod.nova_core.ui.api.ButtonWidget;
+import org.mod.nova_core.ui.api.Checkbox;
+import org.mod.nova_core.ui.api.HStack;
+import org.mod.nova_core.ui.api.Panel;
+import org.mod.nova_core.ui.api.TextWidget;
+import org.mod.nova_core.ui.api.VStack;
+import org.mod.nova_core.ui.component.Widget;
+import org.mod.nova_core.ui.context.UiContext;
+import org.mod.nova_core.ui.graphics.UiGraphics;
+import org.mod.nova_core.ui.graphics.UiText;
+import org.mod.nova_core.ui.input.MouseButton;
+import org.mod.nova_core.ui.input.PointerEvent;
+import org.mod.nova_core.ui.layout.Alignment;
+import org.mod.nova_core.ui.layout.Insets;
+import org.mod.nova_core.ui.layout.Justification;
+import org.mod.nova_core.ui.layout.SizeMode;
+import org.mod.nova_core.ui.minecraft.NovaTexts;
+import org.mod.nova_core.ui.minecraft.UIScreen;
+import org.mod.nova_core.ui.state.Computed;
+import org.mod.nova_core.ui.state.Signal;
+import org.mod.nova_core.ui.state.Subscription;
+import org.mod.nova_core.ui.style.BackdropStyle;
+import org.mod.nova_core.ui.style.ButtonStyle;
+import org.mod.nova_core.ui.style.Gradient;
+import org.mod.nova_core.ui.style.Styles;
+import org.mod.nova_core.ui.theme.Theme;
+import org.mod.nova_core.ui.theme.ThemeManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.IntConsumer;
 
-/**
- * Экран настроек размытия на UILib (ветка 1.20.1).
- * Заменяет прежний ModBlurSettingsScreen: тот же конструктор без аргументов,
- * так что вызов в ModClientForgeEvents.onKey менять не нужно.
- */
-public class IBlurSettingsScreen extends AbstractScreen {
+/** Экран настроек размытия на Nova Core (тема Glass). Конструктор без аргументов прежний. */
+public class IBlurSettingsScreen extends UIScreen {
 
     private static final int PANEL_W = 232;
     private static final int PANEL_H = 160;
-    private static final int PAD = 16;
+    private static final int PAD = 14;
 
     private static final int MIN_RADIUS = 1;
     /** Больше 30 уже заметно нагружает видеокарту (4 прохода по 2R+1 выборок). */
     private static final int MAX_RADIUS = 30;
 
-    /** Прозрачность оттенка сверху и снизу градиента (0x00..0xFF). */
+    /** Прозрачность оттенка сверху градиента (0x00..0xFF). */
     private static final int TINT_TOP_ALPHA = 0x70;
-    private static final String  BOTTOM_COLOR = "0000003f";
+    private static final String BOTTOM_COLOR = "0000003f";
 
     /** RGB пресетов: синий, красный, фиолетовый, зелёный, жёлтый, оранжевый, розовый, голубой. */
     private static final int[] PRESETS = {
             0x0190FF, 0xFF0000, 0xAA00FF, 0x00FF00, 0xFFFF00, 0xFFA500, 0xFF69B4, 0x00FFFF
     };
 
-    private final List<SwatchComponent> swatches = new ArrayList<>();
-    private TextComponent radiusLabel;
-    private TextComponent toggleLabel;
-    private int radiusCenterX;
+    // ------------------------------------------------------------------ state
+    // Состояние живёт в экране: build() вызывается заново при ресайзе, а значения должны сохраняться
+
+    private final Signal<Boolean> blurOn = Signal.of(IBlurConfig.CLIENT.blurEnabled.get());
+    private final Signal<Integer> radius = Signal.of(IBlurConfig.CLIENT.radius.get());
+    /** RGB выбранного пресета или -1. */
+    private final Signal<Integer> selectedRgb = Signal.of(readSelectedRgb());
+    private final Computed<UiText> radiusText = new Computed<>(
+            () -> NovaTexts.tr("label.industrialtech.radius", radius.get()));
+
+    private final Subscription blurSub;
+    private Theme savedTheme = null;
 
     public IBlurSettingsScreen() {
-        super(Component.literal("Настройки размытия"));
+        super(Component.translatable("label.industrialtech.settings"));
+        this.blurSub = blurOn.subscribe(enabled -> defer(() -> onBlurToggled(enabled)));
     }
 
-    // ------------------------------------------------------------------ UILib hooks
+    // ------------------------------------------------------------------ lifecycle
 
     @Override
-    public void startScreen() {
-        this.setPauseScreen(false);
-        // Фон UILib по умолчанию (тёмный градиент) убираем: иначе он перекрывает и блюр, и тонировку.
-        this.setBackground(null);
-        buildUi();
-    }
-
-    @Override
-    public void onResizeScreenRepositionComponents(int width, int height) {
-        // Компоненты UILib хранят абсолютные координаты, поэтому при ресайзе проще пересобрать.
-        this.getComponents().clear();
-        this.swatches.clear();
-        buildUi();
-    }
-
-    @Override
-    public void onTickScreen(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+    protected void init() {
+        // Фон темы заменяем прозрачным, пока экран открыт: иначе он закрыл бы оттенок из MixinScreen
+        if (savedTheme == null) {
+            savedTheme = ThemeManager.current();
+            ThemeManager.set(savedTheme.with(Styles.BACKDROP, new BackdropStyle(Gradient.solid(0x00000000))));
+        }
+        super.init();
     }
 
     /**
-     * Рисуем ванильный фон Screen.renderBackground(GuiGraphics): именно в нём MixinScreen подменяет
-     * цвета градиента на цвета из конфига. Это и есть живой предпросмотр выбранного цвета.
-     * (AbstractScreen из UILib этот метод не вызывает, поэтому без переопределения тонировки не видно.)
+     * Ванильный фон Screen.renderBackground(GuiGraphics): именно в нём MixinScreen подменяет цвета
+     * градиента на цвета из конфига. Это живой предпросмотр выбранного цвета.
      */
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        this.renderBackground(guiGraphics);
+    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(g);
+        super.render(g, mouseX, mouseY, partialTick);
+    }
+
+    @Override
+    public void removed() {
+        blurSub.cancel();
+        radiusText.cancel();
+        if (savedTheme != null) {
+            ThemeManager.set(savedTheme);
+            savedTheme = null;
+        }
+        super.removed();
+    }
+
+    @Override
+    public boolean isPauseScreen() {
+        return false;
     }
 
     // ------------------------------------------------------------------ layout
 
-    private void buildUi() {
-        int px = (this.width - PANEL_W) / 2;
-        int py = (this.height - PANEL_H) / 2;
-        int centerX = this.width / 2;
-        int innerW = PANEL_W - PAD * 2;
+    @Override
+    protected void build(Widget root) {
+        Panel panel = new Panel((root.getWidth() - PANEL_W) / 2, (root.getHeight() - PANEL_H) / 2, PANEL_W, PANEL_H);
 
-        // Панель
-        addComponent(new SolidColorComponent(px, py, PANEL_W, PANEL_H, 0xE0141414));
-        frame(px, py, PANEL_W, PANEL_H, 0xFF5A5A5A);
+        VStack stack = new VStack(0, 0, 0, 0);
+        stack.setSizeMode(SizeMode.FILL, SizeMode.FILL);
+        stack.setPadding(Insets.all(PAD)).setGap(6).setAlignment(Alignment.STRETCH);
 
-        // Заголовок
-        addLabel("Настройки размытия", centerX, py + 8, 0xFFFFFFFF);
+        stack.add(new TextWidget(0, 0, 0, 12, NovaTexts.bold(NovaTexts.tr("label.industrialtech.settings")))
+                .setAlignment(Alignment.CENTER));
+        stack.add(centered(new Checkbox(0, 0, NovaTexts.tr("label.industrialtech.blur_toggle"), blurOn)));
+        stack.add(radiusRow());
+        stack.add(new TextWidget(0, 0, 0, 10, NovaTexts.tr("label.industrialtech.dark_color")).setColor(0xFFC8D2E6));
+        stack.add(centered(swatchRow()));
 
-        // Вкл/выкл
-        toggleLabel = addButton(px + PAD, py + 24, innerW, 20, "", this::toggleBlur);
-        setLabelText(toggleLabel, blurEnabledText(), innerW / 2);
+        Widget spacer = new Widget(0, 0, 0, 0);
+        spacer.setWeight(1f);
+        stack.add(spacer);
 
-        // Радиус:  [ − ]  Радиус: N  [ + ]
-        addButton(px + PAD, py + 50, 60, 20, "-", () -> changeRadius(-1));
-        addButton(px + PAD + innerW - 60, py + 50, 60, 20, "+", () -> changeRadius(1));
-        radiusCenterX = centerX;
-        radiusLabel = addLabel("", radiusCenterX, py + 56, 0xFFFFFFFF);
-        setLabelText(radiusLabel, radiusText(), radiusCenterX);
+        stack.add(bottomRow());
+        panel.add(stack);
+        root.add(panel);
+    }
 
-        // Цвета
-        addLabel("Цвет затемнения", centerX, py + 78, 0xFFAAAAAA);
-        int size = 20;
-        int gap = 4;
-        int rowW = PRESETS.length * size + (PRESETS.length - 1) * gap;
-        int sx = px + (PANEL_W - rowW) / 2;
-        int selected = readSelectedRgb();
-        for (int i = 0; i < PRESETS.length; i++) {
-            SwatchComponent swatch = new SwatchComponent(sx + i * (size + gap), py + 92, size, PRESETS[i]);
-            swatch.setSelected(PRESETS[i] == selected);
-            swatch.setOnClickEvent((clicked, screen, mouseX, mouseY, button) -> {
-                if (button == 0) applyPreset(clicked.getRgb());
-            });
-            swatches.add(swatch);
-            addComponent(swatch);
+    /** Обёртка для центрирования по горизонтали. */
+    private static Widget centered(Widget child) {
+        HStack row = new HStack(0, 0, 0, 0);
+        row.setSizeMode(SizeMode.FILL, SizeMode.WRAP);
+        row.setJustification(Justification.CENTER).setAlignment(Alignment.CENTER);
+        row.add(child);
+        return row;
+    }
+
+    /** [ - ]  Радиус: N  [ + ] */
+    private Widget radiusRow() {
+        HStack row = new HStack(0, 0, 0, 0);
+        row.setSizeMode(SizeMode.FILL, SizeMode.WRAP);
+        row.setJustification(Justification.SPACE_BETWEEN).setAlignment(Alignment.CENTER);
+
+        TextWidget label = new TextWidget(0, 0, UiText.literal(""));
+        label.bindText(radiusText);
+
+        row.add(new ButtonWidget(0, 0, 40, 20, UiText.literal("-"), () -> defer(() -> changeRadius(-1))));
+        row.add(label);
+        row.add(new ButtonWidget(0, 0, 40, 20, UiText.literal("+"), () -> defer(() -> changeRadius(1))));
+        return row;
+    }
+
+    private Widget swatchRow() {
+        HStack row = new HStack(0, 0, 0, 0);
+        row.setSizeMode(SizeMode.WRAP, SizeMode.WRAP);
+        row.setGap(4);
+        for (int rgb : PRESETS) {
+            row.add(new SwatchWidget(rgb, selectedRgb, picked -> defer(() -> applyPreset(picked))));
         }
+        return row;
+    }
 
-        // Низ
-        int bw = (innerW - 8) / 2;
-        addButton(px + PAD, py + 124, bw, 20, "Сброс цвета", this::resetColors);
-        addButton(px + PAD + bw + 8, py + 124, bw, 20, "Готово", this::onClose);
+    private Widget bottomRow() {
+        HStack row = new HStack(0, 0, 0, 0);
+        row.setSizeMode(SizeMode.FILL, SizeMode.WRAP);
+        row.setGap(8);
+
+        ButtonWidget reset = new ButtonWidget(0, 0, 0, 20,
+                NovaTexts.tr("label.industrialtech.clear_color"), () -> defer(this::resetColors));
+        reset.setWeight(1f);
+
+        ButtonWidget done = new ButtonWidget(0, 0, 0, 20,
+                NovaTexts.tr("label.industrialtech.success"), () -> defer(this::onClose));
+        done.setWeight(1f);
+        done.setStyle(primaryStyle());
+
+        row.add(reset);
+        row.add(done);
+        return row;
+    }
+
+    /** Зелёная акцентная кнопка: остальное берётся из текущей темы. */
+    private static ButtonStyle primaryStyle() {
+        ButtonStyle b = ThemeManager.current().get(Styles.BUTTON);
+        return new ButtonStyle(0xCC2F8F72, 0xEE38A584, 0xCC236B56, b.disabled(),
+                b.border(), b.focusedBorder(), b.text(), b.disabledText(),
+                b.paddingX(), b.height(), b.textShadow(), b.radius());
     }
 
     // ------------------------------------------------------------------ actions
 
-    private void toggleBlur() {
+    /** Выполнить после завершения обработки клика: действия могут пересоздать или закрыть экран. */
+    private static void defer(Runnable action) {
+        Minecraft.getInstance().tell(action);
+    }
+
+    private void onBlurToggled(boolean enabled) {
         boolean wasEnabled = IBlurConfig.CLIENT.blurEnabled.get();
-        IBlurConfig.CLIENT.blurEnabled.set(!wasEnabled);
+        if (enabled == wasEnabled) {
+            return;
+        }
+        IBlurConfig.CLIENT.blurEnabled.set(enabled);
         IBlurConfig.saveConfig();
         // excluded = true выключает шейдер, то есть новое состояние "выключено" == старое "включено"
         IClientForgeEvents.onConfigChange(wasEnabled);
-        setLabelText(toggleLabel, blurEnabledText(), (PANEL_W - PAD * 2) / 2);
     }
 
     private void changeRadius(int delta) {
@@ -146,29 +222,22 @@ public class IBlurSettingsScreen extends AbstractScreen {
         IBlurConfig.CLIENT.radius.set(value);
         IClientForgeEvents.updateUniform("Radius", value);
         IBlurConfig.saveConfig();
-        setLabelText(radiusLabel, radiusText(), radiusCenterX);
+        radius.set(value);
     }
 
     private void applyPreset(int rgb) {
         String hex = String.format("%06X", rgb);
-        IBlurConfig.applyColors(
-                hex + String.format("%02X", TINT_TOP_ALPHA), BOTTOM_COLOR);
-        refreshSwatches(rgb);
+        IBlurConfig.applyColors(hex + String.format("%02X", TINT_TOP_ALPHA), BOTTOM_COLOR);
+        selectedRgb.set(rgb);
     }
 
     private void resetColors() {
         IBlurConfig.applyColors(BOTTOM_COLOR, BOTTOM_COLOR);
-        refreshSwatches(-1);
-    }
-
-    private void refreshSwatches(int selectedRgb) {
-        for (SwatchComponent swatch : swatches) {
-            swatch.setSelected(swatch.getRgb() == selectedRgb);
-        }
+        selectedRgb.set(-1);
     }
 
     /** RGB первого цвета из конфига (первые 6 hex-символов строки RRGGBBAA) или -1. */
-    private int readSelectedRgb() {
+    private static int readSelectedRgb() {
         try {
             return Integer.parseInt(IBlurConfig.CLIENT.colorFirstRaw.get().substring(0, 6), 16);
         } catch (RuntimeException e) {
@@ -176,89 +245,57 @@ public class IBlurSettingsScreen extends AbstractScreen {
         }
     }
 
-    private String radiusText() {
-        return "Радиус: " + IBlurConfig.CLIENT.radius.get();
-    }
-
-    private String blurEnabledText() {
-        return "Размытие: " + (IBlurConfig.CLIENT.blurEnabled.get() ? "вкл" : "выкл");
-    }
-
-    // ------------------------------------------------------------------ helpers
-
-    /** Подпись без добавления на экран (для вложения в кнопку). */
-    private TextComponent makeLabel(String text, int centerX, int y, int color) {
-        Text uiText = new Text(this.font, Component.literal(text));
-        uiText.setTextColor(color);
-        uiText.setShadow(true);
-        return new TextComponent(centerX - this.font.width(text) / 2, y, uiText);
-    }
-
-    private TextComponent addLabel(String text, int centerX, int y, int color) {
-        TextComponent label = makeLabel(text, centerX, y, color);
-        addComponent(label);
-        return label;
-    }
-
-    /** Меняет текст подписи и пересчитывает её x, чтобы она осталась по центру centerX. */
-    private void setLabelText(TextComponent label, String text, int centerX) {
-        label.getText().setText(Component.literal(text));
-        label.setX(centerX - this.font.width(text) / 2);
-    }
-
-    /**
-     * Кнопка UILib с ванильной текстурой и hover-состоянием. Подпись кладём ДОЧЕРНИМ компонентом:
-     * hover-состояние в UILib рисует только детей, а не text самой кнопки.
-     * Координаты задаём сразу в конструкторе (hover-копия запоминает их в момент создания).
-     */
-    private TextComponent addButton(int x, int y, int w, int h, String text, Runnable action) {
-        ButtonComponent button = new ButtonComponent(Textures.MINECRAFT_BUTTON, x, y, w, h);
-        button.getHoverState().setTexture(Textures.MINECRAFT_BUTTON_HOVERED);
-        // Без непустого hover-обработчика UILib не рисует hover-состояние
-        button.setOnHoverEvent((hovered, screen, mouseX, mouseY, delta) -> {});
-        button.setOnClickEvent((clicked, screen, mouseX, mouseY, mouseButton) -> {
-            if (mouseButton == 0) action.run();
-        });
-
-        TextComponent label = makeLabel(text, w / 2, (h - this.font.lineHeight) / 2, 0xFFFFFFFF);
-        button.addChild(label);
-        addComponent(button);
-        return label;
-    }
-
-    private void frame(int x, int y, int w, int h, int color) {
-        addComponent(new SolidColorComponent(x, y, w, 1, color));
-        addComponent(new SolidColorComponent(x, y + h - 1, w, 1, color));
-        addComponent(new SolidColorComponent(x, y, 1, h, color));
-        addComponent(new SolidColorComponent(x + w - 1, y, 1, h, color));
-    }
-
     // ------------------------------------------------------------------ swatch
 
-    /** Квадрат с цветом пресета: рамка светлеет при наведении, у выбранного она толще. */
-    private static final class SwatchComponent extends AbstractComponent<SwatchComponent> {
+    /** Квадрат с цветом пресета: у выбранного рамка белая и толще. При наведении ничего не меняется. */
+    private static final class SwatchWidget extends Widget {
+        private static final int SIZE = 20;
+
         private final int rgb;
-        private boolean selected;
+        private final Signal<Integer> selected;
+        private final IntConsumer onPick;
+        private boolean pressedState = false;
 
-        private SwatchComponent(int x, int y, int size, int rgb) {
-            super(null, x, y, size, size);
+        private SwatchWidget(int rgb, Signal<Integer> selected, IntConsumer onPick) {
+            super(0, 0, SIZE, SIZE);
             this.rgb = rgb;
-        }
-
-        int getRgb() {
-            return rgb;
-        }
-
-        void setSelected(boolean selected) {
             this.selected = selected;
+            this.onPick = onPick;
         }
 
         @Override
-        public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-            boolean highlighted = selected || isTotalHovered(mouseX, mouseY);
-            int inset = selected ? 2 : 1;
-            graphics.fill(0, 0, getWidth(), getHeight(), highlighted ? 0xFFFFFFFF : 0xFF555555);
-            graphics.fill(inset, inset, getWidth() - inset, getHeight() - inset, 0xFF000000 | rgb);
+        protected void renderSelf(UiGraphics g, int mouseX, int mouseY, float partialTick) {
+            boolean isSelected = selected.peek() == rgb;
+            int ax = absX();
+            int ay = absY();
+            int w = getWidth();
+            int h = getHeight();
+            int inset = isSelected ? 2 : 1;
+            g.fillRounded(ax, ay, ax + w, ay + h, 4, isSelected ? 0xFFFFFFFF : 0x66FFFFFF);
+            g.fillRounded(ax + inset, ay + inset, ax + w - inset, ay + h - inset, 3, 0xFF000000 | rgb);
+        }
+
+        @Override
+        protected void onPointerDown(PointerEvent e) {
+            if (e.getButton() != MouseButton.LEFT) return;
+            pressedState = true;
+            e.stopPropagation();
+        }
+
+        @Override
+        protected void onPointerUp(PointerEvent e) {
+            if (e.getButton() != MouseButton.LEFT || !pressedState) return;
+            pressedState = false;
+            if (contains(e.getX(), e.getY())) {
+                UiContext.platform().playClickSound();
+                onPick.accept(rgb);
+            }
+            e.stopPropagation();
+        }
+
+        @Override
+        protected void onPointerCancel(PointerEvent e) {
+            pressedState = false;
         }
     }
 }

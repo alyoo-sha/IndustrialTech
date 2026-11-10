@@ -1,11 +1,8 @@
 pluginManagement {
   repositories {
     gradlePluginPortal()
-    maven {
-      name = 'MinecraftForge'
-      url = 'https://maven.minecraftforge.net/'
-    }
-    maven { url = 'https://maven.parchmentmc.org' } // Add this line
+    maven { name = 'MinecraftForge'; url = 'https://maven.minecraftforge.net/' }
+    maven { name = 'ParchmentMC';    url = 'https://maven.parchmentmc.org' }
   }
 }
 
@@ -15,4 +12,6 @@ plugins {
 
 rootProject.name = 'industrialtech'
 
-//include ":IndustrialTech_Crafting"
+include 'Nova_Core', 'Nova_UI'
+project(':Nova_Core').projectDir = file('modules/Nova_Core')
+project(':Nova_UI').projectDir   = file('modules/Nova_UI')

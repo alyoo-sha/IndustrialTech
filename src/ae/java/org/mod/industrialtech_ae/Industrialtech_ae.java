@@ -43,7 +43,6 @@ public class Industrialtech_ae {
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     public static ResourceLocation makeId(String path) {

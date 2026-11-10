@@ -45,7 +45,6 @@ public class Industrialtech_crafting {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     public static ResourceLocation makeId(String path) {

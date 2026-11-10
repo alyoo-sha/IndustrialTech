@@ -24,6 +24,10 @@ plugins {
 
 apply plugin: 'org.spongepowered.mixin'
 
+// Nova-модули должны быть настроены раньше корня (нужны их sourceSets)
+evaluationDependsOn(':Nova_Core')
+evaluationDependsOn(':Nova_UI')
+
 // ========== Wrapper ==========
 tasks.named('wrapper', Wrapper).configure {
   gradleVersion = '8.4'  // Для Forge 1.20.1 подойдёт 8.4
@@ -159,6 +163,7 @@ minecraft {
 
       mods {
         "${mod_id}" {
+//        "industrialtech" {
           source sourceSets.main
         }
         "industrialtech_ae" {
@@ -167,9 +172,10 @@ minecraft {
         "industrialtech_crafting" {
           source sourceSets.crafting
         }
-        "industrialtech_ore" {
-          source sourceSets.ore
+        "industrialtech_ore" {source sourceSets.ore
         }
+        nova_core { source project(':Nova_Core').sourceSets.main }
+        nova_ui   { source project(':Nova_UI').sourceSets.main }
       }
     }
 
@@ -235,6 +241,13 @@ repositories {
   }
   // Для совместимости со старыми библиотеками
   mavenCentral()
+  maven {
+    url = uri("https://maven.pkg.github.com/UpperMoon0/OpenUI-MC")
+    credentials {
+      username = providers.gradleProperty("gpr.user").orNull
+      password = providers.gradleProperty("gpr.key").orNull
+    }
+  }
 }
 
 // ========== Зависимости ==========
@@ -242,8 +255,16 @@ dependencies {
   minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
   annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+
+  // Компилируемся против папок классов (dev-имена), а не против jar после reobf (SRG-имена)
+  compileOnly project(':Nova_Core').sourceSets.main.output
+  compileOnly project(':Nova_UI').sourceSets.main.output
+
+  //OpenUI MC
+
   //applied-energistics-2-wireless-terminals
   runtimeOnly fg.deobf("curse.maven:applied-energistics-2-wireless-terminals-459929:7251206") //MIT
+//  runtimeOnly fg.deobf("curse.maven:ftb-quests-forge-289412:8078538") //All Rights Reserved
 
   // ae2-crafting-tree
   runtimeOnly fg.deobf("curse.maven:ae2-crafting-tree-1086241:7182165") //MIT
@@ -321,7 +342,7 @@ dependencies {
   runtimeOnly fg.deobf("curse.maven:sodium-options-api-1103431:6100812")
   runtimeOnly fg.deobf("curse.maven:magnesium-extras-558905:6041697")
   runtimeOnly fg.deobf("curse.maven:dynamiclights-reforged-551736:6044481")
-  runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:5338457")
+//  runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:5338457")
   runtimeOnly fg.deobf("curse.maven:ferritecore-429235:4810975")
   runtimeOnly fg.deobf("curse.maven:faster-block-placement-1025486:5374271")
   runtimeOnly fg.deobf("curse.maven:chunk-animator-embeddium-compat-1527419:8007459")
@@ -426,7 +447,6 @@ dependencies {
   implementation fg.deobf("maven.modrinth:supermartijn642s-core-lib:1.1.21-forge-mc1.20.1") //
 
   // UI
-  implementation fg.deobf("maven.modrinth:ui-lib:GizE27iH") //
   implementation fg.deobf("maven.modrinth:mekanism:uxe1WQp4") //
 
 //  implementation fg.deobf(fileTree(dir: 'libs', include: '*.jar'))
@@ -479,7 +499,7 @@ tasks.withType(ProcessResources).configureEach {
 }
 
 // ========== JAR-задачи ==========
-def createModuleJar(SourceSet ss, String title) {
+TaskProvider<Jar> createModuleJar(SourceSet ss, String title) {
   return tasks.register(ss.getJarTaskName(), Jar) {
     archiveClassifier.set(ss.name)
     from ss.output
