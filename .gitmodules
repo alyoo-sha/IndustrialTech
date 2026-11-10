@@ -1,6 +1,6 @@
 [submodule "modules/Nova_UI"]
 	path = modules/Nova_UI
-	url = https://github.com/alyoo-sha/Nova-Core
+	url = https://github.com/alyoo-sha/Nova_UI
 [submodule "modules/Nova-Core"]
 	path = modules/Nova-Core
 	url = https://github.com/alyoo-sha/Nova-Core
